@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import NavBar from './Components/navBar/NavBar';
+import SimpleSidebar from './Components/sidebar/SideBar';
+import {Routes,Route} from 'react-router-dom'
+import ImagePage from './Components/Pages/ImagePage';
+import { AuthModal } from './Components/Authentication/AuthModal';
 
 function App() {
+  const[user,setUser]=useState<any>(null)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar/>
+      <AuthModal/>
+      <Routes>
+        <Route path='/' element={<SimpleSidebar/>}>
+          <Route path='/' element={<ImagePage/>}/>
+          <Route path='/*' element={<ImagePage/>}/>
+        </Route>
+      </Routes>
     </div>
   );
 }
