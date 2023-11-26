@@ -7,6 +7,8 @@ import ImagePage from './Components/Pages/ImagePage';
 import { AuthModal } from './Components/Authentication/AuthModal';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import Home from './Components/Home/Home';
+import WelcomePage from './Components/Pages/WelcomePage/WelcomePage';
 
 function App() {
   const[user,setUser]=useState<any>(null)
@@ -25,11 +27,12 @@ function App() {
         user ? (
           <Routes>
             <Route path='/' element={<SimpleSidebar/>}>
-                <Route path='/' element={<ImagePage/>}/>
+              <Route path='' element={<Home/>}/>
+                <Route path='Images' element={<ImagePage/>}/>
                 <Route path='/*' element={<ImagePage/>}/>
             </Route>
           </Routes>
-        ) : <AuthModal user={user}/>
+        ) : <WelcomePage/>
       }
       
       

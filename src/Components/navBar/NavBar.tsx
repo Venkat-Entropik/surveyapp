@@ -1,13 +1,15 @@
 
 import {
+
   Box,Flex,Avatar,Button,Menu,MenuButton,MenuList,MenuDivider,useColorModeValue,Stack,useColorMode,Center,useToast
+
 } from '@chakra-ui/react'
 
 import {FiTrendingUp} from 'react-icons/fi'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { AuthModal } from '../Authentication/AuthModal'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
+
 
 interface user{
   user:any
@@ -39,7 +41,8 @@ const  NavBar:React.FC<user>=({user}) =>{
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
 
-              {user ? (<Menu>
+             {
+              (user) ? ( <Menu>
                 <MenuButton
                   as={Button}
                   rounded={'full'}
@@ -48,8 +51,8 @@ const  NavBar:React.FC<user>=({user}) =>{
                   minW={0}>
                   <Avatar
                     size={'sm'}
-                    src={user.photoURL}
-                    // alt={user.displayName || user.email}
+                    src={user?.photoURL}
+                    
                   />
                 </MenuButton>
                 <MenuList alignItems={'center'} p='2'>
@@ -57,19 +60,19 @@ const  NavBar:React.FC<user>=({user}) =>{
                   <Center>
                     <Avatar
                       size={'2xl'}
-                      // src={'https://avatars.dicebear.com/api/male/username.svg'}
-                      src={user.photoURL}
+                      src={user?.photoURL}
                     />
                   </Center>
                   <br />
                   <Center>
-                    <p>{user.displayName || user.email}</p>
+                    <p>{user?.displayName || user?.email}</p>
                   </Center>
                   <br />
                   <MenuDivider />
                   <Button w='100%' onClick={handlelogout}>Logout</Button>
                 </MenuList>
-              </Menu>) : <AuthModal user={user}/>}
+              </Menu>) : (<></>)
+             }
             </Stack>
           </Flex>
         </Flex>
