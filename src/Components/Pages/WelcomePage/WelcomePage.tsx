@@ -9,7 +9,7 @@ const WelcomePage = () => {
     <Flex justifyContent='center' alignItems='center' textAlign='center' w='100%' h='90%'>
       <VStack>
         <Heading display='flex' alignItems='center' gap='10px'><PiHandWavingFill/> Welcome to our website</Heading>
-        <Text fontWeight='bold'>Please <AuthModal/> to continue </Text>
+        <Text fontWeight='bold'>Please <AuthModal/> to continue</Text>
       </VStack>
     </Flex>
   )

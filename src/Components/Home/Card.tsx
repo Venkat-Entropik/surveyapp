@@ -1,5 +1,6 @@
 import React from 'react'
-import {  Card,Button,Text,Heading,Image} from '@chakra-ui/react'
+import {  Card,Text,Heading,Image} from '@chakra-ui/react'
+import { DrawerComponent } from '../Drawer/Drawer'
 
 const CardComponent = ({selector}:any) => {
     console.log('card',selector)
@@ -18,7 +19,9 @@ const CardComponent = ({selector}:any) => {
             <Heading size='sm' mt='10px'>{selector?.title}</Heading>
             <Text pt='5px'>{selector?.description}</Text>
 
-            <Button w='100%' mt='10px'>View here</Button>
+
+            <DrawerComponent id={selector?.id}/>
+      
         </Card>
     </>
   )
