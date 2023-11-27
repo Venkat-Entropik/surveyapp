@@ -1,29 +1,17 @@
-import {Modal,ModalOverlay,ModalContent,ModalHeader,ModalCloseButton,Button,useDisclosure,UseDisclosureReturn ,useToast,Tabs, Text,TabList, TabPanels, Tab, TabPanel,ModalFooter} from '@chakra-ui/react'
+import {Modal,ModalOverlay,ModalContent,ModalHeader,ModalCloseButton,Box,useDisclosure,UseDisclosureReturn ,useToast,Tabs, Text,TabList, TabPanels, Tab, TabPanel,ModalFooter} from '@chakra-ui/react'
 import SignPage from './SignPage'
 import SignUpPage from './signUpPage'
 import GoogleButton from 'react-google-button'
-import React,{useEffect} from 'react'
+import React from 'react'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../firebase'
-interface user{
-    user:any
-}
 
-export const AuthModal:React.FC<user>=({user})=> {
+
+export const AuthModal:React.FC=()=> {
     const { isOpen, onOpen, onClose }:UseDisclosureReturn = useDisclosure()
     const googleProvider = new GoogleAuthProvider()
+
     const toast = useToast()
-    useEffect(() => {
-        
-        if (user) {
-          onClose(); 
-        } else {
-          onOpen(); 
-
-        }
-      }, [user, onOpen, onClose]);
-
-      
 
       const signInWithGoogle = async (): Promise<any> => {
         try {
@@ -36,7 +24,7 @@ export const AuthModal:React.FC<user>=({user})=> {
             isClosable: true,
           });
           onClose();
-          return response; // Return the response object
+          return response; 
         } catch (error) {
           toast({
             title: 'Error',
@@ -50,9 +38,8 @@ export const AuthModal:React.FC<user>=({user})=> {
 
     return (
       <>
-        <Button bg='gold' color='black' onClick={onOpen}>Login</Button>
-   
-
+        <Box as='span' bg='gold' p='1' borderRadius='5px' cursor='pointer' color='black' onClick={onOpen}>Login</Box >
+      
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
