@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
-import {Drawer,DrawerBody,DrawerOverlay,DrawerContent,DrawerCloseButton,Button,useDisclosure, Heading,Box,Text,SimpleGrid,Image, Flex
+import {Drawer,DrawerBody,DrawerOverlay,DrawerContent,DrawerCloseButton,Button,useDisclosure,Box,Text,SimpleGrid,Image, Flex,
 } from '@chakra-ui/react';
+
 import { useSelector } from "react-redux";
+import { db } from '../../firebase';
 
 interface id{
-    id:string
+    id:string,
+    user:any
 }
 
-export const DrawerComponent:React.FC<id>=({id})=> {
+export const DrawerComponent:React.FC<id>=({id,user})=> {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
-
+  
   const selector=useSelector((state:any)=>{
     return state.images
     })
@@ -22,6 +26,12 @@ export const DrawerComponent:React.FC<id>=({id})=> {
 
   const imagesContainer=Array.from(singleCardData[0].images)
    
+    // console.log('container',imagesContainer);
+
+    const handleAddToDataBase= async ()=>{
+      console.log(singleCardData);
+      
+    }
     
   return (
     <>
@@ -47,14 +57,22 @@ export const DrawerComponent:React.FC<id>=({id})=> {
                         imagesContainer?.map((item: unknown) => {
                         
                         if (item instanceof File) {
-                            console.log(item);
+
+                          if(item.type.includes('image')){
                             return <Image src={URL.createObjectURL(item)} h='100px' w='100%' alt='singleImage' borderRadius='10px'/>;
+                          }else{
+                            return (<video controls width='100%' height='200px' style={{borderRadius:'10px'}}>
+                            <source src={URL.createObjectURL(item)} />
+                            </video>)
+                          }
+                           
+                            
                         } 
                         })
                     }
             </SimpleGrid>
             <Flex mt='10px' justifyContent='space-between'>
-                <Button bg='green.600' w='40%'>Publish</Button>
+                <Button bg='green.600' w='40%' onClick={handleAddToDataBase}>Publish</Button>
                 <Button bg='blue.600' w='40%'>Analytics</Button>
             </Flex>
           </DrawerBody>

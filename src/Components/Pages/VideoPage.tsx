@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addImages } from '../features/redux/dataSlice';
 import {Box,Flex,Heading,Input,Stack,Text,FormControl,FormLabel,Textarea,Button,useToast,
 } from '@chakra-ui/react';
 
 import { FaCloudUploadAlt } from 'react-icons/fa';
+import { addVideos } from '../features/redux/dataSlice';
 
 export interface dataType {
   id: string;
@@ -13,9 +13,7 @@ export interface dataType {
   images: any;
 }
 
-
-
-const FileUpload: React.FC = () => {
+const VideoUpload: React.FC = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -23,7 +21,7 @@ const FileUpload: React.FC = () => {
 
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [imageUploaded, setImageUploaded] = useState<boolean>(false);
+  const [videoUploaded, setvideoUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,34 +29,34 @@ const FileUpload: React.FC = () => {
     setSelectedFiles(files);
 
     if (files && files.length > 0) {
-      if (files.length > 4) {
+      if (files.length > 1) {
         toast({
-          title: 'You can only select up to 4 images.',
+          title: 'You can only select up to 1 Video.',
           status: 'warning',
           duration: 3000,
           isClosable: true,
         });
         e.target.value = '';
-        setImageUploaded(false);
+        setvideoUploaded(false);
         return;
       }
-
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+   
+      const allowedTypes = ['video/mp4', 'video/x-m4v','video/webm', 'video/*'];
       for (let i = 0; i < files.length; i++) {
         if (!allowedTypes.includes(files[i].type)) {
           toast({
-            title: 'Please select only image files (JPEG, PNG, GIF).',
+            title: 'Please select only video files (mp4, x-m4v etc..).',
             status: 'warning',
             duration: 3000,
             isClosable: true,
           });
           e.target.value = '';
-          setImageUploaded(false);
+          setvideoUploaded(false);
           return;
         }
       }
 
-      setImageUploaded(true);
+      setvideoUploaded(true);
     }
   };
 
@@ -84,10 +82,10 @@ const FileUpload: React.FC = () => {
       return;
     }
 
-    if (!imageUploaded) {
+    if (!videoUploaded) {
       toast({
-        title: 'Upload Image',
-        description: 'Images Not Uploaded',
+        title: 'Upload Video',
+        description: 'Video Not Uploaded',
         status: 'warning',
         duration: 3000,
         isClosable: true,
@@ -102,10 +100,11 @@ const FileUpload: React.FC = () => {
       images: selectedFiles,
     };
 
-    dispatch(addImages(data));
+    console.log(data)
+    dispatch(addVideos(data));
 
     toast({
-      title: 'Images Uploaded Successfully',
+      title: 'Video Uploaded Successfully',
       description: 'Please check in home page',
       status: 'success',
       duration: 3000,
@@ -126,8 +125,7 @@ const FileUpload: React.FC = () => {
             id="fileInput"
             display="none"
             onChange={(e) => handleImages(e)}
-            multiple
-            accept="image/jpeg, image/png, image/gif"
+            accept="video/mp4,video/x-m4v,video/*"
           />
           <label htmlFor="fileInput">
             <Box
@@ -143,7 +141,7 @@ const FileUpload: React.FC = () => {
             </Box>
           </label>
           <Text fontSize="sm" color="gray.500">
-            Supported file types: JPG, JPEG, PNG.
+            Supported file types: MP4, X-m4v, Video/*
           </Text>
         </Stack>
         <Stack>
@@ -166,4 +164,4 @@ const FileUpload: React.FC = () => {
   );
 };
 
-export default FileUpload;
+export default VideoUpload;

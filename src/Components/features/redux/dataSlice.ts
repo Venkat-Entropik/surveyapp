@@ -15,11 +15,14 @@ const dataSlice = createSlice({
     
     reducers:{
         addImages:(state,{payload})=>{
-            state.images.push(payload)
+            state.images.push({...payload,type:'images'})
+        },
+        addVideos:(state,{payload})=>{
+            state.images.push({...payload,type:'videos'})
         }
     }
 })
 
-export const {addImages} = dataSlice.actions
+export const {addImages,addVideos} = dataSlice.actions
 export const getAllMovies = (state:any) =>state.data.images
 export default dataSlice.reducer

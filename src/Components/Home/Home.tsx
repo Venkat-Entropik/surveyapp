@@ -1,33 +1,47 @@
-import React from 'react'
-import { Box , Flex, Img, SimpleGrid, VStack,Text} from '@chakra-ui/react'
+import React,{useState} from 'react'
+import { Box , Flex, Img, SimpleGrid, VStack,Text,Select} from '@chakra-ui/react'
 import { useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import CardComponent from './Card';
-const Home = () => {
+
+
+interface user{
+  user:any
+}
+const Home:React.FC<user> = ({user}) => {
+
+  const[dropdown,setDropDown]=useState<string>('images')
   const selector=useSelector((state:any)=>{
   return state.images
-    
   })
-  console.log("selector",selector);
-  
 
-  
-  // console.log('image',imageName);
+  const filterTasks=selector.filter((task:any)=>{
+    // console.log(task);
+    
+    return task.type.toLowerCase() === dropdown.toLowerCase()
+  })
+  // console.log(dropdown)
+  // console.log(selector);
   
   return (
     <Box>
-      
-   
-    
+       <Select placeholder='Select option' w={['50%','40%','30%']} onChange={(e)=>setDropDown(e.target.value)}>
+            <option value='images'>Images</option>
+            <option value='videos'>Videos</option>
+            <option value='survey'>Survey</option>
+        </Select>
       {
-        selector.length > 0 ? ( 
-          <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+        filterTasks.length > 0 ? ( 
+          <>
+          
+          <SimpleGrid spacing={4} mt='15px' templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
           {
-          selector.map((prod:any)=>{
-          return <CardComponent selector={prod} key={prod.id}/>
+          filterTasks.map((prod:any)=>{
+          return <CardComponent selector={prod} key={prod.id} user={user}/>
         })}
       
         </SimpleGrid>
+        </>
         ) : (
           <Flex justifyContent="center" alignItems="center">
             <VStack>

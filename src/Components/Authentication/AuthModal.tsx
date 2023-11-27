@@ -10,10 +10,8 @@ import { auth } from '../../firebase'
 export const AuthModal:React.FC=()=> {
     const { isOpen, onOpen, onClose }:UseDisclosureReturn = useDisclosure()
     const googleProvider = new GoogleAuthProvider()
-    const toast = useToast()
-   
 
-      
+    const toast = useToast()
 
       const signInWithGoogle = async (): Promise<any> => {
         try {
@@ -26,7 +24,7 @@ export const AuthModal:React.FC=()=> {
             isClosable: true,
           });
           onClose();
-          return response; // Return the response object
+          return response; 
         } catch (error) {
           toast({
             title: 'Error',
@@ -42,8 +40,6 @@ export const AuthModal:React.FC=()=> {
       <>
         <Box as='span' bg='gold' p='1' borderRadius='5px' cursor='pointer' color='black' onClick={onOpen}>Login</Box >
       
-      
-
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>

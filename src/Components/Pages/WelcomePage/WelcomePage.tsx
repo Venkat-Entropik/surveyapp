@@ -8,8 +8,8 @@ const WelcomePage = () => {
   return (
     <Flex justifyContent='center' alignItems='center' textAlign='center' w='100%' h='90%'>
       <VStack>
-        <Heading display='flex' alignItems='center' gap='10px'><PiHandWavingFill/> Welcome to our website</Heading>
-        <Text fontWeight='bold'>Please <AuthModal/> to continue</Text>
+        <Heading display='flex' alignItems='center'   fontSize={['2xl', '2xl', '5xl']} gap='10px'><PiHandWavingFill/> Welcome to our website</Heading>
+        <Text fontWeight='bold' fontSize='20px'>Please <AuthModal/> to continue</Text>
       </VStack>
     </Flex>
   )
