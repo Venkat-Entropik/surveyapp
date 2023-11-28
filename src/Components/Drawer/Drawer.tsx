@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {  useRef,useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -12,10 +12,15 @@ import {
   SimpleGrid,
   Image,
   Flex,
+  useToast
 } from "@chakra-ui/react";
 
 import { useSelector } from "react-redux";
-import { db } from "../../firebase";
+import { v4 } from "uuid";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { imageDb, textDb } from "../../firebase";
+import { addDoc, collection } from "firebase/firestore";
+
 
 interface id {
   id: string;
@@ -23,6 +28,10 @@ interface id {
 }
 
 export const DrawerComponent: React.FC<id> = ({ id, user }) => {
+  const toast = useToast()
+  // const [imagesArray, setImagesArray] = useState<string[]>([]);
+  const imagesArrayRef = useRef<string[]>([]);
+  // const[isLoading,setIsLoading]=useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -33,14 +42,56 @@ export const DrawerComponent: React.FC<id> = ({ id, user }) => {
   const singleCardData = selector.filter((prod: any) => {
     return prod.id === id;
   });
-  // console.log('single',singleCardData[0].title)
 
   const imagesContainer = Array.from(singleCardData[0].images);
 
-  // console.log('container',imagesContainer);
-
   const handleAddToDataBase = async () => {
-    console.log(singleCardData);
+    const storageRef = ref(imageDb, "storage");
+
+    try {
+      const uploadPromises = imagesContainer.map(async (file: any) => {
+        const fileRef = ref(storageRef, `${v4()}_${file.name}`);
+        
+        try {
+          await uploadBytes(fileRef, file);
+
+          const downloadURL = await getDownloadURL(fileRef);
+
+       
+
+          imagesArrayRef.current.push(downloadURL);
+
+          console.log("File uploaded successfully. Download URL:", downloadURL);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      });
+
+      await Promise.all(uploadPromises);
+     
+
+      console.log("All files uploaded successfully.");
+
+      const valRef = collection(textDb, "textData");
+
+      const dataToStore = {
+        id: singleCardData[0].id,
+        title: singleCardData[0].title,
+        description: singleCardData[0].description,
+        images: imagesArrayRef.current,
+      };
+
+      // console.log('imagearray',imagesArray)
+      
+      
+     await addDoc(valRef, dataToStore);
+
+   
+    
+    } catch (error) {
+      console.error("Error uploading files or updating Firestore:", error);
+    }
+    
   };
 
   return (
