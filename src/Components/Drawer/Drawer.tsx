@@ -41,7 +41,7 @@ export const DrawerComponent: React.FC<id> = ({
   const btnRef = useRef<HTMLButtonElement>(null);
 
   const selector = useSelector((state: any) => {
-    return state.images;
+    return state.data.images;
   });
 
   const singleCardData = selector.filter((prod: any) => {

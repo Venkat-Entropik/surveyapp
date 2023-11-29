@@ -13,7 +13,8 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiVideo, FiCamera, FiBarChart } from "react-icons/fi";
+import { FiHome, FiMenu, FiVideo, FiCamera, FiBarChart , FiDatabase } from "react-icons/fi";
+import { RiSurveyFill } from "react-icons/ri";
 import { Link as ReactRouterLink, Outlet } from "react-router-dom";
 import { IconType } from "react-icons";
 
@@ -22,10 +23,13 @@ interface LinkItemProps {
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
+  {name:"Database",icon: FiDatabase},
   { name: "Home", icon: FiHome },
-  { name: "Video", icon: FiVideo },
+  { name: "Videos", icon: FiVideo },
   { name: "Images", icon: FiCamera },
-  { name: "Progress", icon: FiBarChart },
+  { name: "Survey", icon: RiSurveyFill },
+  { name : 'Analytics' , icon : FiBarChart }
+
 ];
 
 export default function SimpleSidebar() {
