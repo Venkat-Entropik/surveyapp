@@ -5,8 +5,15 @@ import { DrawerComponent } from "../drawer/Drawer";
 interface user {
   selector: any;
   user: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const CardComponent: React.FC<user> = ({ selector, user }) => {
+const CardComponent: React.FC<user> = ({
+  selector,
+  user,
+  isLoading,
+  setIsLoading,
+}) => {
   const imageName = selector?.images?.[0];
   const image = imageName ? URL.createObjectURL(imageName) : "";
 
@@ -35,7 +42,12 @@ const CardComponent: React.FC<user> = ({ selector, user }) => {
         </Heading>
         <Text pt="5px">{selector?.description}</Text>
 
-        <DrawerComponent id={selector?.id} user={user} />
+        <DrawerComponent
+          id={selector?.id}
+          user={user}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </Card>
     </>
   );

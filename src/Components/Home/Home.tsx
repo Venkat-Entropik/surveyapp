@@ -11,11 +11,14 @@ import {
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardComponent from "./Card";
+import Spinners from "../loaders/Spinners";
 
 interface user {
   user: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const Home: React.FC<user> = ({ user }) => {
+const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
   const [dropdown, setDropDown] = useState<string>("images");
   const selector = useSelector((state: any) => {
     return state.images;
@@ -40,6 +43,7 @@ const Home: React.FC<user> = ({ user }) => {
         <option value="videos">Videos</option>
         <option value="survey">Survey</option>
       </Select>
+      {isLoading && <Spinners />}
       {filterTasks.length > 0 ? (
         <>
           <SimpleGrid
@@ -49,7 +53,13 @@ const Home: React.FC<user> = ({ user }) => {
           >
             {filterTasks.map((prod: any) => {
               return (
-                <CardComponent selector={prod} key={prod.id} user={user} />
+                <CardComponent
+                  selector={prod}
+                  key={prod.id}
+                  user={user}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
               );
             })}
           </SimpleGrid>

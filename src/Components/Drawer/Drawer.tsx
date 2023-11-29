@@ -1,4 +1,4 @@
-import React, {  useRef,useState } from "react";
+import React, { useRef } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -12,7 +12,7 @@ import {
   SimpleGrid,
   Image,
   Flex,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 
 import { useSelector } from "react-redux";
@@ -21,17 +21,22 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imageDb, textDb } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 
-
 interface id {
   id: string;
   user: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DrawerComponent: React.FC<id> = ({ id, user }) => {
-  const toast = useToast()
-  // const [imagesArray, setImagesArray] = useState<string[]>([]);
+export const DrawerComponent: React.FC<id> = ({
+  id,
+  user,
+  isLoading,
+  setIsLoading,
+}) => {
+  const toast = useToast();
+
   const imagesArrayRef = useRef<string[]>([]);
-  // const[isLoading,setIsLoading]=useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -46,32 +51,32 @@ export const DrawerComponent: React.FC<id> = ({ id, user }) => {
   const imagesContainer = Array.from(singleCardData[0].images);
 
   const handleAddToDataBase = async () => {
+    setIsLoading(true);
     const storageRef = ref(imageDb, "storage");
 
     try {
       const uploadPromises = imagesContainer.map(async (file: any) => {
         const fileRef = ref(storageRef, `${v4()}_${file.name}`);
-        
+
         try {
           await uploadBytes(fileRef, file);
 
           const downloadURL = await getDownloadURL(fileRef);
 
-       
-
           imagesArrayRef.current.push(downloadURL);
-
-          console.log("File uploaded successfully. Download URL:", downloadURL);
         } catch (error) {
-          console.error("Error uploading file:", error);
+          toast({
+            title: `${error}`,
+            status: "warning",
+            duration: 3000,
+            isClosable: true,
+          });
         }
       });
 
       await Promise.all(uploadPromises);
-     
 
-      console.log("All files uploaded successfully.");
-
+    
       const valRef = collection(textDb, "textData");
 
       const dataToStore = {
@@ -81,17 +86,22 @@ export const DrawerComponent: React.FC<id> = ({ id, user }) => {
         images: imagesArrayRef.current,
       };
 
-      // console.log('imagearray',imagesArray)
-      
-      
-     await addDoc(valRef, dataToStore);
-
-   
-    
+      await addDoc(valRef, dataToStore);
     } catch (error) {
-      console.error("Error uploading files or updating Firestore:", error);
+      toast({
+        title: `${error}`,
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
     }
-    
+    setIsLoading(false);
+    toast({
+      title: `successfully uploaded files`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (

@@ -1,37 +1,23 @@
 import React from "react";
-import { Spinner,Stack } from '@chakra-ui/react'
+import { CirclesWithBar } from "react-loader-spinner";
+import styles from './Spinners.module.css'
 const Spinners = () => {
   return (
-    <Stack direction="row" spacing={4}>
-      <Spinner
-        size="md"
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="blue.500"
+    <>
+      <CirclesWithBar
+        height="100"
+        width="100"
+        color="#4fa94d"
+        wrapperStyle={{}}
+        wrapperClass={styles.spinners}
+        visible={true}
+        outerCircleColor=""
+        innerCircleColor=""
+        barColor=""
+        ariaLabel="circles-with-bar-loading"
+        
       />
-      <Spinner
-        size="md"
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="red.500"
-      />
-      <Spinner
-        size="md"
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="orange.500"
-      />
-      <Spinner
-        size="md"
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="yellow.500"
-      />
-    </Stack>
+    </>
   );
 };
 

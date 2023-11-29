@@ -10,8 +10,10 @@ import Home from "./Components/home/Home";
 import WelcomePage from "./Components/pages/welcomepage/WelcomePage";
 import VideoUpload from "./Components/pages/VideoPage";
 
+
 function App() {
   const [user, setUser] = useState<any>(null);
+  const[isLoading,setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -26,7 +28,7 @@ function App() {
       {user ? (
         <Routes>
           <Route path="/" element={<SimpleSidebar />}>
-            <Route path="" element={<Home user={user} />} />
+            <Route path="" element={<Home user={user} isLoading={isLoading} setIsLoading={setIsLoading} />} />
             <Route path="Images" element={<ImagePage />} />
             <Route path="Video" element={<VideoUpload />} />
             <Route path="/*" element={<ImagePage />} />
