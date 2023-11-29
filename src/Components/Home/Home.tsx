@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardComponent from "./Card";
 import Spinners from "../loaders/Spinners";
+import SurveyCard from "./SurveyCard";
+
 
 interface user {
   user: any;
@@ -21,16 +23,16 @@ interface user {
 const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
   const [dropdown, setDropDown] = useState<string>("images");
   const selector = useSelector((state: any) => {
-    return state.images;
+    return state.data.images;
   });
+
+  const surveySelector = useSelector((state:any)=>{
+    return state.survey.surveys
+  })
 
   const filterTasks = selector.filter((task: any) => {
-    // console.log(task);
-
     return task.type.toLowerCase() === dropdown.toLowerCase();
   });
-  // console.log(dropdown)
-  // console.log(selector);
 
   return (
     <Box>
@@ -52,15 +54,21 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
             templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
           >
             {filterTasks.map((prod: any) => {
-              return (
-                <CardComponent
+              if(prod.type === "images" || prod.type === 'videos'){
+                return(
+                  <CardComponent
                   selector={prod}
                   key={prod.id}
                   user={user}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
                 />
-              );
+                )
+              }else {
+                return(
+                  <SurveyCard/>
+                )
+              }
             })}
           </SimpleGrid>
         </>
@@ -75,9 +83,9 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
             />
             <Text fontWeight="bold">
               No Data Available{" "}
-              <Link to="Images">
+              <Link to={`${dropdown}`}>
                 <Box as="span" color="blue.500">
-                  Upload Images
+                  Upload {`${dropdown}`}
                 </Box>
               </Link>
             </Text>

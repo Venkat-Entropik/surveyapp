@@ -9,6 +9,9 @@ import { auth } from "./firebase";
 import Home from "./Components/home/Home";
 import WelcomePage from "./Components/pages/welcomepage/WelcomePage";
 import VideoUpload from "./Components/pages/VideoPage";
+import SurveyPage from "./Components/pages/SurveyPage";
+import Database from "./Components/pages/Database";
+import Analytics from "./Components/pages/Analytics";
 
 
 function App() {
@@ -30,7 +33,10 @@ function App() {
           <Route path="/" element={<SimpleSidebar />}>
             <Route path="" element={<Home user={user} isLoading={isLoading} setIsLoading={setIsLoading} />} />
             <Route path="Images" element={<ImagePage />} />
-            <Route path="Video" element={<VideoUpload />} />
+            <Route path="Videos" element={<VideoUpload />} />
+            <Route path="Survey" element={<SurveyPage/>}/>
+            <Route path="Database" element={<Database/>}/>
+            <Route path="Analytics" element={<Analytics/>}/>
             <Route path="/*" element={<ImagePage />} />
           </Route>
         </Routes>
