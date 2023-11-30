@@ -47,7 +47,13 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
               templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
             >
               {surveySelector.map((survey: any) => (
-                <SurveyCard key={survey.id} />
+                <SurveyCard
+                  key={survey.id}
+                  user={user}
+                  selector={survey}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
               ))}
             </SimpleGrid>
           ) : (

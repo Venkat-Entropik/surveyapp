@@ -13,10 +13,9 @@ import SurveyPage from "./Components/pages/SurveyPage";
 import Database from "./Components/pages/Database";
 import Analytics from "./Components/pages/Analytics";
 
-
 function App() {
   const [user, setUser] = useState<any>(null);
-  const[isLoading,setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -31,12 +30,30 @@ function App() {
       {user ? (
         <Routes>
           <Route path="/" element={<SimpleSidebar />}>
-            <Route path="" element={<Home user={user} isLoading={isLoading} setIsLoading={setIsLoading} />} />
+            <Route
+              path=""
+              element={
+                <Home
+                  user={user}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
+              }
+            />
             <Route path="Images" element={<ImagePage />} />
             <Route path="Videos" element={<VideoUpload />} />
-            <Route path="Survey" element={<SurveyPage/>}/>
-            <Route path="Database" element={<Database/>}/>
-            <Route path="Analytics" element={<Analytics/>}/>
+            <Route path="Survey" element={<SurveyPage />} />
+            <Route
+              path="Database"
+              element={
+                <Database
+                  user={user}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
+              }
+            />
+            <Route path="Analytics" element={<Analytics />} />
             <Route path="/*" element={<ImagePage />} />
           </Route>
         </Routes>
