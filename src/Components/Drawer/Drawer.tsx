@@ -48,6 +48,7 @@ export const DrawerComponent: React.FC<id> = ({
     return prod.id === id;
   });
 
+
   const imagesContainer = Array.from(singleCardData[0].images);
 
   const handleAddToDataBase = async () => {
@@ -84,6 +85,8 @@ export const DrawerComponent: React.FC<id> = ({
         title: singleCardData[0].title,
         description: singleCardData[0].description,
         images: imagesArrayRef.current,
+        type:singleCardData[0].type,
+        database:true
       };
 
       await addDoc(valRef, dataToStore);

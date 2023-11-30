@@ -41,12 +41,21 @@ const SurveyPage: React.FC = () => {
       return;
     }
 
+    // setQuestions((prevQuestions) => [
+    //   ...prevQuestions,
+    //   {
+    //     text: questionText,
+    //     type: questionType,
+    //     options: questionType === "mcq" ? options : undefined,
+    //   },
+    // ]);
+
     setQuestions((prevQuestions) => [
       ...prevQuestions,
       {
         text: questionText,
         type: questionType,
-        options: questionType === "mcq" ? options : undefined,
+        ...(questionType === "mcq" && { options }),
       },
     ]);
    
