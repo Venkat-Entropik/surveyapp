@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import Home from "./Components/home/Home";
 import VideoUpload from "./Components/pages/VideoPage";
 import SurveyPage from "./Components/pages/SurveyPage";
 import Database from "./Components/pages/Database";
@@ -12,6 +11,7 @@ import { auth } from "./firebase";
 import Analytics from "./Components/pages/Analytics";
 import WelcomePage from "./Components/pages/WelcomePage/WelcomePage";
 import FileUpload from "./Components/pages/ImagePage";
+import Home from "./Components/home/Home";
 
 function App() {
   const [user, setUser] = useState<any>(null);
