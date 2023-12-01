@@ -8,10 +8,10 @@ import NavBar from "./Components/navBar/NavBar";
 import SimpleSidebar from "./Components/sidebar/SideBar";
 import { auth } from "./firebase";
 import Analytics from "./Components/pages/Analytics";
-import WelcomePage from "./Components/pages/WelcomePage/WelcomePage";
 import FileUpload from "./Components/pages/ImagePage";
 import Home from "./Components/home/Home";
 import VideoUpload from "./Components/pages/VideoPage";
+import WelcomePage from "./Components/pages/welcomePage/WelcomePage";
 
 function App() {
   const [user, setUser] = useState<any>(null);
