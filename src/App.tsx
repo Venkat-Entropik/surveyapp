@@ -13,6 +13,7 @@ import SurveyPage from "./Components/pages/SurveyPage";
 import Database from "./Components/pages/Database";
 import Analytics from "./Components/pages/Analytics";
 
+
 function App() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

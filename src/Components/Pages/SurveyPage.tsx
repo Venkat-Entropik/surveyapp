@@ -13,6 +13,7 @@ import {
   RadioGroup,
   VStack,
   Checkbox,
+  useToast
 } from "@chakra-ui/react";
 import { addSurveys } from "../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ interface Question {
 }
 
 const SurveyPage: React.FC = () => {
+  const toast = useToast()
     const dispatch=useDispatch()
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionText, setQuestionText] = useState<string>("");
@@ -37,18 +39,14 @@ const SurveyPage: React.FC = () => {
 
   const addQuestion = () => {
     if (questionText.trim() === "") {
-      alert("Please enter a question.");
+      toast({
+        title: "please Enter Question",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
       return;
     }
-
-    // setQuestions((prevQuestions) => [
-    //   ...prevQuestions,
-    //   {
-    //     text: questionText,
-    //     type: questionType,
-    //     options: questionType === "mcq" ? options : undefined,
-    //   },
-    // ]);
 
     setQuestions((prevQuestions) => [
       ...prevQuestions,
@@ -68,7 +66,12 @@ const SurveyPage: React.FC = () => {
 
   const addOption = () => {
     if (optionText.trim() === "") {
-      alert("Please enter an option.");
+      toast({
+        title: "Please enter an option",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
       return;
     }
 
@@ -80,6 +83,26 @@ const SurveyPage: React.FC = () => {
 
 
   const handleSubmit=()=>{
+    if(surveyTitle.trim() === ''){
+      toast({
+        title: "Please enter title",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      return
+    }
+
+    if(surveyDescription.trim() === ''){
+      toast({
+        title: "Enter Description",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      return
+    }
+
     const surveyData={
         id:new Date().getTime().toString(),
         title:surveyTitle,
@@ -87,6 +110,15 @@ const SurveyPage: React.FC = () => {
         questions: questions
     }
     dispatch(addSurveys(surveyData))
+    toast({
+      title: "Survey submitted successfully",
+      description: "Please check in home page.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    setSurveyTitle('')
+    setSurveyDescription('')
   }
 
   return (

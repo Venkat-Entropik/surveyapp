@@ -7,6 +7,7 @@ import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 
 
+
 interface DatabaseType {
   user: any;
   isLoading: boolean;
