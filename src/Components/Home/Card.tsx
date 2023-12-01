@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Text, Heading, Image, AspectRatio } from "@chakra-ui/react";
-import { DrawerComponent } from "../Drawer/Drawer";
+import { DrawerComponent } from "../drawer/Drawer";
 
 
 interface user {
