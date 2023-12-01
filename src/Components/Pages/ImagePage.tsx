@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addImages } from "../features/redux/dataSlice";
+
 import {
   Box,
   Flex,
@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { addImages } from "../features/redux/dataSlice";
 
 export interface dataType {
   id: string;

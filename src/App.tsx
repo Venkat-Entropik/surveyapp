@@ -7,11 +7,11 @@ import ImagePage from "./Components/pages/ImagePage";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import Home from "./Components/home/Home";
-import WelcomePage from "./Components/pages/welcomepage/WelcomePage";
 import VideoUpload from "./Components/pages/VideoPage";
 import SurveyPage from "./Components/pages/SurveyPage";
 import Database from "./Components/pages/Database";
 import Analytics from "./Components/pages/Analytics";
+import WelcomePage from "./Components/pages/WelcomePage/WelcomePage";
 
 
 function App() {

@@ -1,7 +1,8 @@
 import { Card, Image, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import img from '../assets/17.jpg'
-import { SurveyDrawer } from "../drawer/SurveyDrawer";
+import { SurveyDrawer } from "../Drawer/SurveyDrawer";
+
 
 interface survey {
   selector: any;
