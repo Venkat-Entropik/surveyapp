@@ -3,7 +3,6 @@ import "./App.css";
 import NavBar from "./Components/navBar/NavBar";
 import SimpleSidebar from "./Components/sidebar/SideBar";
 import { Routes, Route } from "react-router-dom";
-import ImagePage from "./Components/pages/ImagePage";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import Home from "./Components/home/Home";
@@ -12,6 +11,7 @@ import SurveyPage from "./Components/pages/SurveyPage";
 import Database from "./Components/pages/Database";
 import Analytics from "./Components/pages/Analytics";
 import WelcomePage from "./Components/pages/WelcomePage/WelcomePage";
+import FileUpload from "./Components/pages/ImagePage";
 
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
                 />
               }
             />
-            <Route path="Images" element={<ImagePage />} />
+            <Route path="Images" element={<FileUpload />} />
             <Route path="Videos" element={<VideoUpload />} />
             <Route path="Survey" element={<SurveyPage />} />
             <Route
@@ -55,7 +55,7 @@ function App() {
               }
             />
             <Route path="Analytics" element={<Analytics />} />
-            <Route path="/*" element={<ImagePage />} />
+            <Route path="/*" element={<FileUpload />} />
           </Route>
         </Routes>
       ) : (
