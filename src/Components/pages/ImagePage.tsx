@@ -33,8 +33,8 @@ const FileUpload: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const [fileNames, setFileNames] = useState<string[]>([]);
-  console.log(fileNames)
+  const [imagePreviews, setImagePreviews] = useState<{ url: string; name: string }[]>([]);
+
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     setSelectedFiles(files);
@@ -53,6 +53,8 @@ const FileUpload: React.FC = () => {
       }
 
       const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+      const previews: { url: string; name: string }[] = [];
+
       for (let i = 0; i < files.length; i++) {
         if (!allowedTypes.includes(files[i].type)) {
           toast({
@@ -63,13 +65,15 @@ const FileUpload: React.FC = () => {
           });
           e.target.value = "";
           setImageUploaded(false);
-          setFileNames([])
+          setImagePreviews([]);
           return;
         }
-        // console.log(files[i].name);
-        setFileNames([...fileNames,files[i].name])
+
+        const previewURL = URL.createObjectURL(files[i]);
+        previews.push({ url: previewURL, name: files[i].name });
       }
 
+      setImagePreviews(previews);
       setImageUploaded(true);
     }
   };
@@ -118,7 +122,7 @@ const FileUpload: React.FC = () => {
 
     toast({
       title: "Images Uploaded Successfully",
-      description: "Please check in home page",
+      description: "Please check in the home page",
       status: "success",
       duration: 3000,
       isClosable: true,
@@ -154,9 +158,16 @@ const FileUpload: React.FC = () => {
               Choose a file
             </Box>
           </label>
-          <Text fontSize="sm" color="gray.500">
-             { fileNames.length === 0 ? "No Files Uploaded" : fileNames.toString()}
-          </Text>
+          <Flex>
+            {imagePreviews.map((preview, index) => (
+              <img
+                key={index}
+                src={preview.url}
+                alt={preview.name}
+                style={{ width: "50px", height: "50px", objectFit: "cover", margin: "0 5px" ,borderRadius:'10px'}}
+              />
+            ))}
+          </Flex>
           <Text fontSize="sm" color="gray.500">
             Supported file types: JPG, JPEG, PNG.
           </Text>
