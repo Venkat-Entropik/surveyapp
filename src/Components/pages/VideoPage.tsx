@@ -69,10 +69,9 @@ const VideoUpload: React.FC = () => {
           setvideoUploaded(false);
           return;
         }
-      setFileNames([...fileNames,files[i].name])
+        setFileNames([...fileNames, files[i].name]);
       }
 
-      
       setvideoUploaded(true);
     }
   };
@@ -158,7 +157,9 @@ const VideoUpload: React.FC = () => {
             </Box>
           </label>
           <Text fontSize="sm" color="gray.500">
-             { fileNames.length === 0 ? "No Files Uploaded" : fileNames.toString()}
+            {fileNames.length === 0
+              ? "No Files Uploaded"
+              : fileNames.toString()}
           </Text>
           <Text fontSize="sm" color="gray.500">
             Supported file types: MP4, X-m4v, Video/*

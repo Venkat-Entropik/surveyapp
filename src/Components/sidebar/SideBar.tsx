@@ -13,7 +13,14 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiVideo, FiCamera, FiBarChart , FiDatabase } from "react-icons/fi";
+import {
+  FiHome,
+  FiMenu,
+  FiVideo,
+  FiCamera,
+  FiBarChart,
+  FiDatabase,
+} from "react-icons/fi";
 import { RiSurveyFill } from "react-icons/ri";
 import { NavLink as ReactRouterLink, Outlet } from "react-router-dom";
 import { IconType } from "react-icons";
@@ -23,19 +30,16 @@ interface LinkItemProps {
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  
   { name: "Home", icon: FiHome },
   { name: "Videos", icon: FiVideo },
   { name: "Images", icon: FiCamera },
   { name: "Survey", icon: RiSurveyFill },
-  {name:"Database",icon: FiDatabase},
-  { name : 'Analytics' , icon : FiBarChart }
-
+  { name: "Database", icon: FiDatabase },
+  { name: "Analytics", icon: FiBarChart },
 ];
 
 export default function SimpleSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
 
   return (
     <Box minH="90%" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -113,7 +117,6 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
             bg: "cyan.400",
             color: "white",
           }}
-
           {...rest}
         >
           {icon && (

@@ -1,12 +1,12 @@
-import { VStack,Text,Img,Box } from "@chakra-ui/react";
+import { VStack, Text, Img, Box } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-type dropdown={
-    dropdown:string
-}
+type dropdown = {
+  dropdown: string;
+};
 
-const NoDataComp:React.FC<dropdown> = ({dropdown}) => {
+const NoDataComp: React.FC<dropdown> = ({ dropdown }) => {
   return (
     <VStack>
       <Img

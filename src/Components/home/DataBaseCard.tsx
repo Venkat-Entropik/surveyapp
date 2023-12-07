@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Text, Heading, Image, AspectRatio } from "@chakra-ui/react";
+import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
 
 interface DatabaseCard {
   selector: any;
@@ -13,8 +14,7 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
   isLoading,
   setIsLoading,
 }) => {
-
-console.log(selector?.images[0])
+  const analyticsBtn = selector.hasOwnProperty("analytics");
   return (
     <>
       <Card p="10px">
@@ -39,6 +39,14 @@ console.log(selector?.images[0])
           {selector?.title}
         </Heading>
         <Text pt="5px">{selector?.description}</Text>
+        {analyticsBtn && (
+          <AnalyticsDrawer
+            id={selector.id}
+            selector={selector}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
+        )}
       </Card>
     </>
   );

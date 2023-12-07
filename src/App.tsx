@@ -53,7 +53,16 @@ function App() {
                 />
               }
             />
-            <Route path="Analytics" element={<Analytics />} />
+            <Route
+              path="Analytics"
+              element={
+                <Analytics
+                  user={user}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
+              }
+            />
             <Route path="/*" element={<FileUpload />} />
           </Route>
         </Routes>

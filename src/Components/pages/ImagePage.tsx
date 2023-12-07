@@ -33,7 +33,9 @@ const FileUpload: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const [imagePreviews, setImagePreviews] = useState<{ url: string; name: string }[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<
+    { url: string; name: string }[]
+  >([]);
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -164,7 +166,13 @@ const FileUpload: React.FC = () => {
                 key={index}
                 src={preview.url}
                 alt={preview.name}
-                style={{ width: "50px", height: "50px", objectFit: "cover", margin: "0 5px" ,borderRadius:'10px'}}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  objectFit: "cover",
+                  margin: "0 5px",
+                  borderRadius: "10px",
+                }}
               />
             ))}
           </Flex>

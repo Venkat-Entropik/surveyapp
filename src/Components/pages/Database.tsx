@@ -6,25 +6,27 @@ import Spinners from "../loaders/Spinners";
 import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 
-
-
 interface DatabaseType {
   user: any;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Database:React.FC<DatabaseType> = ({user,isLoading,setIsLoading}) => {
+const Database: React.FC<DatabaseType> = ({
+  user,
+  isLoading,
+  setIsLoading,
+}) => {
   const [dropdown, setDropDown] = useState<string>("images");
   const [databaseData, setDatabaseData] = useState<any[]>([]);
 
   const getDataFromDatabase = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const valRef = collection(textDb, "textData");
     const dataDB = await getDocs(valRef);
     const allData = dataDB.docs.map((val) => ({ ...val.data(), id: val.id }));
     setDatabaseData(allData);
-    setIsLoading(false)
+    setIsLoading(false);
   };
   useEffect(() => {
     getDataFromDatabase();
@@ -91,11 +93,11 @@ const Database:React.FC<DatabaseType> = ({user,isLoading,setIsLoading}) => {
             >
               {filterTasks.map((prod: any) => (
                 <DataBaseCard
-                selector={prod}
-                key={prod.id}
-                user={user}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
+                  selector={prod}
+                  key={prod.id}
+                  user={user}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               ))}
             </SimpleGrid>

@@ -15,65 +15,63 @@ import {
 import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { textDb } from "../../firebase";
-
+import { Link } from "react-router-dom";
 
 interface survey {
-    id: string;
-    user: any;
-    isLoading: boolean;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  }
+  id: string;
+  user: any;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export const SurveyDrawer: React.FC<survey> = ({
-    id,
-    user,
-    isLoading,
-    setIsLoading,
-  }) => {
-
-  const selector=useSelector((state:any)=>{
-    return state.survey.surveys
-  })
+  id,
+  user,
+  isLoading,
+  setIsLoading,
+}) => {
+  const selector = useSelector((state: any) => {
+    return state.survey.surveys;
+  });
   const toast = useToast();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const filteredSurveys=selector.filter((survey:any)=>{
-    return survey.id === id
-  })
+  const filteredSurveys = selector.filter((survey: any) => {
+    return survey.id === id;
+  });
 
-  console.log("filteredSurveys",filteredSurveys[0]);
-  
-  const handleUploadSurvey= async()=>{
+  console.log("filteredSurveys", filteredSurveys[0]);
 
+  const handleUploadSurvey = async () => {
     try {
-        setIsLoading(true)
-        const valRef = collection(textDb,"textData")
-        const dataToStore = {
-            id: filteredSurveys[0].id,
-            title: filteredSurveys[0].title,
-            description: filteredSurveys[0].description,
-            questions: filteredSurveys[0].questions,
-            type:'surveys',
-            database:true
-          };
-        await addDoc(valRef,dataToStore)
+      setIsLoading(true);
+      const valRef = collection(textDb, "textData");
+      const dataToStore = {
+        id: filteredSurveys[0].id,
+        title: filteredSurveys[0].title,
+        description: filteredSurveys[0].description,
+        questions: filteredSurveys[0].questions,
+        type: "surveys",
+        database: true,
+      };
+      await addDoc(valRef, dataToStore);
     } catch (error) {
-        toast({
-            title: `${error}`,
-            status: "warning",
-            duration: 3000,
-            isClosable: true,
-          });
-    }
-    setIsLoading(false)
-    toast({
-        title: `successfully uploaded files`,
-        status: "success",
+      toast({
+        title: `${error}`,
+        status: "warning",
         duration: 3000,
         isClosable: true,
       });
-  }
+    }
+    setIsLoading(false);
+    toast({
+      title: `successfully uploaded files`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
 
   return (
     <>
@@ -104,9 +102,17 @@ export const SurveyDrawer: React.FC<survey> = ({
               <Button bg="green.600" w="40%" onClick={handleUploadSurvey}>
                 Publish
               </Button>
-              <Button bg="blue.600" w="40%">
-                Analytics
-              </Button>
+              <Link
+                to="Analytics"
+                style={{
+                  background: "skyblue",
+                  width: "40%",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                }}
+              >
+                <Button>Analytics</Button>
+              </Link>
             </Flex>
           </DrawerBody>
         </DrawerContent>

@@ -13,7 +13,7 @@ import {
   RadioGroup,
   VStack,
   Checkbox,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { addSurveys } from "../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
@@ -25,8 +25,8 @@ interface Question {
 }
 
 const SurveyPage: React.FC = () => {
-  const toast = useToast()
-    const dispatch=useDispatch()
+  const toast = useToast();
+  const dispatch = useDispatch();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionText, setQuestionText] = useState<string>("");
   const [questionType, setQuestionType] = useState<"descriptive" | "mcq">(
@@ -56,7 +56,6 @@ const SurveyPage: React.FC = () => {
         ...(questionType === "mcq" && { options }),
       },
     ]);
-   
 
     setQuestionText("");
     setQuestionType("descriptive");
@@ -80,36 +79,34 @@ const SurveyPage: React.FC = () => {
     setOptionText("");
   };
 
-
-
-  const handleSubmit=()=>{
-    if(surveyTitle.trim() === ''){
+  const handleSubmit = () => {
+    if (surveyTitle.trim() === "") {
       toast({
         title: "Please enter title",
         status: "warning",
         duration: 3000,
         isClosable: true,
       });
-      return
+      return;
     }
 
-    if(surveyDescription.trim() === ''){
+    if (surveyDescription.trim() === "") {
       toast({
         title: "Enter Description",
         status: "warning",
         duration: 3000,
         isClosable: true,
       });
-      return
+      return;
     }
 
-    const surveyData={
-        id:new Date().getTime().toString(),
-        title:surveyTitle,
-        description:surveyDescription,
-        questions: questions
-    }
-    dispatch(addSurveys(surveyData))
+    const surveyData = {
+      id: new Date().getTime().toString(),
+      title: surveyTitle,
+      description: surveyDescription,
+      questions: questions,
+    };
+    dispatch(addSurveys(surveyData));
     toast({
       title: "Survey submitted successfully",
       description: "Please check in home page.",
@@ -117,9 +114,9 @@ const SurveyPage: React.FC = () => {
       duration: 3000,
       isClosable: true,
     });
-    setSurveyTitle('')
-    setSurveyDescription('')
-  }
+    setSurveyTitle("");
+    setSurveyDescription("");
+  };
 
   return (
     <Box
@@ -161,7 +158,9 @@ const SurveyPage: React.FC = () => {
         </FormControl>
 
         <VStack spacing={4} mt={4} align="start">
-            <Text textAlign='center' color='green'>Add at least 5 questions </Text>
+          <Text textAlign="center" color="green">
+            Add at least 5 questions{" "}
+          </Text>
           {questions.map((q, index) => (
             <Flex key={index} alignItems="start" flexDirection="column">
               <Text>
@@ -197,8 +196,18 @@ const SurveyPage: React.FC = () => {
             }
           >
             <Stack direction="row">
-              <Radio value="descriptive" isChecked={questionType === 'descriptive' ? true : false}>Descriptive</Radio>
-              <Radio value="mcq" isChecked={questionType === 'mcq' ? true : false}>MCQ</Radio>
+              <Radio
+                value="descriptive"
+                isChecked={questionType === "descriptive" ? true : false}
+              >
+                Descriptive
+              </Radio>
+              <Radio
+                value="mcq"
+                isChecked={questionType === "mcq" ? true : false}
+              >
+                MCQ
+              </Radio>
             </Stack>
           </RadioGroup>
         </FormControl>
@@ -228,8 +237,8 @@ const SurveyPage: React.FC = () => {
           Add Question
         </Button>
 
-        {questions.length >= 5  && (
-            <Button mt={4} colorScheme="teal" onClick={handleSubmit}>
+        {questions.length >= 5 && (
+          <Button mt={4} colorScheme="teal" onClick={handleSubmit}>
             Submit Questions
           </Button>
         )}

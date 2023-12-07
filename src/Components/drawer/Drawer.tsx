@@ -20,6 +20,7 @@ import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imageDb, textDb } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 interface id {
   id: string;
@@ -47,7 +48,6 @@ export const DrawerComponent: React.FC<id> = ({
   const singleCardData = selector.filter((prod: any) => {
     return prod.id === id;
   });
-
 
   const imagesContainer = Array.from(singleCardData[0].images);
 
@@ -77,7 +77,6 @@ export const DrawerComponent: React.FC<id> = ({
 
       await Promise.all(uploadPromises);
 
-    
       const valRef = collection(textDb, "textData");
 
       const dataToStore = {
@@ -85,8 +84,8 @@ export const DrawerComponent: React.FC<id> = ({
         title: singleCardData[0].title,
         description: singleCardData[0].description,
         images: imagesArrayRef.current,
-        type:singleCardData[0].type,
-        database:true
+        type: singleCardData[0].type,
+        database: true,
       };
 
       await addDoc(valRef, dataToStore);
@@ -167,9 +166,17 @@ export const DrawerComponent: React.FC<id> = ({
               <Button bg="green.600" w="40%" onClick={handleAddToDataBase}>
                 Publish
               </Button>
-              <Button bg="blue.600" w="40%">
-                Analytics
-              </Button>
+              <Link
+                to="Analytics"
+                style={{
+                  background: "skyblue",
+                  width: "40%",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                }}
+              >
+                <Button>Analytics</Button>
+              </Link>
             </Flex>
           </DrawerBody>
         </DrawerContent>
