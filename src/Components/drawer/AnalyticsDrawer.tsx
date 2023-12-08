@@ -72,41 +72,71 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
               </Text>
             </Box>
             <Flex justifyContent="center" w="100%">
-              <SimpleGrid columns={2} spacing={4} mt="25px">
-                {selector?.images?.map((img: string, index: number) =>
-                  selector?.type.includes("image") ? (
-                    <>
-                      <Image
-                        src={img}
-                        h="150px"
-                        w="100%"
-                        alt="singleImage"
-                        objectFit="cover"
-                        borderRadius="10px"
-                      />
-                    </>
-                  ) : (
-                    <VStack justifyContent="center" w="100%">
-                      <ReactPlayer
-                        ref={videoRef}
-                        url={img}
-                        controls={true}
-                        width="auto"
-                        height="auto"
-                        onStart={() =>
-                          handlePlay(selector.id, selector.startTime)
-                        }
-                        onProgress={handleStop}
-                      />
-                      <Text>
-                        Video Starts from {selector.startTime} seconds and ends
-                        at {selector.endTime} seconds
-                      </Text>
-                    </VStack>
-                  )
-                )}
-              </SimpleGrid>
+              {selector.type.includes("image") && (
+                <SimpleGrid columns={2} spacing={4} mt="25px">
+                  {selector?.images?.map((img: string, index: number) => (
+                    <Image
+                      key={index}
+                      src={img}
+                      h="150px"
+                      w="100%"
+                      alt="singleImage"
+                      objectFit="cover"
+                      borderRadius="10px"
+                    />
+                  ))}
+                </SimpleGrid>
+              )}
+              {selector.type.includes("video") && (
+                <VStack justifyContent="center" w="100%">
+                  {selector?.images?.map((img: string, index: number) => (
+                    <ReactPlayer
+                      key={index}
+                      ref={videoRef}
+                      url={img}
+                      controls={true}
+                      width="auto"
+                      height="auto"
+                      style={{marginTop:'10px',borderRadius:'10px'}}
+                      onStart={() =>
+                        handlePlay(selector.id, selector.startTime)
+                      }
+                      onProgress={handleStop}
+                    />
+                  ))}
+                  <Text>
+                    Video Starts from {selector.startTime} seconds and ends at{" "}
+                    {selector.endTime} seconds
+                  </Text>
+                </VStack>
+              )}
             </Flex>
+            {selector.type.includes("survey") && (
+              <>
+                {selector.questions.map((que: any, index: string) => {
+                  console.log(selector);
+                  return (
+                    <Box key={index} mt="15px">
+                      <Heading as="h4" size="md" color="blue.600">
+                        {index + 1}. {que.text}
+                      </Heading>
+                      <Box
+                        boxShadow="outline"
+                        rounded="md"
+                        mt="5px"
+                        bg="inherit"
+                        p="10px"
+                      >
+                        <Text fontWeight="bolder">
+                          {" "}
+                          Ans : {selector.answers[index]}
+                        </Text>
+                      </Box>
+                    </Box>
+                  );
+                })}
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

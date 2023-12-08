@@ -41,7 +41,6 @@ export const SurveyDrawer: React.FC<survey> = ({
     return survey.id === id;
   });
 
-  console.log("filteredSurveys", filteredSurveys[0]);
 
   const handleUploadSurvey = async () => {
     try {

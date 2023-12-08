@@ -2,6 +2,7 @@ import { Card, Image, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import img from "../assets/17.jpg";
 import { SurveyDrawer } from "../drawer/SurveyDrawer";
+import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
 
 interface survey {
   selector: any;
@@ -17,7 +18,7 @@ const SurveyCard: React.FC<survey> = ({
   setIsLoading,
 }) => {
   const drawerHide = selector.hasOwnProperty("database");
-
+  const analyticsDrawer = selector.hasOwnProperty("analytics");
   return (
     <Card p="10px">
       <Image
@@ -33,10 +34,19 @@ const SurveyCard: React.FC<survey> = ({
       </Heading>
       <Text pt="5px">{selector?.description}</Text>
 
-      {!drawerHide && (
+      {!drawerHide && !analyticsDrawer && (
         <SurveyDrawer
           id={selector?.id}
           user={user}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
+      )}
+
+      {analyticsDrawer && (
+        <AnalyticsDrawer
+          id={selector.id}
+          selector={selector}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
