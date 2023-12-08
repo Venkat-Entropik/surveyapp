@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   IconButton,
   Box,
@@ -22,7 +23,7 @@ import {
   FiDatabase,
 } from "react-icons/fi";
 import { RiSurveyFill } from "react-icons/ri";
-import { NavLink as ReactRouterLink, Outlet } from "react-router-dom";
+import { NavLink as ReactRouterLink, Outlet, useLocation } from "react-router-dom";
 import { IconType } from "react-icons";
 
 interface LinkItemProps {
@@ -40,7 +41,7 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function SimpleSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  
   return (
     <Box minH="90%" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -100,6 +101,8 @@ interface NavItemProps extends FlexProps {
   children: string;
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+  const { pathname } = useLocation();
+  console.log(pathname)
   return (
     <>
       <ReactRouterLink
@@ -109,6 +112,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         <Flex
           align="center"
           p="4"
+          mt='5px'
           mx="4"
           borderRadius="lg"
           role="group"
@@ -118,6 +122,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
             color: "white",
           }}
           {...rest}
+          sx={{ backgroundColor : children.toLowerCase() === pathname?.slice(1).toLowerCase() && 'cyan.400' , color:'white'}}
         >
           {icon && (
             <Icon
