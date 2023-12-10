@@ -12,8 +12,8 @@ import {
   Radio,
   RadioGroup,
   VStack,
-  Checkbox,
   useToast,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { addSurveys } from "../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
@@ -116,6 +116,7 @@ const SurveyPage: React.FC = () => {
     });
     setSurveyTitle("");
     setSurveyDescription("");
+    setQuestions([])
   };
 
   return (
@@ -127,121 +128,185 @@ const SurveyPage: React.FC = () => {
       height="80vh"
       overflowY="auto"
     >
-      <Text
-        textAlign="center"
-        fontWeight="bolder"
-        fontSize={["md", "xl", "2xl"]}
-      >
-        Survey Form Creation
-      </Text>
-
       <Flex
-        direction="column"
-        mt="15px"
-        width={["100%", "60%", "30%"]}
-        mx="auto"
+        flexDirection={["column", "row", "row"]}
+        justifyContent="space-around"
       >
-        <FormControl>
-          <FormLabel>Survey Title</FormLabel>
-          <Input
-            type="text"
-            placeholder="Enter Survey Title"
-            value={surveyTitle}
-            onChange={(e) => setSurveyTitle(e.target.value)}
-          />
-          <FormLabel mt={2}>Survey Description</FormLabel>
-          <Textarea
-            placeholder="Enter Survey Description"
-            value={surveyDescription}
-            onChange={(e) => setSurveyDescription(e.target.value)}
-          />
-        </FormControl>
+        <Box width={["100%", "45%", "35%"]}>
+          <Text
+            textAlign="center"
+            fontWeight="bolder"
+            fontSize={["md", "xl", "2xl"]}
+          >
+            Survey Form Creation
+          </Text>
 
-        <VStack spacing={4} mt={4} align="start">
+          <Flex direction="column" mt="15px" width="100%" mx="auto">
+            <FormControl>
+              <FormLabel>Survey Title</FormLabel>
+              <Input
+                type="text"
+                placeholder="Enter Survey Title"
+                value={surveyTitle}
+                onChange={(e) => setSurveyTitle(e.target.value)}
+              />
+              <FormLabel mt={2}>Survey Description</FormLabel>
+              <Textarea
+                placeholder="Enter Survey Description"
+                value={surveyDescription}
+                onChange={(e) => setSurveyDescription(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Enter Question</FormLabel>
+              <Input
+                type="text"
+                placeholder="Enter Question"
+                value={questionText}
+                onChange={(e) => setQuestionText(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Select Question Type</FormLabel>
+              <RadioGroup
+                defaultValue="descriptive"
+                onChange={(value) =>
+                  setQuestionType(value as "descriptive" | "mcq")
+                }
+              >
+                <Stack direction="row">
+                  <Radio
+                    value="descriptive"
+                    isChecked={questionType === "descriptive" ? true : false}
+                  >
+                    Descriptive
+                  </Radio>
+                  <Radio
+                    value="mcq"
+                    isChecked={questionType === "mcq" ? true : false}
+                  >
+                    MCQ
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            </FormControl>
+
+            {questionType === "mcq" && (
+              <FormControl mt={4}>
+                <FormLabel>Options for MCQ</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Enter Option"
+                  value={optionText}
+                  onChange={(e) => setOptionText(e.target.value)}
+                />
+                <Button mt={2} colorScheme="teal" onClick={addOption}>
+                  Add Option
+                </Button>
+
+                {options.map((option, index) => (
+                  <Flex key={index} mt={2} alignItems="center">
+                    <Text ml="20px">{`${String.fromCharCode(
+                      97 + index
+                    ).toUpperCase()}) ${
+                      option.charAt(0).toUpperCase() + option.slice(1)
+                    }`}</Text>
+                  </Flex>
+                ))}
+              </FormControl>
+            )}
+
+            <Button mt={4} colorScheme="teal" onClick={addQuestion}>
+              Add Question
+            </Button>
+
+            {questions.length >= 5 && (
+              <Button mt={4} colorScheme="teal" onClick={handleSubmit}>
+                Submit Questions
+              </Button>
+            )}
+          </Flex>
+        </Box>
+        <VStack spacing={4} mt={4} align="start" width={["100%", "45%", "35%"]}>
           <Text textAlign="center" color="green">
             Add at least 5 questions{" "}
           </Text>
           {questions.map((q, index) => (
-            <Flex key={index} alignItems="start" flexDirection="column">
-              <Text>
-                {index + 1}. {q.text}
-              </Text>
+            <Flex
+              key={index}
+              alignItems="start"
+              flexDirection="column"
+              width="100%"
+            >
+              <Box
+                border="1px"
+                borderColor="gray.200"
+                p="5px"
+                rounded="md"
+                width="100%"
+                display="flex"
+                gap="10px"
+                alignItems="center"
+                color="blue.600"
+                fontWeight="bolder"
+              >
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  w="22px"
+                  h="22px"
+                  borderRadius="50%"
+                  bg="white"
+                  color="green"
+                  sx={{ fontWeight: "bolder" }}
+                  textAlign="center"
+                >
+                  {index + 1}{" "}
+                </Box>
+                {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+              </Box>
               {q.type === "mcq" && (
-                <VStack align="start" mt={2}>
+                <SimpleGrid columns={2} spacing={4} mt={2} width="100%">
                   {q.options?.map((option, optionIndex) => (
-                    <Text key={optionIndex}>{`- ${option}`}</Text>
+                    <Box
+                      key={optionIndex}
+                      border="1px"
+                      borderColor="gray.200"
+                      p="5px"
+                      rounded="md"
+                      width="100%"
+                      display="flex"
+                      gap="10px"
+                      alignItems="center"
+                      bg='lightgray'
+                      color="red.600"
+                      fontWeight="bolder"
+                    >
+                      <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        w="22px"
+                        h="22px"
+                        borderRadius="50%"
+                        bg="black"
+                        color="white"
+                        sx={{ fontWeight: "bolder" }}
+                        textAlign="center"
+                      >
+                        {String.fromCharCode(97 + optionIndex).toUpperCase()}
+                      </Box>
+                      {`${option.charAt(0).toUpperCase() + option.slice(1)}`}
+                    </Box>
                   ))}
-                </VStack>
+                </SimpleGrid>
               )}
             </Flex>
           ))}
         </VStack>
-
-        <FormControl mt={4}>
-          <FormLabel>Enter Question</FormLabel>
-          <Input
-            type="text"
-            placeholder="Enter Question"
-            value={questionText}
-            onChange={(e) => setQuestionText(e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel>Select Question Type</FormLabel>
-          <RadioGroup
-            defaultValue="descriptive"
-            onChange={(value) =>
-              setQuestionType(value as "descriptive" | "mcq")
-            }
-          >
-            <Stack direction="row">
-              <Radio
-                value="descriptive"
-                isChecked={questionType === "descriptive" ? true : false}
-              >
-                Descriptive
-              </Radio>
-              <Radio
-                value="mcq"
-                isChecked={questionType === "mcq" ? true : false}
-              >
-                MCQ
-              </Radio>
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-
-        {questionType === "mcq" && (
-          <FormControl mt={4}>
-            <FormLabel>Options for MCQ</FormLabel>
-            <Input
-              type="text"
-              placeholder="Enter Option"
-              value={optionText}
-              onChange={(e) => setOptionText(e.target.value)}
-            />
-            <Button mt={2} colorScheme="teal" onClick={addOption}>
-              Add Option
-            </Button>
-
-            {options.map((option, index) => (
-              <Flex key={index} mt={2} alignItems="center">
-                <Checkbox isReadOnly isChecked>{`- ${option}`}</Checkbox>
-              </Flex>
-            ))}
-          </FormControl>
-        )}
-
-        <Button mt={4} colorScheme="teal" onClick={addQuestion}>
-          Add Question
-        </Button>
-
-        {questions.length >= 5 && (
-          <Button mt={4} colorScheme="teal" onClick={handleSubmit}>
-            Submit Questions
-          </Button>
-        )}
       </Flex>
     </Box>
   );

@@ -9,22 +9,19 @@ import {
   MenuDivider,
   useColorModeValue,
   Stack,
-  useColorMode,
   Center,
   useToast,
 } from "@chakra-ui/react";
 
 import { FiTrendingUp } from "react-icons/fi";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-
+import React,{useEffect} from "react";
 interface user {
   user: any;
 }
 
 const NavBar: React.FC<user> = ({ user }) => {
-  const { colorMode, toggleColorMode } = useColorMode();
   const toast = useToast();
   const handlelogout = () => {
     signOut(auth);
@@ -36,6 +33,10 @@ const NavBar: React.FC<user> = ({ user }) => {
       isClosable: true,
     });
   };
+
+  useEffect(()=>{
+    localStorage.setItem('chakra-ui-color-mode','dark')
+  },[])
 
   return (
     <>
@@ -55,10 +56,6 @@ const NavBar: React.FC<user> = ({ user }) => {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
-
               {user ? (
                 <Menu>
                   <MenuButton
