@@ -69,7 +69,7 @@ const Analytics: React.FC<analatycsType> = ({
               spacing={4}
               mt="15px"
               templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-              maxH="400px"
+              maxH="590px"
               overflowY="auto"
             >
               {surveySelector.map((survey: any) => (
@@ -93,7 +93,7 @@ const Analytics: React.FC<analatycsType> = ({
               spacing={4}
               mt="15px"
               templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-              maxH="600px"
+              maxH="590px"
               overflowY="auto"
             >
               {filterTasks.map((prod: any) => (

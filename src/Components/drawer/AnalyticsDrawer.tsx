@@ -15,7 +15,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
 interface dataBase {
@@ -34,19 +34,43 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<ReactPlayer>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const [remainingTime, setRemainingTime] = React.useState<number>(
+    selector.endTime - selector.startTime
+  );
 
   const handlePlay = (id: string, startTime: string) => {
     if (videoRef.current) {
       videoRef.current.seekTo(parseFloat(startTime));
     }
+    setRemainingTime(selector.endTime - parseFloat(startTime));
   };
+
   const handleStop = (progress: any) => {
-    if (progress.playedSeconds >= selector.endTime) {
-      if (videoRef.current) {
-        videoRef.current.getInternalPlayer().pause();
+    if (isPlaying) {
+      if (progress.playedSeconds >= selector.endTime) {
+        handlePause();
+      } else {
+        setRemainingTime(selector.endTime - progress.playedSeconds);
       }
     }
   };
+  const handlePause = () => {
+    if (videoRef.current) {
+      videoRef.current.getInternalPlayer().pause();
+    }
+    setIsPlaying(false);
+  };
+
+  const handleButtonClick = () => {
+    setIsPlaying(true)
+    handlePlay(selector.startTime, selector.endTime);
+    if (videoRef.current) {
+      videoRef.current.getInternalPlayer().play();
+    }
+  };
+
   return (
     <>
       <Button ref={btnRef} colorScheme="teal" onClick={onOpen} mt="10px">
@@ -94,20 +118,30 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                       key={index}
                       ref={videoRef}
                       url={img}
-                      controls={true}
                       width="auto"
                       height="auto"
-                      style={{marginTop:'10px',borderRadius:'10px'}}
+                      style={{ marginTop: "10px", borderRadius: "10px" }}
                       onStart={() =>
                         handlePlay(selector.id, selector.startTime)
                       }
                       onProgress={handleStop}
                     />
                   ))}
+
                   <Text>
                     Video Starts from {selector.startTime} seconds and ends at{" "}
                     {selector.endTime} seconds
                   </Text>
+                  <Text>
+                    Remaining Time: {Math.floor(remainingTime)} seconds
+                  </Text>
+                  <Button
+                    colorScheme="teal"
+                    onClick={handleButtonClick}
+                    mt="10px"
+                  >
+                    Play Video
+                  </Button>
                 </VStack>
               )}
             </Flex>
@@ -116,16 +150,19 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                 {selector.questions.map((que: any, index: string) => {
                   console.log(selector);
                   return (
-                    <Box key={index} mt="15px">
+                    <Box key={index} mt="10px" overflowY="auto">
                       <Heading as="h4" size="md" color="blue.600">
-                        {index + 1}. {que.text}
+                        {index + 1}.{" "}
+                        {que.text.charAt(0).toUpperCase() + que.text.slice(1)}{" "}
+                        {"?"}
                       </Heading>
                       <Box
-                        boxShadow="outline"
+                        border="1px"
+                        borderColor="gray.200"
                         rounded="md"
                         mt="5px"
                         bg="inherit"
-                        p="10px"
+                        p="5px"
                       >
                         <Text fontWeight="bolder">
                           {" "}
