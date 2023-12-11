@@ -51,6 +51,7 @@ const FileUpload: React.FC = () => {
         });
         e.target.value = "";
         setImageUploaded(false);
+        setImagePreviews([]);
         return;
       }
 
@@ -129,6 +130,17 @@ const FileUpload: React.FC = () => {
       duration: 3000,
       isClosable: true,
     });
+    setImagePreviews([]);
+    setSelectedFiles(null);
+    setTitle("");
+    setDescription("");
+    setImageUploaded(false);
+  };
+
+  const handleRemove = () => {
+    setImagePreviews([]);
+    setSelectedFiles(null);
+    setImageUploaded(false);
   };
 
   return (
@@ -176,6 +188,13 @@ const FileUpload: React.FC = () => {
               />
             ))}
           </Flex>
+          {imagePreviews.length > 0 && (
+            <>
+              <Button bg="red.500" onClick={handleRemove}>
+                Remove Images
+              </Button>
+            </>
+          )}
           <Text fontSize="sm" color="gray.500">
             Supported file types: JPG, JPEG, PNG.
           </Text>

@@ -12,6 +12,7 @@ import {
   Textarea,
   Button,
   useToast,
+  VStack,
 } from "@chakra-ui/react";
 
 import { FaCloudUploadAlt } from "react-icons/fa";
@@ -32,7 +33,9 @@ const VideoUpload: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [videoUploaded, setvideoUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const [fileNames, setFileNames] = useState<string[]>([]);
+  const [videoPreviews, setVideoPreviews] = useState<
+    { url: string; name: string }[]
+  >([]);
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -48,6 +51,7 @@ const VideoUpload: React.FC = () => {
         });
         e.target.value = "";
         setvideoUploaded(false);
+        setVideoPreviews([])
         return;
       }
 
@@ -57,6 +61,8 @@ const VideoUpload: React.FC = () => {
         "video/webm",
         "video/*",
       ];
+      const previews: { url: string; name: string }[] = [];
+
       for (let i = 0; i < files.length; i++) {
         if (!allowedTypes.includes(files[i].type)) {
           toast({
@@ -67,15 +73,17 @@ const VideoUpload: React.FC = () => {
           });
           e.target.value = "";
           setvideoUploaded(false);
+          setVideoPreviews([]);
           return;
         }
-        setFileNames([...fileNames, files[i].name]);
+        const previewURL = URL.createObjectURL(files[i]);
+        previews.push({ url: previewURL, name: files[i].name });
       }
-
+      setVideoPreviews(previews)
       setvideoUploaded(true);
     }
   };
-
+console.log('video',videoPreviews)
   const handleSubmit = () => {
     if (title.trim() === "") {
       toast({
@@ -126,7 +134,19 @@ const VideoUpload: React.FC = () => {
       duration: 3000,
       isClosable: true,
     });
+
+    setVideoPreviews([])
+    setSelectedFiles(null)
+    setTitle('')
+    setDescription('')
+    setvideoUploaded(false)
   };
+
+  const handleRemove = ()=>{
+    setVideoPreviews([]);
+    setSelectedFiles(null);
+    setvideoUploaded(false);
+  }
 
   return (
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
@@ -156,11 +176,19 @@ const VideoUpload: React.FC = () => {
               Choose a file
             </Box>
           </label>
-          <Text fontSize="sm" color="gray.500">
-            {fileNames.length === 0
-              ? "No Files Uploaded"
-              : fileNames.toString()}
-          </Text>
+          <VStack>
+          {
+            videoPreviews.length > 0 && (<>
+              <video width='100px' height='70px' style={{borderRadius:'10px'}}>
+              <source src={videoPreviews[0]?.url}/>
+            </video>
+            <Button bg='red.500' onClick={handleRemove}>Remove Video</Button>
+            </>
+            )
+          }
+            
+          
+          </VStack>
           <Text fontSize="sm" color="gray.500">
             Supported file types: MP4, X-m4v, Video/*
           </Text>
