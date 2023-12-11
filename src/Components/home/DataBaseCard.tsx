@@ -12,14 +12,16 @@ import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
 import { deleteDoc, doc } from "firebase/firestore";
 import { textDb } from "../../firebase";
 import Spinners from "../loaders/Spinners";
+// import { useDispatch } from "react-redux";
+// import { addToDataBase } from "../features/redux/dataBaseSlice";
 
 interface DatabaseCard {
   selector: any;
   user: any;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setDatabaseData?: React.Dispatch<React.SetStateAction<any[]>>;
-  databaseData?: any[];
+  setDatabaseData: React.Dispatch<React.SetStateAction<any[]>>;
+  databaseData: any[];
 }
 const DataBaseCard: React.FC<DatabaseCard> = ({
   selector,
@@ -36,7 +38,7 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
     setIsLoading(true);
     try {
       await deleteDoc(doc(textDb, "textData", id));
-
+      setDatabaseData((prevData)=> prevData.filter((item)=>item.id !== id))
     } catch (error) {
       toast({
         title: "Error",

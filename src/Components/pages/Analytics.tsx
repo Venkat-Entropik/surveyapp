@@ -79,6 +79,7 @@ const Analytics: React.FC<analatycsType> = ({
                   selector={survey}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+      
                 />
               ))}
             </SimpleGrid>
@@ -103,6 +104,8 @@ const Analytics: React.FC<analatycsType> = ({
                   user={user}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+                  setDatabaseData={setDatabaseData}
+                  databaseData={databaseData}
                 />
               ))}
             </SimpleGrid>

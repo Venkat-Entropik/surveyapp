@@ -32,7 +32,7 @@ const Database: React.FC<DatabaseType> = ({
     }
     setIsLoading(false);
   };
-  
+
   useEffect(() => {
     getDataFromDatabase();
   }, []);
