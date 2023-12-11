@@ -82,7 +82,7 @@ const Analytics: React.FC<analatycsType> = ({
                 <SurveyCard
                   key={survey.id}
                   user={user}
-                  selector={surveySelector[0]}
+                  selector={survey}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
                 />
