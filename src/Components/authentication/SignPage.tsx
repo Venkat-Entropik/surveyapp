@@ -37,9 +37,8 @@ const SignPage: React.FC = () => {
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Error",
-        status: "error",
+        title: `${error}`,
+        status: "warning",
         duration: 3000,
         isClosable: true,
       });
