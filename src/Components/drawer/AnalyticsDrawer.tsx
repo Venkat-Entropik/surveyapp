@@ -116,12 +116,13 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                 {selector.questions.map((que: any, index: string) => {
                   console.log(selector);
                   return (
-                    <Box key={index} mt="15px">
-                      <Heading as="h4" size="md" color="blue.600">
-                        {index + 1}. {que.text}
+                    <Box key={index} mt="15px" overflowY='auto'>
+                      <Heading as="h4" size="md" color="blue.700">
+                        {index + 1}. {que.text.charAt(0).toUpperCase() + que.text.slice(1)} {"?"}
                       </Heading>
                       <Box
-                        boxShadow="outline"
+                       border='1px' 
+                       borderColor='gray.200'
                         rounded="md"
                         mt="5px"
                         bg="inherit"

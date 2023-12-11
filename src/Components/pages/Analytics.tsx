@@ -1,4 +1,4 @@
-import { Box, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Select, SimpleGrid, useToast } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { textDb } from "../../firebase";
@@ -17,6 +17,7 @@ const Analytics: React.FC<analatycsType> = ({
   isLoading,
   setIsLoading,
 }) => {
+  const toast= useToast()
   const [databaseData, setDatabaseData] = useState<any[]>([]);
   const [dropdown, setDropDown] = useState<string>("images");
 
@@ -28,7 +29,12 @@ const Analytics: React.FC<analatycsType> = ({
       const allData = dataDB.docs.map((val) => ({ ...val.data(), id: val.id }));
       setDatabaseData(allData);
     } catch (error) {
-      console.log(error);
+      toast({
+        title: `${error}`,
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
     }
     setIsLoading(false);
   };
