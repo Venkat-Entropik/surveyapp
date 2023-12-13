@@ -47,15 +47,6 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
     setRemainingTime(selector.endTime - parseFloat(startTime));
   };
 
-  const handleStop = (progress: any) => {
-    if (isPlaying) {
-      if (progress.playedSeconds >= selector.endTime) {
-        handlePause();
-      } else {
-        setRemainingTime(selector.endTime - progress.playedSeconds);
-      }
-    }
-  };
   const handlePause = () => {
     if (videoRef.current) {
       videoRef.current.getInternalPlayer().pause();
@@ -63,9 +54,22 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
     setIsPlaying(false);
   };
 
+  const handleProgress = (progress: any) => {
+    if (isPlaying) {
+      if (progress.playedSeconds >= selector.endTime) {
+        handlePause();
+        setIsPlaying(false);
+        setRemainingTime(selector.endTime - selector.startTime);
+      } else {
+        setRemainingTime(selector.endTime - progress.playedSeconds);
+      }
+    }
+  };
+
   const handleButtonClick = () => {
-    setIsPlaying(true)
-    handlePlay(selector.startTime, selector.endTime);
+    console.log('Btn clicked');
+    setIsPlaying(true);
+    handlePlay(selector.id, selector.startTime);
     if (videoRef.current) {
       videoRef.current.getInternalPlayer().play();
     }
@@ -121,10 +125,8 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                       width="auto"
                       height="auto"
                       style={{ marginTop: "10px", borderRadius: "10px" }}
-                      onStart={() =>
-                        handlePlay(selector.id, selector.startTime)
-                      }
-                      onProgress={handleStop}
+                      onStart={() => handlePlay(selector.id, selector.startTime)}
+                      onProgress={handleProgress}
                     />
                   ))}
 
@@ -139,8 +141,9 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                     colorScheme="teal"
                     onClick={handleButtonClick}
                     mt="10px"
+                    isDisabled={isPlaying}
                   >
-                    Play Video
+                    {isPlaying ? "Playing ..." : "Play Video"}
                   </Button>
                 </VStack>
               )}
