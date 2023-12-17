@@ -40,6 +40,7 @@ const FileUpload: React.FC = () => {
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     setSelectedFiles(files);
+    console.log(files)
 
     if (files && files.length > 0) {
       if (files.length > 4) {
@@ -147,7 +148,7 @@ const FileUpload: React.FC = () => {
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
       <Flex flexDirection={["column", "column", "row"]} justify="space-around">
         <Stack spacing={4} align="center">
-          <FaCloudUploadAlt fontSize="2em" color="gray.500" />
+          <FaCloudUploadAlt fontSize="2em" color="gray.500" data-testid='uploadlogo'/>
           <Heading as="h3" size="md">
             Upload Files
           </Heading>
@@ -158,6 +159,7 @@ const FileUpload: React.FC = () => {
             onChange={(e) => handleImages(e)}
             multiple
             accept="image/jpeg, image/png, image/gif"
+            placeholder="Enter files"
           />
           <label htmlFor="fileInput">
             <Box

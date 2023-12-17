@@ -27,7 +27,6 @@ const NavBar: React.FC<user> = ({ user }) => {
     signOut(auth);
     toast({
       title: "Logout Successfull",
-
       status: "success",
       duration: 3000,
       isClosable: true,
@@ -50,13 +49,14 @@ const NavBar: React.FC<user> = ({ user }) => {
           >
             Data{" "}
             <Flex as="span" alignItems="center" gap="10px" color="red">
-              Analytics <FiTrendingUp />
+              Analytics <FiTrendingUp data-testid='logo' />
             </Flex>{" "}
           </Flex>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
               {user ? (
+                <Box data-testid='usericon'>
                 <Menu>
                   <MenuButton
                     as={Button}
@@ -70,11 +70,11 @@ const NavBar: React.FC<user> = ({ user }) => {
                   <MenuList alignItems={"center"} p="2">
                     <br />
                     <Center>
-                      <Avatar size={"2xl"} src={user?.photoURL} />
+                      <Avatar size={"2xl"} src={user?.photoURL}/>
                     </Center>
                     <br />
                     <Center>
-                      <p>{user?.displayName || user?.email}</p>
+                      <p data-testid='paragraph'>{user?.displayName || user?.email}</p>
                     </Center>
                     <br />
                     <MenuDivider />
@@ -83,9 +83,10 @@ const NavBar: React.FC<user> = ({ user }) => {
                     </Button>
                   </MenuList>
                 </Menu>
-              ) : (
+                </Box>  ) : (
                 <></>
-              )}
+               )}
+              
             </Stack>
           </Flex>
         </Flex>

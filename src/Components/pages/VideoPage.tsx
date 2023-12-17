@@ -51,7 +51,7 @@ const VideoUpload: React.FC = () => {
         });
         e.target.value = "";
         setvideoUploaded(false);
-        setVideoPreviews([])
+        setVideoPreviews([]);
         return;
       }
 
@@ -79,11 +79,11 @@ const VideoUpload: React.FC = () => {
         const previewURL = URL.createObjectURL(files[i]);
         previews.push({ url: previewURL, name: files[i].name });
       }
-      setVideoPreviews(previews)
+      setVideoPreviews(previews);
       setvideoUploaded(true);
     }
   };
-console.log('video',videoPreviews)
+  console.log("video", videoPreviews);
   const handleSubmit = () => {
     if (title.trim() === "") {
       toast({
@@ -135,24 +135,28 @@ console.log('video',videoPreviews)
       isClosable: true,
     });
 
-    setVideoPreviews([])
-    setSelectedFiles(null)
-    setTitle('')
-    setDescription('')
-    setvideoUploaded(false)
+    setVideoPreviews([]);
+    setSelectedFiles(null);
+    setTitle("");
+    setDescription("");
+    setvideoUploaded(false);
   };
 
-  const handleRemove = ()=>{
+  const handleRemove = () => {
     setVideoPreviews([]);
     setSelectedFiles(null);
     setvideoUploaded(false);
-  }
+  };
 
   return (
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
       <Flex flexDirection={["column", "column", "row"]} justify="space-around">
         <Stack spacing={4} align="center">
-          <FaCloudUploadAlt fontSize="2em" color="gray.500" />
+          <FaCloudUploadAlt
+            data-testid="uploadlogo"
+            fontSize="2em"
+            color="gray.500"
+          />
           <Heading as="h3" size="md">
             Upload Files
           </Heading>
@@ -162,6 +166,7 @@ console.log('video',videoPreviews)
             display="none"
             onChange={(e) => handleImages(e)}
             accept="video/mp4,video/x-m4v,video/*"
+            placeholder="Enter files"
           />
           <label htmlFor="fileInput">
             <Box
@@ -177,17 +182,20 @@ console.log('video',videoPreviews)
             </Box>
           </label>
           <VStack>
-          {
-            videoPreviews.length > 0 && (<>
-              <video width='100px' height='70px' style={{borderRadius:'10px'}}>
-              <source src={videoPreviews[0]?.url}/>
-            </video>
-            <Button bg='red.500' onClick={handleRemove}>Remove Video</Button>
-            </>
-            )
-          }
-            
-          
+            {videoPreviews.length > 0 && (
+              <>
+                <video
+                  width="100px"
+                  height="70px"
+                  style={{ borderRadius: "10px" }}
+                >
+                  <source src={videoPreviews[0]?.url} />
+                </video>
+                <Button bg="red.500" onClick={handleRemove}>
+                  Remove Video
+                </Button>
+              </>
+            )}
           </VStack>
           <Text fontSize="sm" color="gray.500">
             Supported file types: MP4, X-m4v, Video/*

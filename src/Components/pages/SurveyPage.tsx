@@ -251,6 +251,7 @@ const SurveyPage: React.FC = () => {
                 alignItems="center"
                 color="blue.600"
                 fontWeight="bolder"
+                data-testid='questions'
               >
                 <Box
                   display="flex"
@@ -284,6 +285,7 @@ const SurveyPage: React.FC = () => {
                       bg='lightgray'
                       color="red.600"
                       fontWeight="bolder"
+                      data-testid='option'
                     >
                       <Box
                         display="flex"
