@@ -83,7 +83,6 @@ const VideoUpload: React.FC = () => {
       setvideoUploaded(true);
     }
   };
-  console.log("video", videoPreviews);
   const handleSubmit = () => {
     if (title.trim() === "") {
       toast({
@@ -124,7 +123,6 @@ const VideoUpload: React.FC = () => {
       images: selectedFiles,
     };
 
-    console.log(data);
     dispatch(addVideos(data));
 
     toast({

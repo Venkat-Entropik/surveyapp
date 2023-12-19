@@ -40,7 +40,6 @@ const FileUpload: React.FC = () => {
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     setSelectedFiles(files);
-    console.log(files)
 
     if (files && files.length > 0) {
       if (files.length > 4) {

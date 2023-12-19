@@ -102,7 +102,6 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   const { pathname } = useLocation();
-  console.log(pathname)
   return (
     <>
       <ReactRouterLink

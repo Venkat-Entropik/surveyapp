@@ -67,7 +67,6 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
   };
 
   const handleButtonClick = () => {
-    console.log('Btn clicked');
     setIsPlaying(true);
     handlePlay(selector.id, selector.startTime);
     if (videoRef.current) {
@@ -151,7 +150,6 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
             {selector.type.includes("survey") && (
               <>
                 {selector.questions.map((que: any, index: string) => {
-                  console.log(selector);
                   return (
                     <Box key={index} mt="10px" overflowY="auto">
                       <Heading as="h4" size="md" color="blue.600">
