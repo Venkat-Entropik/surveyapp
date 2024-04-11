@@ -116,7 +116,7 @@ const SurveyPage: React.FC = () => {
     });
     setSurveyTitle("");
     setSurveyDescription("");
-    setQuestions([])
+    setQuestions([]);
   };
 
   return (
@@ -148,7 +148,7 @@ const SurveyPage: React.FC = () => {
                 type="text"
                 placeholder="Enter Survey Title"
                 value={surveyTitle}
-                onChange={(e) => setSurveyTitle(e.target.value)}
+                onChange={(e: any) => setSurveyTitle(e.target.value)}
               />
               <FormLabel mt={2}>Survey Description</FormLabel>
               <Textarea
@@ -164,7 +164,7 @@ const SurveyPage: React.FC = () => {
                 type="text"
                 placeholder="Enter Question"
                 value={questionText}
-                onChange={(e) => setQuestionText(e.target.value)}
+                onChange={(e: any) => setQuestionText(e.target.value)}
               />
             </FormControl>
 
@@ -172,21 +172,18 @@ const SurveyPage: React.FC = () => {
               <FormLabel>Select Question Type</FormLabel>
               <RadioGroup
                 defaultValue="descriptive"
-                onChange={(value) =>
+                onChange={(value: any) =>
                   setQuestionType(value as "descriptive" | "mcq")
                 }
               >
                 <Stack direction="row">
                   <Radio
                     value="descriptive"
-                    isChecked={questionType === "descriptive" ? true : false}
+                    isChecked={questionType === "descriptive"}
                   >
                     Descriptive
                   </Radio>
-                  <Radio
-                    value="mcq"
-                    isChecked={questionType === "mcq" ? true : false}
-                  >
+                  <Radio value="mcq" isChecked={questionType === "mcq"}>
                     MCQ
                   </Radio>
                 </Stack>
@@ -200,7 +197,7 @@ const SurveyPage: React.FC = () => {
                   type="text"
                   placeholder="Enter Option"
                   value={optionText}
-                  onChange={(e) => setOptionText(e.target.value)}
+                  onChange={(e: any) => setOptionText(e.target.value)}
                 />
                 <Button mt={2} colorScheme="teal" onClick={addOption}>
                   Add Option
@@ -251,7 +248,7 @@ const SurveyPage: React.FC = () => {
                 alignItems="center"
                 color="blue.600"
                 fontWeight="bolder"
-                data-testid='questions'
+                data-testid="questions"
               >
                 <Box
                   display="flex"
@@ -282,10 +279,10 @@ const SurveyPage: React.FC = () => {
                       display="flex"
                       gap="10px"
                       alignItems="center"
-                      bg='lightgray'
+                      bg="lightgray"
                       color="red.600"
                       fontWeight="bolder"
-                      data-testid='option'
+                      data-testid="option"
                     >
                       <Box
                         display="flex"
