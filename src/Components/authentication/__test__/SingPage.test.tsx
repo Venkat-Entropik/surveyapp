@@ -12,6 +12,9 @@ import {
 import { Provider } from "react-redux";
 import { store } from "../../features/store";
 
+
+
+
 const SingInPageWrapper = () => {
   return (
     <BrowserRouter>
