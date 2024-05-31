@@ -16,6 +16,7 @@ import { store } from "../../features/store";
 
 
 const SingInPageWrapper = () => {
+  
   return (
     <BrowserRouter>
       <ChakraProvider>
