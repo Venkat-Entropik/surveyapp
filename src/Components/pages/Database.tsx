@@ -29,6 +29,7 @@ const Database: React.FC<DatabaseType> = ({
       const allData = dataDB.docs.map((val) => ({ ...val.data(), id: val.id }));
       setDatabaseData(allData);
     } catch (error) {
+
       toast({
         title: `${error}`,
         status: "warning",
@@ -37,8 +38,12 @@ const Database: React.FC<DatabaseType> = ({
       });
     }
 
+     console.log(error);
+    }
+
     setIsLoading(false);
   };
+
   useEffect(() => {
     getDataFromDatabase();
   }, []);
@@ -82,7 +87,7 @@ const Database: React.FC<DatabaseType> = ({
                 <SurveyCard
                   key={survey.id}
                   user={user}
-                  selector={surveySelector[0]}
+                  selector={survey}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
                 />
@@ -109,6 +114,8 @@ const Database: React.FC<DatabaseType> = ({
                   user={user}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+                  setDatabaseData={setDatabaseData}
+                  databaseData={databaseData}
                 />
               ))}
             </SimpleGrid>

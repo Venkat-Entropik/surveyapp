@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import SurveyPage from "./Components/pages/SurveyPage";
-import Database from "./Components/pages/Database";
 import NavBar from "./Components/navBar/NavBar";
 import SimpleSidebar from "./Components/sidebar/SideBar";
 import { auth } from "./firebase";
-import Analytics from "./Components/pages/Analytics";
-import FileUpload from "./Components/pages/ImagePage";
-import Home from "./Components/home/Home";
-import VideoUpload from "./Components/pages/VideoPage";
 import WelcomePage from "./Components/pages/welcomePage/WelcomePage";
 
+const Home = React.lazy(() => import("./Components/home/Home"));
+const FileUpload = React.lazy(() => import("./Components/pages/ImagePage"));
+const VideoUpload = React.lazy(() => import("./Components/pages/VideoPage"));
+const SurveyPage = React.lazy(() => import("./Components/pages/SurveyPage"));
+const Database = React.lazy(() => import("./Components/pages/Database"));
+const Analytics = React.lazy(() => import("./Components/pages/Analytics"));
+
 function App() {
-  const [user, setUser] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUser] = useState(null as any);
+  const [isLoading, setIsLoading] = useState(false as boolean);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user:any) => {
       if (user) setUser(user);
       else setUser(null);
     });
@@ -33,34 +34,61 @@ function App() {
             <Route
               path=""
               element={
-                <Home
-                  user={user}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Home
+                    user={user}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
+                </Suspense>
               }
             />
-            <Route path="Images" element={<FileUpload />} />
-            <Route path="Videos" element={<VideoUpload />} />
-            <Route path="Survey" element={<SurveyPage />} />
+            <Route
+              path="Images"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <FileUpload />
+                </Suspense>
+              }
+            />
+            <Route
+              path="Videos"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <VideoUpload />
+                </Suspense>
+              }
+            />
+            <Route
+              path="Survey"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <SurveyPage />
+                </Suspense>
+              }
+            />
             <Route
               path="Database"
               element={
-                <Database
-                  user={user}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Database
+                    user={user}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
+                </Suspense>
               }
             />
             <Route
               path="Analytics"
               element={
-                <Analytics
-                  user={user}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Analytics
+                    user={user}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                  />
+                </Suspense>
               }
             />
             <Route path="/*" element={<FileUpload />} />

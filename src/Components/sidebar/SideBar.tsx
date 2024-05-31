@@ -23,7 +23,11 @@ import {
   FiDatabase,
 } from "react-icons/fi";
 import { RiSurveyFill } from "react-icons/ri";
-import { NavLink as ReactRouterLink, Outlet, useLocation } from "react-router-dom";
+import {
+  NavLink as ReactRouterLink,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
 import { IconType } from "react-icons";
 
 interface LinkItemProps {
@@ -41,7 +45,7 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function SimpleSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   return (
     <Box minH="90%" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -88,7 +92,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} onClose={onClose}>
           {link.name}
         </NavItem>
       ))}
@@ -99,10 +103,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: string;
+  onClose: () => void;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, onClose, ...rest }: NavItemProps) => {
   const { pathname } = useLocation();
-  console.log(pathname)
   return (
     <>
       <ReactRouterLink
@@ -112,7 +116,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         <Flex
           align="center"
           p="4"
-          mt='5px'
+          mt="5px"
           mx="4"
           borderRadius="lg"
           role="group"
@@ -122,12 +126,19 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
             color: "white",
           }}
           {...rest}
-          sx={{ backgroundColor : children.toLowerCase() === pathname?.slice(1).toLowerCase() && 'cyan.400' , color:'white'}}
+          onClick={onClose}
+          sx={{
+            backgroundColor:
+              children.toLowerCase() === pathname?.slice(1).toLowerCase() &&
+              "cyan.400",
+            color: "white",
+          }}
         >
           {icon && (
             <Icon
               mr="4"
               fontSize="16"
+              data-testid="icon"
               _groupHover={{
                 color: "white",
               }}

@@ -1,8 +1,10 @@
-import { Card, Image, Heading, Text } from "@chakra-ui/react";
+import { Card, Image, Heading, Text, Button, useToast } from "@chakra-ui/react";
 import React from "react";
 import img from "../assets/17.jpg";
 import { SurveyDrawer } from "../drawer/SurveyDrawer";
 import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
+import { deleteDoc, doc } from "firebase/firestore";
+import { textDb } from "../../firebase";
 
 interface survey {
   selector: any;
@@ -19,6 +21,30 @@ const SurveyCard: React.FC<survey> = ({
 }) => {
   const drawerHide = selector.hasOwnProperty("database");
   const analyticsDrawer = selector.hasOwnProperty("analytics");
+  const toast = useToast();
+
+  const handleRemove = async (id: string) => {
+    setIsLoading(true);
+    try {
+      await deleteDoc(doc(textDb, "textData", id));
+      // setDatabaseData((prevData) => prevData.filter((item:any) => item.id !== id));
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Error",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+    setIsLoading(false);
+    toast({
+      title: "Removed Task successfully",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
   return (
     <Card p="10px">
       <Image
@@ -41,6 +67,12 @@ const SurveyCard: React.FC<survey> = ({
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
+      )}
+
+      {drawerHide && (
+        <Button mt="5px" onClick={() => handleRemove(selector.id)}>
+          Remove Task
+        </Button>
       )}
 
       {analyticsDrawer && (

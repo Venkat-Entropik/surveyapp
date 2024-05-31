@@ -19,7 +19,7 @@ const WelcomePage = () => {
           fontSize={["2xl", "2xl", "5xl"]}
           gap="10px"
         >
-          <PiHandWavingFill /> Welcome to our website
+          <PiHandWavingFill data-testid='handicon'/> Welcome to our website
         </Heading>
         <Text fontWeight="bold" fontSize="20px">
           Please <AuthModal /> to continue

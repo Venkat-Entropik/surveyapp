@@ -50,14 +50,14 @@ const SignPage: React.FC = () => {
       <FormLabel>Enter Email</FormLabel>
       <Input
         type="email"
-        placeholder="Enter Title"
+        placeholder="Enter Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <FormLabel>Enter Password</FormLabel>
       <Input
         type="password"
-        placeholder="Enter Title"
+        placeholder="Enter Password"
         value={passowrd}
         onChange={(e) => setPassword(e.target.value)}
       />
