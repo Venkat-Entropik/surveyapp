@@ -15,7 +15,7 @@ import {
   useToast,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { addSurveys } from "../features/redux/surveySlice";
+import { addSurveys } from "../../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
 
 interface Question {

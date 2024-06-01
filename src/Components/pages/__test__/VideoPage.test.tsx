@@ -4,7 +4,7 @@ import { screen, render, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "../../features/store";
+import { store } from "../../../features/store";
 import { ChakraProvider, useToast as baseUseToast } from "@chakra-ui/react";
 import userEvent from "@testing-library/user-event";
 import VideoUpload from "../VideoPage";
