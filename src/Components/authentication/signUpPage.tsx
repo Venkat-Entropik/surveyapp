@@ -44,13 +44,21 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
       });
       onClose();
     } catch (error) {
-      toast({
+      let errorMessage = "An unexpected error occurred";
+
+    if (error instanceof Error) {
+        errorMessage = error.message;
+    } else if (typeof error === 'string') {
+        errorMessage = error;
+    }
+
+    toast({
         title: "Error",
-        description: "Error",
+        description: errorMessage,
         status: "error",
         duration: 3000,
         isClosable: true,
-      });
+    });
     }
   };
 
