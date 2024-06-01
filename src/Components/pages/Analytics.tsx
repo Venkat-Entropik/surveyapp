@@ -5,6 +5,7 @@ import { textDb } from "../../firebase";
 import Spinners from "../loaders/Spinners";
 import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
+import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
 
 interface analatycsType {
   user: any;
@@ -61,7 +62,21 @@ const Analytics: React.FC<analatycsType> = ({
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
-      {isLoading && <Spinners />}
+      {isLoading && (
+        <SimpleGrid
+        spacing={4}
+        mt="15px"
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        maxH="400px"
+        overflowY="auto"
+      >
+        {Array(40).fill(0).map((_,index:number)=>{
+          return(
+            <SkeletonComp key={index}/>
+          )
+        })}
+        </SimpleGrid>
+      )}
       {dropdown === "surveys" ? (
         <>
           {surveySelector.length > 0 ? (
