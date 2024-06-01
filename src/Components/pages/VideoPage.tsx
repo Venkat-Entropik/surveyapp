@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { addVideos } from "../features/redux/dataSlice";
+import { addVideos } from "../../features/redux/dataSlice";
 
 export interface dataType {
   id: string;

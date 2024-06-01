@@ -4,9 +4,9 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, useToast as baseUseToast } from "@chakra-ui/react";
 import { Provider } from "react-redux";
-import { store } from "../../features/store";
 import SurveyPage from "../SurveyPage";
 import "@testing-library/jest-dom";
+import { store } from "../../../features/store";
 
 const SurveyCompWrapper = () => {
   return (

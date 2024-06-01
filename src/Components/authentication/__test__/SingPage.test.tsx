@@ -10,7 +10,7 @@ import {
   useToast as baseUseToast,
 } from "@chakra-ui/react";
 import { Provider } from "react-redux";
-import { store } from "../../features/store";
+import { store } from "../../../features/store";
 
 const SingInPageWrapper = () => {
   return (

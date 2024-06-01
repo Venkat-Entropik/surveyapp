@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { dataType } from "../../pages/ImagePage";
+import { dataType } from "../../Components/pages/ImagePage";
 
 interface intialStateType {
   images: dataType[];
