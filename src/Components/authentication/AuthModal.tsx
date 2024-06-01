@@ -42,12 +42,20 @@ export const AuthModal: React.FC = () => {
       onClose();
       return response;
     } catch (error) {
+      let errorMessage = "An unexpected error occurred";
+
+      if (error instanceof Error) {
+          errorMessage = error.message;
+      } else if (typeof error === 'string') {
+          errorMessage = error;
+      } 
+  
       toast({
-        title: "Error",
-        description: "Error",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
+          title: "Error",
+          description: errorMessage,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
       });
     }
   };
