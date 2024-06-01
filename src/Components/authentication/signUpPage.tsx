@@ -67,7 +67,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
       <FormLabel>Enter Email</FormLabel>
       <Input
         type="email"
-        placeholder="Enter Title"
+        placeholder="Enter Email"
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -76,7 +76,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
       <FormLabel>Enter Password</FormLabel>
       <Input
         type="password"
-        placeholder="Enter Title"
+        placeholder="Enter Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
