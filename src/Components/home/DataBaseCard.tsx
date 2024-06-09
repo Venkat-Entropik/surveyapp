@@ -22,6 +22,7 @@ interface DatabaseCard {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setDatabaseData: React.Dispatch<React.SetStateAction<any[]>>;
   databaseData: any[];
+  setDeleteCard?: any;
 }
 const DataBaseCard: React.FC<DatabaseCard> = ({
   selector,
@@ -30,12 +31,14 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
   setIsLoading,
   setDatabaseData,
   databaseData,
+  setDeleteCard,
+  
 }) => {
   const analyticsBtn = selector.hasOwnProperty("analytics");
   const dataBase = selector.hasOwnProperty("database");
   const toast = useToast();
   const handleRemove = async (id: string) => {
-    setIsLoading(true);
+    setDeleteCard(true);
     try {
       await deleteDoc(doc(textDb, "textData", id));
       setDatabaseData((prevData)=> prevData.filter((item)=>item.id !== id))
@@ -48,13 +51,15 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
         isClosable: true,
       });
     }
-    setIsLoading(false);
+    finally {
+    setDeleteCard(false);
     toast({
       title: "Removed Task successfully",
       status: "success",
       duration: 3000,
       isClosable: true,
     });
+    }
   };
   return (
     <>
