@@ -20,7 +20,7 @@ const Database: React.FC<DatabaseType> = ({
 }) => {
   const [dropdown, setDropDown] = useState<string>("images");
   const [databaseData, setDatabaseData] = useState<any[]>([]);
-
+  const [deleteCard, setDeleteCard] = useState(false as boolean)
   const getDataFromDatabase = async () => {
     setIsLoading(true);
     try {
@@ -62,7 +62,7 @@ const Database: React.FC<DatabaseType> = ({
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
-      {isLoading && (
+      {deleteCard ? <Spinners/> : isLoading && (
         <SimpleGrid
         spacing={4}
         mt="15px"
@@ -120,6 +120,7 @@ const Database: React.FC<DatabaseType> = ({
                   setIsLoading={setIsLoading}
                   setDatabaseData={setDatabaseData}
                   databaseData={databaseData}
+                  setDeleteCard={setDeleteCard}
                 />
               ))}
             </SimpleGrid>
