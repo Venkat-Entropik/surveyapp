@@ -31,7 +31,7 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
       <Select
         placeholder="Select option"
         w={["50%", "40%", "30%"]}
-        onChange={(e) => setDropDown(e.target.value)}
+        onChange={(e) => setDropDown(e.target.value || "images")}
       >
         <option value="images">Images</option>
         <option value="videos">Videos</option>
@@ -58,7 +58,7 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
             </SimpleGrid>
           ) : (
             <Flex justifyContent="center" alignItems="center">
-              <NoDataComp dropdown={dropdown} />
+              <NoDataComp dropdown={dropdown} home={true}/>
             </Flex>
           )}
         </>
@@ -82,7 +82,7 @@ const Home: React.FC<user> = ({ user, isLoading, setIsLoading }) => {
             </SimpleGrid>
           ) : (
             <Flex justifyContent="center" alignItems="center">
-              <NoDataComp dropdown={dropdown} />
+              <NoDataComp dropdown={dropdown} home={true}/>
             </Flex>
           )}
         </>
