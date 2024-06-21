@@ -64,7 +64,7 @@ const SurveyPage: React.FC = () => {
     setOptions([]);
     setOptionText("");
   };
-  console.log("questions", hoveredQuestion);
+
   const addOption = () => {
     if (optionText.trim() === "") {
       toast({
