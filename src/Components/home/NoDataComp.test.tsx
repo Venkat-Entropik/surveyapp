@@ -7,12 +7,13 @@ import NoDataComp from "./NoDataComp";
 import { BrowserRouter } from "react-router-dom";
 interface dropdownType {
   dropdown: string;
+  home?: boolean;
 }
 
-const BroswerRouterComp: React.FC<dropdownType> = ({ dropdown }) => {
+const BroswerRouterComp: React.FC<dropdownType> = ({ dropdown,home=true }) => {
   return (
     <BrowserRouter>
-      <NoDataComp dropdown={dropdown} />
+      <NoDataComp dropdown={dropdown} home={home} />
     </BrowserRouter>
   );
 };

@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 type dropdown = {
   dropdown: string;
+  home?: boolean;
 };
 
-const NoDataComp: React.FC<dropdown> = ({ dropdown }) => {
+const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => {
   return (
     <VStack>
       <Img
@@ -17,11 +18,13 @@ const NoDataComp: React.FC<dropdown> = ({ dropdown }) => {
       />
       <Text fontWeight="bold">
         No {`${dropdown}`} Data Available{" "}
-        <Link to={`${dropdown}`}>
-          <Box as="span" color="blue.500">
-            Upload {`${dropdown}`}
-          </Box>
-        </Link>
+        {home && (
+          <Link to={`${dropdown}`}>
+            <Box as="span" color="blue.500">
+              Upload {`${dropdown}`}
+            </Box>
+          </Link>
+        )}
       </Text>
     </VStack>
   );

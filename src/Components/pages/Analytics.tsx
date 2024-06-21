@@ -56,7 +56,7 @@ const Analytics: React.FC<analatycsType> = ({
       <Select
         placeholder="Select option"
         w={["50%", "40%", "30%"]}
-        onChange={(e) => setDropDown(e.target.value)}
+        onChange={(e) => setDropDown(e.target.value || "images")}
       >
         <option value="images">Images</option>
         <option value="videos">Videos</option>

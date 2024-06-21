@@ -11,6 +11,8 @@ interface survey {
   user: any;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setDatabaseData?: any;
+  setDeleteCard?: any;
 }
 
 const SurveyCard: React.FC<survey> = ({
@@ -18,16 +20,18 @@ const SurveyCard: React.FC<survey> = ({
   user,
   isLoading,
   setIsLoading,
+  setDatabaseData,
+  setDeleteCard,
 }) => {
   const drawerHide = selector.hasOwnProperty("database");
   const analyticsDrawer = selector.hasOwnProperty("analytics");
   const toast = useToast();
 
   const handleRemove = async (id: string) => {
-    setIsLoading(true);
+    setDeleteCard(true);
     try {
       await deleteDoc(doc(textDb, "textData", id));
-      // setDatabaseData((prevData) => prevData.filter((item:any) => item.id !== id));
+      setDatabaseData((prevData:any) => prevData.filter((item:any) => item.id !== id));
     } catch (error) {
       toast({
         title: "Error",
@@ -37,7 +41,7 @@ const SurveyCard: React.FC<survey> = ({
         isClosable: true,
       });
     }
-    setIsLoading(false);
+    setDeleteCard(false);
     toast({
       title: "Removed Task successfully",
       status: "success",
