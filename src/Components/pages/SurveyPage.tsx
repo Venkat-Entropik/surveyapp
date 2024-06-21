@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import styles from "./SurveyPage.module.css";
 import {
   Box,
   Text,
@@ -17,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { addSurveys } from "../../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 interface Question {
   text: string;
@@ -36,7 +38,7 @@ const SurveyPage: React.FC = () => {
   const [optionText, setOptionText] = useState<string>("");
   const [surveyTitle, setSurveyTitle] = useState<string>("");
   const [surveyDescription, setSurveyDescription] = useState<string>("");
-
+  const [hoveredQuestion, setHoveredQuestion] = useState<number | string>("");
   const addQuestion = () => {
     if (questionText.trim() === "") {
       toast({
@@ -79,7 +81,13 @@ const SurveyPage: React.FC = () => {
     setOptionText("");
   };
 
+
+  const handleDeleteQuestion =(deletedIndex:any)=>{
+    setQuestions(prev=> prev.filter((_,index)=>index !== deletedIndex))
+  }
+
   const handleSubmit = () => {
+    
     if (surveyTitle.trim() === "") {
       toast({
         title: "Please enter title",
@@ -249,6 +257,9 @@ const SurveyPage: React.FC = () => {
                 color="blue.600"
                 fontWeight="bolder"
                 data-testid="questions"
+                position="relative"
+                onMouseEnter={()=>setHoveredQuestion(index)}
+                onMouseLeave={()=>setHoveredQuestion("")}
               >
                 <Box
                   display="flex"
@@ -261,10 +272,25 @@ const SurveyPage: React.FC = () => {
                   color="green"
                   sx={{ fontWeight: "bolder" }}
                   textAlign="center"
+                  
                 >
                   {index + 1}{" "}
                 </Box>
-                {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+                <Box className={styles["survey__question"]}>
+                  {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+                </Box>
+                {
+                  hoveredQuestion === index && (
+                    <DeleteIcon
+                    position="absolute"
+                    right="8px"
+                    cursor="pointer"
+                    color="red"
+                    onClick={()=>handleDeleteQuestion(index)}
+                  />
+                  )
+                }
+               
               </Box>
               {q.type === "mcq" && (
                 <SimpleGrid columns={2} spacing={4} mt={2} width="100%">
