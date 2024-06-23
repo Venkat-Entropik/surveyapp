@@ -17,14 +17,14 @@ const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => {
         alt="image"
       />
       <Text fontWeight="bold">
-        No {`${dropdown}`} Data Available{" "}
-        {home && (
-          <Link to={`${dropdown}`}>
+        No Data Available{" "}
+        {/* {home && ( 
+          <Link to={`${dropdown}`}> // will be implemented in feature development
             <Box as="span" color="blue.500">
               Upload {`${dropdown}`}
             </Box>
           </Link>
-        )}
+        )} */}
       </Text>
     </VStack>
   );
