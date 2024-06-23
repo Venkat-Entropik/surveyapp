@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styles from "./SurveyPage.module.css";
 import {
   Box,
