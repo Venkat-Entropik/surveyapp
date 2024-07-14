@@ -31,7 +31,9 @@ const SurveyCard: React.FC<survey> = ({
     setDeleteCard(true);
     try {
       await deleteDoc(doc(textDb, "textData", id));
-      setDatabaseData((prevData:any) => prevData.filter((item:any) => item.id !== id));
+      setDatabaseData((prevData: any) =>
+        prevData.filter((item: any) => item.id !== id),
+      );
     } catch (error) {
       toast({
         title: "Error",

@@ -33,7 +33,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       toast({
         title: "Sign Up Successfull",
@@ -46,19 +46,19 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
     } catch (error) {
       let errorMessage = "An unexpected error occurred";
 
-    if (error instanceof Error) {
+      if (error instanceof Error) {
         errorMessage = error.message;
-    } else if (typeof error === 'string') {
+      } else if (typeof error === "string") {
         errorMessage = error;
-    }
+      }
 
-    toast({
+      toast({
         title: "Error",
         description: errorMessage,
         status: "error",
         duration: 3000,
         isClosable: true,
-    });
+      });
     }
   };
 

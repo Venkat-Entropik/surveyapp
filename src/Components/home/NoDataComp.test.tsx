@@ -10,7 +10,10 @@ interface dropdownType {
   home?: boolean;
 }
 
-const BroswerRouterComp: React.FC<dropdownType> = ({ dropdown,home=true }) => {
+const BroswerRouterComp: React.FC<dropdownType> = ({
+  dropdown,
+  home = true,
+}) => {
   return (
     <BrowserRouter>
       <NoDataComp dropdown={dropdown} home={home} />
@@ -38,7 +41,7 @@ describe("testing no data component", () => {
     render(<BroswerRouterComp dropdown="images" />);
     const image = screen.getByRole("img", { name: /image/i });
     expect(image.getAttribute("src")).toBe(
-      "https://www.chopserve.com/assets/animation_nofound-b0584b837b2c320b19b87eaa0ee18fb427a627ee601bc5472eeb13463fde3c32.gif"
+      "https://www.chopserve.com/assets/animation_nofound-b0584b837b2c320b19b87eaa0ee18fb427a627ee601bc5472eeb13463fde3c32.gif",
     );
   });
 });

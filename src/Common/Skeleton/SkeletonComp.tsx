@@ -1,4 +1,3 @@
-
 import styles from "./SkeletonComp.module.css";
 import { Card, Skeleton, SkeletonText } from "@chakra-ui/react";
 

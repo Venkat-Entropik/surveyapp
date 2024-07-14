@@ -40,10 +40,13 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "**/*.(ts|tsx|js|jsx)": [
+      "prettier --write"
+    ],
+    "**/*.(test|spec).(ts|tsx|js|jsx)": [
+      "prettier --write"
+    ],
+    "**/*.(css|scss|json)": "prettier --write"
   },
   "eslintConfig": {
     "extends": [
@@ -66,7 +69,13 @@
   },
   "devDependencies": {
     "@types/uuid": "9.0.7",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.7",
     "prettier": "3.3.3"

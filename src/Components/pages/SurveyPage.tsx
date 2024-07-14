@@ -32,7 +32,7 @@ const SurveyPage: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionText, setQuestionText] = useState<string>("");
   const [questionType, setQuestionType] = useState<"descriptive" | "mcq">(
-    "descriptive"
+    "descriptive",
   );
   const [options, setOptions] = useState<string[]>([]);
   const [optionText, setOptionText] = useState<string>("");
@@ -81,13 +81,11 @@ const SurveyPage: React.FC = () => {
     setOptionText("");
   };
 
-
-  const handleDeleteQuestion =(deletedIndex:any)=>{
-    setQuestions(prev=> prev.filter((_,index)=>index !== deletedIndex))
-  }
+  const handleDeleteQuestion = (deletedIndex: any) => {
+    setQuestions((prev) => prev.filter((_, index) => index !== deletedIndex));
+  };
 
   const handleSubmit = () => {
-    
     if (surveyTitle.trim() === "") {
       toast({
         title: "Please enter title",
@@ -214,7 +212,7 @@ const SurveyPage: React.FC = () => {
                 {options.map((option, index) => (
                   <Flex key={index} mt={2} alignItems="center">
                     <Text ml="20px">{`${String.fromCharCode(
-                      97 + index
+                      97 + index,
                     ).toUpperCase()}) ${
                       option.charAt(0).toUpperCase() + option.slice(1)
                     }`}</Text>
@@ -258,8 +256,8 @@ const SurveyPage: React.FC = () => {
                 fontWeight="bolder"
                 data-testid="questions"
                 position="relative"
-                onMouseEnter={()=>setHoveredQuestion(index)}
-                onMouseLeave={()=>setHoveredQuestion("")}
+                onMouseEnter={() => setHoveredQuestion(index)}
+                onMouseLeave={() => setHoveredQuestion("")}
               >
                 <Box
                   display="flex"
@@ -272,25 +270,21 @@ const SurveyPage: React.FC = () => {
                   color="green"
                   sx={{ fontWeight: "bolder" }}
                   textAlign="center"
-                  
                 >
                   {index + 1}{" "}
                 </Box>
                 <Box className={styles["survey__question"]}>
                   {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
                 </Box>
-                {
-                  hoveredQuestion === index && (
-                    <DeleteIcon
+                {hoveredQuestion === index && (
+                  <DeleteIcon
                     position="absolute"
                     right="8px"
                     cursor="pointer"
                     color="red"
-                    onClick={()=>handleDeleteQuestion(index)}
+                    onClick={() => handleDeleteQuestion(index)}
                   />
-                  )
-                }
-               
+                )}
               </Box>
               {q.type === "mcq" && (
                 <SimpleGrid columns={2} spacing={4} mt={2} width="100%">

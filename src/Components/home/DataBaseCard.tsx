@@ -32,7 +32,6 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
   setDatabaseData,
   databaseData,
   setDeleteCard,
-  
 }) => {
   const analyticsBtn = selector.hasOwnProperty("analytics");
   const dataBase = selector.hasOwnProperty("database");
@@ -41,7 +40,7 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
     setDeleteCard(true);
     try {
       await deleteDoc(doc(textDb, "textData", id));
-      setDatabaseData((prevData)=> prevData.filter((item)=>item.id !== id))
+      setDatabaseData((prevData) => prevData.filter((item) => item.id !== id));
     } catch (error) {
       toast({
         title: "Error",
@@ -50,15 +49,14 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
         duration: 3000,
         isClosable: true,
       });
-    }
-    finally {
-    setDeleteCard(false);
-    toast({
-      title: "Removed Task successfully",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
+    } finally {
+      setDeleteCard(false);
+      toast({
+        title: "Removed Task successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
   return (

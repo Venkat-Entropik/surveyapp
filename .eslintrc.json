@@ -1,0 +1,93 @@
+{
+  "root": true,
+  "extends": ["airbnb", "prettier", "react-app"],
+  "env": {
+    "node": false,
+    "es6": true,
+    "es2021": true,
+    "browser": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["webpack.config.js", "webpack.prod.js"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "sort-destructure-keys",
+    "unused-imports"
+  ],
+  "overrides": [
+    {
+      "files": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx", "src/**/*.js"],
+      "excludedFiles": ["*.spec.*", "*.test.*"]
+    },
+    {
+      "files": ["**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": [
+        "plugin:testing-library/react",
+        "plugin:vitest-globals/recommended"
+      ],
+      "env": {
+        "vitest-globals/env": true
+      }
+    }
+  ],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "error",
+    "import/no-webpack-loader-syntax": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-boolean-value": "error",
+    "react/self-closing-comp": "warn",
+    "react/jsx-sort-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-fragments": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "sort-destructure-keys/sort-destructure-keys": [
+      "off",
+      {
+        "caseSensitive": false
+      }
+    ],
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": [
+      "warn",
+      {
+        "devDependencies": true
+      }
+    ],
+    "react/destructuring-assignment": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "dot-notation": "off",
+    "import/no-unresolved": "off",
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-plusplus": "off",
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "no-use-before-define": "off",
+    "prefer-destructuring": "off",
+    "no-prototype-builtins": "off",
+    "camelcase": "warn",
+    "no-nested-ternary": "warn",
+    "no-relative-packages": "off"
+  }
+}
