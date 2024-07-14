@@ -64,17 +64,17 @@ const Analytics: React.FC<analatycsType> = ({
       </Select>
       {isLoading && (
         <SimpleGrid
-        spacing={4}
-        mt="15px"
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-        maxH="400px"
-        overflowY="auto"
-      >
-        {Array(40).fill(0).map((_,index:number)=>{
-          return(
-            <SkeletonComp key={index}/>
-          )
-        })}
+          spacing={4}
+          mt="15px"
+          templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+          maxH="400px"
+          overflowY="auto"
+        >
+          {Array(40)
+            .fill(0)
+            .map((_, index: number) => {
+              return <SkeletonComp key={index} />;
+            })}
         </SimpleGrid>
       )}
       {dropdown === "surveys" ? (
@@ -94,7 +94,6 @@ const Analytics: React.FC<analatycsType> = ({
                   selector={survey}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
-      
                 />
               ))}
             </SimpleGrid>

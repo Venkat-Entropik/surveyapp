@@ -37,7 +37,7 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const [remainingTime, setRemainingTime] = React.useState<number>(
-    selector.endTime - selector.startTime
+    selector.endTime - selector.startTime,
   );
 
   const handlePlay = (id: string, startTime: string) => {
@@ -124,7 +124,9 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                       width="auto"
                       height="auto"
                       style={{ marginTop: "10px", borderRadius: "10px" }}
-                      onStart={() => handlePlay(selector.id, selector.startTime)}
+                      onStart={() =>
+                        handlePlay(selector.id, selector.startTime)
+                      }
                       onProgress={handleProgress}
                     />
                   ))}

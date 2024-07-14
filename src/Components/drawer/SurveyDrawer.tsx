@@ -41,7 +41,6 @@ export const SurveyDrawer: React.FC<survey> = ({
     return survey.id === id;
   });
 
-
   const handleUploadSurvey = async () => {
     try {
       setIsLoading(true);

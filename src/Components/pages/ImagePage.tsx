@@ -147,7 +147,11 @@ const FileUpload: React.FC = () => {
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
       <Flex flexDirection={["column", "column", "row"]} justify="space-around">
         <Stack spacing={4} align="center">
-          <FaCloudUploadAlt fontSize="2em" color="gray.500" data-testid='uploadlogo'/>
+          <FaCloudUploadAlt
+            fontSize="2em"
+            color="gray.500"
+            data-testid="uploadlogo"
+          />
           <Heading as="h3" size="md">
             Upload Files
           </Heading>

@@ -53,8 +53,8 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
     return filterValue.type === "name"
       ? item.title.toLowerCase().includes(filterValue.key.toLowerCase())
       : filterValue.type === "type"
-      ? item.type === filterValue.key
-      : item;
+        ? item.type === filterValue.key
+        : item;
   });
 
   console.log("allstudies", allStudies);
@@ -142,7 +142,11 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                 />
               )}
               {dropdown === "type" && (
-                <Select onChange={(e) => setFilterDropDown(e.target.value || "images")}>
+                <Select
+                  onChange={(e) =>
+                    setFilterDropDown(e.target.value || "images")
+                  }
+                >
                   <option value="images">Images</option>
                   <option value="videos">Videos</option>
                   <option value="survey">Survey</option>
@@ -184,7 +188,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
               />
-            )
+            ),
           )}
         </SimpleGrid>
       ) : (

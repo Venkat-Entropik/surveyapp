@@ -19,7 +19,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false as boolean);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user:any) => {
+    onAuthStateChanged(auth, (user: any) => {
       if (user) setUser(user);
       else setUser(null);
     });
