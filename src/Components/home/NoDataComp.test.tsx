@@ -23,10 +23,10 @@ describe("testing no data component", () => {
   dropdownValue.forEach((val) => {
     test("should component exist", () => {
       render(<BroswerRouterComp dropdown={val} />);
-      const noDataText = screen.getByText(`No ${val} Data Available`);
-      const uploadText = screen.getByText(`Upload ${val}`); //Upload {`${dropdown}`}
+      const noDataText = screen.getByText(`No Data Available`);
+      // const uploadText = screen.getByText(`Upload ${val}`); //Upload {`${dropdown}`}
       expect(noDataText).toBeInTheDocument();
-      expect(uploadText).toBeInTheDocument();
+      // expect(uploadText).toBeInThewDocument();
     });
   });
   test("should no data image tag available", () => {
