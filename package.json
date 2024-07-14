@@ -41,10 +41,12 @@
   },
   "lint-staged": {
     "**/*.(ts|tsx|js|jsx)": [
-      "prettier --write"
+      "prettier --write",
+      "eslint --fix"
     ],
     "**/*.(test|spec).(ts|tsx|js|jsx)": [
-      "prettier --write"
+      "prettier --write",
+      "eslint --fix"
     ],
     "**/*.(css|scss|json)": "prettier --write"
   },
