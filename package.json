@@ -40,7 +40,10 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.js": "eslint --fix"
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "eslintConfig": {
     "extends": [
