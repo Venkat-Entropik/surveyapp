@@ -96,7 +96,9 @@ export const AuthModal: React.FC = () => {
           </Tabs>
           <Box display="flex" justifyContent="center" alignItems="center">
             <Box borderTop="1px solid gray" w="30%" mr="20px"></Box>
-            <Text textAlign="center">OR</Text>
+            <Text textAlign="center" color="white">
+              OR
+            </Text>
             <Box borderTop="1px solid gray" w="30%" ml="20px"></Box>
           </Box>
 
