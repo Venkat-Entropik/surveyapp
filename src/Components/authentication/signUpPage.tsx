@@ -88,7 +88,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <Button w="100%" mt="10px" onClick={handleSubmit}>
-        Submit
+        Sign Up
       </Button>
     </FormControl>
   );

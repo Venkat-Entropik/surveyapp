@@ -71,7 +71,7 @@ const SignPage: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button w="100%" mt="10px" onClick={handleSubmit}>
-        Submit
+        Login
       </Button>
     </FormControl>
   );
