@@ -94,7 +94,12 @@ export const AuthModal: React.FC = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <Text textAlign="center">OR</Text>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Box borderTop="1px solid gray" w="30%" mr="20px"></Box>
+            <Text textAlign="center">OR</Text>
+            <Box borderTop="1px solid gray" w="30%" ml="20px"></Box>
+          </Box>
+
           <ModalFooter>
             <GoogleButton
               style={{
