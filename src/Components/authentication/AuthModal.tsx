@@ -45,17 +45,17 @@ export const AuthModal: React.FC = () => {
       let errorMessage = "An unexpected error occurred";
 
       if (error instanceof Error) {
-          errorMessage = error.message;
-      } else if (typeof error === 'string') {
-          errorMessage = error;
-      } 
-  
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
       toast({
-          title: "Error",
-          description: errorMessage,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
+        title: "Error",
+        description: errorMessage,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
       });
     }
   };
@@ -94,7 +94,12 @@ export const AuthModal: React.FC = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <Text textAlign="center">OR</Text>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Box borderTop="1px solid gray" w="30%" mr="20px"></Box>
+            <Text textAlign="center">OR</Text>
+            <Box borderTop="1px solid gray" w="30%" ml="20px"></Box>
+          </Box>
+
           <ModalFooter>
             <GoogleButton
               style={{

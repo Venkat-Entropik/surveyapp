@@ -6,6 +6,7 @@ import Spinners from "../loaders/Spinners";
 import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
+import NoDataComp from "../home/NoDataComp";
 
 interface DatabaseType {
   user: any;
@@ -20,7 +21,7 @@ const Database: React.FC<DatabaseType> = ({
 }) => {
   const [dropdown, setDropDown] = useState<string>("images");
   const [databaseData, setDatabaseData] = useState<any[]>([]);
-
+  const [deleteCard, setDeleteCard] = useState(false as boolean);
   const getDataFromDatabase = async () => {
     setIsLoading(true);
     try {
@@ -36,6 +37,7 @@ const Database: React.FC<DatabaseType> = ({
 
   useEffect(() => {
     getDataFromDatabase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterTasks = databaseData.filter((task) => {
@@ -56,26 +58,30 @@ const Database: React.FC<DatabaseType> = ({
       <Select
         placeholder="Select option"
         w={["50%", "40%", "30%"]}
-        onChange={(e) => setDropDown(e.target.value)}
+        onChange={(e) => setDropDown(e.target.value || "images")}
       >
         <option value="images">Images</option>
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
-      {isLoading && (
-        <SimpleGrid
-        spacing={4}
-        mt="15px"
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-        maxH="400px"
-        overflowY="auto"
-      >
-        {Array(40).fill(0).map((_,index:number)=>{
-          return(
-            <SkeletonComp key={index}/>
-          )
-        })}
-        </SimpleGrid>
+      {deleteCard ? (
+        <Spinners />
+      ) : (
+        isLoading && (
+          <SimpleGrid
+            spacing={4}
+            mt="15px"
+            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+            maxH="400px"
+            overflowY="auto"
+          >
+            {Array(40)
+              .fill(0)
+              .map((_, index: number) => {
+                return <SkeletonComp key={index} />;
+              })}
+          </SimpleGrid>
+        )
       )}
       {dropdown === "surveys" ? (
         <>
@@ -94,11 +100,13 @@ const Database: React.FC<DatabaseType> = ({
                   selector={survey}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+                  setDatabaseData={setDatabaseData}
+                  setDeleteCard={setDeleteCard}
                 />
               ))}
             </SimpleGrid>
           ) : (
-            <></>
+            !isLoading && <NoDataComp dropdown="" home={false} />
           )}
         </>
       ) : (
@@ -120,11 +128,12 @@ const Database: React.FC<DatabaseType> = ({
                   setIsLoading={setIsLoading}
                   setDatabaseData={setDatabaseData}
                   databaseData={databaseData}
+                  setDeleteCard={setDeleteCard}
                 />
               ))}
             </SimpleGrid>
           ) : (
-            <></>
+            !isLoading && <NoDataComp dropdown="" home={false} />
           )}
         </>
       )}

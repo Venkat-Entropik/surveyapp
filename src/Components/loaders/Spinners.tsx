@@ -1,6 +1,6 @@
 import React from "react";
 import { CirclesWithBar } from "react-loader-spinner";
-import styles from './Spinners.module.css'
+import styles from "./Spinners.module.css";
 const Spinners = () => {
   return (
     <>
@@ -15,7 +15,6 @@ const Spinners = () => {
         innerCircleColor=""
         barColor=""
         ariaLabel="circles-with-bar-loading"
-        
       />
     </>
   );

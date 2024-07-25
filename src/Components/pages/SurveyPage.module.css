@@ -1,0 +1,7 @@
+.survey__question {
+  width: calc(100% - 50px);
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

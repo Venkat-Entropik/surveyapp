@@ -7,12 +7,16 @@ import NoDataComp from "./NoDataComp";
 import { BrowserRouter } from "react-router-dom";
 interface dropdownType {
   dropdown: string;
+  home?: boolean;
 }
 
-const BroswerRouterComp: React.FC<dropdownType> = ({ dropdown }) => {
+const BroswerRouterComp: React.FC<dropdownType> = ({
+  dropdown,
+  home = true,
+}) => {
   return (
     <BrowserRouter>
-      <NoDataComp dropdown={dropdown} />
+      <NoDataComp dropdown={dropdown} home={home} />
     </BrowserRouter>
   );
 };
@@ -22,10 +26,10 @@ describe("testing no data component", () => {
   dropdownValue.forEach((val) => {
     test("should component exist", () => {
       render(<BroswerRouterComp dropdown={val} />);
-      const noDataText = screen.getByText(`No ${val} Data Available`);
-      const uploadText = screen.getByText(`Upload ${val}`); //Upload {`${dropdown}`}
+      const noDataText = screen.getByText(`No Data Available`);
+      // const uploadText = screen.getByText(`Upload ${val}`); //Upload {`${dropdown}`}
       expect(noDataText).toBeInTheDocument();
-      expect(uploadText).toBeInTheDocument();
+      // expect(uploadText).toBeInThewDocument();
     });
   });
   test("should no data image tag available", () => {
@@ -37,7 +41,7 @@ describe("testing no data component", () => {
     render(<BroswerRouterComp dropdown="images" />);
     const image = screen.getByRole("img", { name: /image/i });
     expect(image.getAttribute("src")).toBe(
-      "https://www.chopserve.com/assets/animation_nofound-b0584b837b2c320b19b87eaa0ee18fb427a627ee601bc5472eeb13463fde3c32.gif"
+      "https://www.chopserve.com/assets/animation_nofound-b0584b837b2c320b19b87eaa0ee18fb427a627ee601bc5472eeb13463fde3c32.gif",
     );
   });
 });

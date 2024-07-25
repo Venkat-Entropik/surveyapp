@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./SurveyPage.module.css";
 import {
   Box,
   Text,
@@ -15,8 +16,9 @@ import {
   useToast,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { addSurveys } from "../features/redux/surveySlice";
+import { addSurveys } from "../../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 interface Question {
   text: string;
@@ -30,13 +32,13 @@ const SurveyPage: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionText, setQuestionText] = useState<string>("");
   const [questionType, setQuestionType] = useState<"descriptive" | "mcq">(
-    "descriptive"
+    "descriptive",
   );
   const [options, setOptions] = useState<string[]>([]);
   const [optionText, setOptionText] = useState<string>("");
   const [surveyTitle, setSurveyTitle] = useState<string>("");
   const [surveyDescription, setSurveyDescription] = useState<string>("");
-
+  const [hoveredQuestion, setHoveredQuestion] = useState<number | string>("");
   const addQuestion = () => {
     if (questionText.trim() === "") {
       toast({
@@ -77,6 +79,10 @@ const SurveyPage: React.FC = () => {
     setOptions((prevOptions) => [...prevOptions, optionText]);
 
     setOptionText("");
+  };
+
+  const handleDeleteQuestion = (deletedIndex: any) => {
+    setQuestions((prev) => prev.filter((_, index) => index !== deletedIndex));
   };
 
   const handleSubmit = () => {
@@ -206,7 +212,7 @@ const SurveyPage: React.FC = () => {
                 {options.map((option, index) => (
                   <Flex key={index} mt={2} alignItems="center">
                     <Text ml="20px">{`${String.fromCharCode(
-                      97 + index
+                      97 + index,
                     ).toUpperCase()}) ${
                       option.charAt(0).toUpperCase() + option.slice(1)
                     }`}</Text>
@@ -249,6 +255,9 @@ const SurveyPage: React.FC = () => {
                 color="blue.600"
                 fontWeight="bolder"
                 data-testid="questions"
+                position="relative"
+                onMouseEnter={() => setHoveredQuestion(index)}
+                onMouseLeave={() => setHoveredQuestion("")}
               >
                 <Box
                   display="flex"
@@ -264,7 +273,18 @@ const SurveyPage: React.FC = () => {
                 >
                   {index + 1}{" "}
                 </Box>
-                {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+                <Box className={styles["survey__question"]}>
+                  {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+                </Box>
+                {hoveredQuestion === index && (
+                  <DeleteIcon
+                    position="absolute"
+                    right="8px"
+                    cursor="pointer"
+                    color="red"
+                    onClick={() => handleDeleteQuestion(index)}
+                  />
+                )}
               </Box>
               {q.type === "mcq" && (
                 <SimpleGrid columns={2} spacing={4} mt={2} width="100%">
