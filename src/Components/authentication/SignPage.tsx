@@ -5,14 +5,20 @@ import {
   Input,
   Button,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
-const SignPage: React.FC = () => {
+interface SignPageProps {}
+
+const SignPage: React.FC<SignPageProps> = () => {
   const [email, setEmail] = useState<string>("");
   const [passowrd, setPassword] = useState<string>("");
   const toast = useToast();
+
+  const FormTypes = ["Email", "Password"];
+
   const handleSubmit = async () => {
     if (!email || !passowrd) {
       toast({
@@ -54,22 +60,29 @@ const SignPage: React.FC = () => {
     }
   };
 
+  const handleChangeInput = (e: any, type: string) => {
+    if (type === "Email") {
+      return setEmail(e.target.value);
+    }
+    return setPassword(e.target.value);
+  };
+
   return (
-    <FormControl>
-      <FormLabel>Enter Email</FormLabel>
-      <Input
-        type="email"
-        placeholder="Enter Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <FormLabel>Enter Password</FormLabel>
-      <Input
-        type="password"
-        placeholder="Enter Password"
-        value={passowrd}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <FormControl isRequired>
+      {FormTypes.map((type: string) => {
+        const isEmail = type === "Email";
+        return (
+          <Box key={type}>
+            <FormLabel mb="8px">{`Enter ${type}`}</FormLabel>
+            <Input
+              type={`${type.toLowerCase()}`}
+              placeholder={`Enter ${type}`}
+              value={isEmail ? email : passowrd}
+              onChange={(e) => handleChangeInput(e, type)}
+            />
+          </Box>
+        );
+      })}
       <Button w="100%" mt="10px" onClick={handleSubmit}>
         Login
       </Button>

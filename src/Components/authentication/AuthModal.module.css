@@ -1,0 +1,35 @@
+.authmodal__container {
+  background-color: gold;
+  border-radius: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+.authmodal__divider-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authmodal__divider-left {
+  border-top: 1px solid gray;
+  width: 30%;
+  margin-right: 20px;
+}
+
+.authmodal__divider-right {
+  border-top: 1px solid gray;
+  width: 30%;
+  margin-left: 20px;
+}
+
+.authmodal__divider {
+  text-align: center;
+  color: white;
+}
+
+.authmodal__google-btn {
+  width: 100% !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}

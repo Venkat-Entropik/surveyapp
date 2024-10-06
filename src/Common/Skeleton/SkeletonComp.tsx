@@ -1,7 +1,10 @@
+import React, { FC } from "react";
 import styles from "./SkeletonComp.module.css";
 import { Card, Skeleton, SkeletonText } from "@chakra-ui/react";
 
-const SkeletonComp = () => {
+interface SkeletonCompProps {}
+
+const SkeletonComp: FC<SkeletonCompProps> = () => {
   return (
     <Card className={styles["skeleton__card"]}>
       <Skeleton isLoaded={false} w="100%" h="100px" />
