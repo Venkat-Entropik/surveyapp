@@ -44,7 +44,7 @@ describe("testing sign in page", () => {
     render(<SingInPageWrapper />);
     const emailInput = screen.getByPlaceholderText(/enter email/i);
     const passwordInput = screen.getByPlaceholderText(/enter password/i);
-    const submitBtn = screen.getByRole("button", { name: /submit/i });
+    const submitBtn = screen.getByRole("button", { name: /Login/i });
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(submitBtn).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("testing sign in page", () => {
     render(<SingInPageWrapper />);
     const emailInput = screen.getByPlaceholderText(/enter email/i);
     const passwordInput = screen.getByPlaceholderText(/enter password/i);
-    const submitBtn = screen.getByRole("button", { name: /submit/i });
+    const submitBtn = screen.getByRole("button", { name: /Login/i });
     fireEvent.change(emailInput, { target: { value: "email.@gmail.com" } });
     fireEvent.change(passwordInput, { target: { value: "" } });
     fireEvent.click(submitBtn);
