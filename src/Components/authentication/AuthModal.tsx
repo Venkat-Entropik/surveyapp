@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -19,11 +20,11 @@ import {
 import SignPage from "./SignPage";
 import SignUpPage from "./signUpPage";
 import GoogleButton from "react-google-button";
-import React from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
+import styles from "./AuthModal.module.css";
 
-export const AuthModal: React.FC = () => {
+export const AuthModal: FC = () => {
   const { isOpen, onOpen, onClose }: UseDisclosureReturn = useDisclosure();
   const googleProvider = new GoogleAuthProvider();
 
@@ -64,12 +65,9 @@ export const AuthModal: React.FC = () => {
     <>
       <Box
         as="span"
-        bg="gold"
         p="1"
-        borderRadius="5px"
-        cursor="pointer"
-        color="black"
         onClick={onOpen}
+        className={styles["authmodal__container"]}
       >
         Login
       </Box>
@@ -94,21 +92,15 @@ export const AuthModal: React.FC = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <Box display="flex" justifyContent="center" alignItems="center">
-            <Box borderTop="1px solid gray" w="30%" mr="20px"></Box>
-            <Text textAlign="center" color="white">
-              OR
-            </Text>
-            <Box borderTop="1px solid gray" w="30%" ml="20px"></Box>
+          <Box className={styles["authmodal__divider-wrapper"]}>
+            <Box className={styles["authmodal__divider-left"]} />
+            <Text className={styles["authmodal__divider"]}>OR</Text>
+            <Box className={styles["authmodal__divider-right"]} />
           </Box>
 
           <ModalFooter>
             <GoogleButton
-              style={{
-                width: "100%",
-                borderRadius: "10px",
-                overflow: "hidden",
-              }}
+              className={styles["authmodal__google-btn"]}
               onClick={signInWithGoogle}
             />
           </ModalFooter>
