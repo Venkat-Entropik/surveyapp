@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -12,14 +13,23 @@ interface SignUpPageProps {
   onClose: () => void;
 }
 
+interface formValuesProps {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
   const toast = useToast();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [formValues, setFormValues] = useState<formValuesProps>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const FormTypes = ["Email", "Password", "Confirm Password"];
 
   const handleSubmit = async () => {
-    if (password !== confirmPassword) {
+    if (formValues.password !== formValues.confirmPassword) {
       toast({
         title: "Password not mached",
         description: "Enter same password",
@@ -32,8 +42,8 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
     try {
       const result = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password,
+        formValues.email,
+        formValues.password,
       );
       toast({
         title: "Sign Up Successfull",
@@ -62,31 +72,41 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
     }
   };
 
+  const handleInputChange = (e: any, type: string) => {
+    console.log(e.target.value, type);
+    if (type === "Email") {
+      setFormValues({ ...formValues, email: e.target.value });
+    } else if (type === "Password") {
+      setFormValues({ ...formValues, password: e.target.value });
+    } else if (type === "Confirm Password") {
+      setFormValues({ ...formValues, confirmPassword: e.target.value });
+    }
+  };
+
+  const handleInputValue = (type: string) => {
+    if (type === "Email") {
+      return formValues.email;
+    } else if (type === "Password") {
+      return formValues.password;
+    }
+    return formValues.confirmPassword;
+  };
+
   return (
-    <FormControl>
-      <FormLabel>Enter Email</FormLabel>
-      <Input
-        type="email"
-        placeholder="Enter Email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
-      <FormLabel>Enter Password</FormLabel>
-      <Input
-        type="password"
-        placeholder="Enter Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <FormLabel>Confirm Password</FormLabel>
-      <Input
-        type="password"
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+    <FormControl isRequired>
+      {FormTypes.map((type: string) => {
+        return (
+          <Box key={type}>
+            <FormLabel>{`Enter ${type}`}</FormLabel>
+            <Input
+              type={`${type.toLowerCase()}`}
+              placeholder={`Enter ${type}`}
+              value={handleInputValue(type)}
+              onChange={(e) => handleInputChange(e, type)}
+            />
+          </Box>
+        );
+      })}
       <Button w="100%" mt="10px" onClick={handleSubmit}>
         Sign Up
       </Button>
