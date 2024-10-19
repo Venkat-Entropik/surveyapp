@@ -3,7 +3,6 @@ import {
   Card,
   Text,
   Heading,
-  Image,
   AspectRatio,
   Button,
   useToast,
@@ -12,8 +11,8 @@ import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
 import { deleteDoc, doc } from "firebase/firestore";
 import { textDb } from "../../firebase";
 import Spinners from "../loaders/Spinners";
-// import { useDispatch } from "react-redux";
-// import { addToDataBase } from "../features/redux/dataBaseSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface DatabaseCard {
   selector: any;
@@ -64,12 +63,16 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
       {isLoading && Spinners}
       <Card p="10px">
         {selector.type === "images" ? (
-          <Image
-            objectFit="cover"
-            src={selector?.images[0]}
-            alt="Chakra UI"
+          <LazyLoadImage
+            alt="chakra ui"
             height="100px"
-            borderRadius="10px"
+            src={selector?.images[0]}
+            effect="blur"
+            wrapperProps={{
+              style: {
+                transitionDelay: "1s",
+              },
+            }}
           />
         ) : (
           <>
