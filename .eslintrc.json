@@ -1,0 +1,15 @@
+{
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "react/jsx-key": "warn",
+      "no-prototype-builtins": "off" // Optional: Turn off this rule if you don't want to deal with it now
+    }
+  }
+  
