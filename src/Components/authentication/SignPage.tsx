@@ -10,6 +10,7 @@ import {
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SignPageProps {}
 
 const SignPage: React.FC<SignPageProps> = () => {
@@ -60,7 +61,7 @@ const SignPage: React.FC<SignPageProps> = () => {
     }
   };
 
-  const handleChangeInput = (e: any, type: string) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
     if (type === "Email") {
       return setEmail(e.target.value);
     }

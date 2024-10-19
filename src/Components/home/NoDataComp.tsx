@@ -6,7 +6,7 @@ type dropdown = {
   home?: boolean;
 };
 
-const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => {
+const NoDataComp: React.FC<dropdown> = () => {
   return (
     <VStack>
       <Img

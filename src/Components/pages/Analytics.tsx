@@ -2,7 +2,6 @@ import { Box, Select, SimpleGrid } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { textDb } from "../../firebase";
-import Spinners from "../loaders/Spinners";
 import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";

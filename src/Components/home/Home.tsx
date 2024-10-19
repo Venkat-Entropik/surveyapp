@@ -45,19 +45,13 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
     return state.survey.surveys;
   });
 
-  const filterTasks = selector.filter((task: any) => {
-    return task.type.toLowerCase() === dropdown.toLowerCase();
-  });
-
-  const allStudies = [...selector, ...surveySelector].filter((item, index) => {
+  const allStudies = [...selector, ...surveySelector].filter((item) => {
     return filterValue.type === "name"
       ? item.title.toLowerCase().includes(filterValue.key.toLowerCase())
       : filterValue.type === "type"
         ? item.type === filterValue.key
         : item;
   });
-
-  console.log("allstudies", allStudies);
 
   const filterTypes = [
     {
@@ -69,7 +63,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
       value: "type",
     },
   ];
-  console.log("filterKey", filterValue);
+
 
   const handleApplyFilter = () => {
     if (dropdown === "name") {
@@ -124,7 +118,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                 w="150px"
                 onChange={(e) => setDropDown(e.target.value || "name")}
               >
-                {filterTypes.map((item, index) => {
+                {filterTypes.map((item) => {
                   return (
                     <option key={item.value} value={item.value}>
                       {item.label}

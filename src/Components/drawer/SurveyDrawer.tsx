@@ -26,8 +26,6 @@ interface survey {
 
 export const SurveyDrawer: React.FC<survey> = ({
   id,
-  user,
-  isLoading,
   setIsLoading,
 }) => {
   const selector = useSelector((state: any) => {

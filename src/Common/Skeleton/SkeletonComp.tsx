@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styles from "./SkeletonComp.module.css";
 import { Card, Skeleton, SkeletonText } from "@chakra-ui/react";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SkeletonCompProps {}
 
 const SkeletonComp: FC<SkeletonCompProps> = () => {

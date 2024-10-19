@@ -72,8 +72,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
     }
   };
 
-  const handleInputChange = (e: any, type: string) => {
-    console.log(e.target.value, type);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
     if (type === "Email") {
       setFormValues({ ...formValues, email: e.target.value });
     } else if (type === "Password") {

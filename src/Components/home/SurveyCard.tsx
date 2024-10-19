@@ -35,6 +35,7 @@ const SurveyCard: React.FC<survey> = ({
         prevData.filter((item: any) => item.id !== id),
       );
     } catch (error) {
+      console.error(error)
       toast({
         title: "Error",
         description: "Error",

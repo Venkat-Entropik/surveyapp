@@ -31,8 +31,6 @@ interface id {
 
 export const DrawerComponent: React.FC<id> = ({
   id,
-  user,
-  isLoading,
   setIsLoading,
 }) => {
   const toast = useToast();
@@ -145,6 +143,7 @@ export const DrawerComponent: React.FC<id> = ({
                         w="100%"
                         alt="singleImage"
                         borderRadius="10px"
+                        key={item.type}
                       />
                     );
                   } else {
@@ -154,6 +153,7 @@ export const DrawerComponent: React.FC<id> = ({
                         width="100%"
                         height="200px"
                         style={{ borderRadius: "10px" }}
+                        key={item.type}
                       >
                         <source src={URL.createObjectURL(item)} />
                       </video>

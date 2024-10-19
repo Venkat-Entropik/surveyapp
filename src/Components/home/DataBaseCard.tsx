@@ -25,11 +25,9 @@ interface DatabaseCard {
 }
 const DataBaseCard: React.FC<DatabaseCard> = ({
   selector,
-  user,
   isLoading,
   setIsLoading,
   setDatabaseData,
-  databaseData,
   setDeleteCard,
 }) => {
   const analyticsBtn = selector.hasOwnProperty("analytics");

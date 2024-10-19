@@ -1,15 +1,24 @@
 {
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "prettier",
-      "plugin:react-hooks/recommended"
-    ],
-    "rules": {
-      "no-unused-vars": "warn",
-      "no-undef": "warn",
-      "react/jsx-key": "warn",
-      "no-prototype-builtins": "off" // Optional: Turn off this rule if you don't want to deal with it now
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-undef": "warn",
+    "react/jsx-key": "warn",
+    "no-prototype-builtins": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.spec.js", "**/*.test.tsx", "**/*.spec.tsx"],
+      "rules": {
+        "no-unused-expressions": "off", // Example: Turning off a specific rule for test files
+        "no-undef": "off",               // Ignore 'no-undef' in test files
+        "no-unused-vars": "off"          // Ignore 'no-unused-vars' in test files
+      }
     }
-  }
-  
+  ]
+}

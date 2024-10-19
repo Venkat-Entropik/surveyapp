@@ -26,10 +26,7 @@ interface dataBase {
 }
 
 const AnalyticsDrawer: React.FC<dataBase> = ({
-  id,
   selector,
-  isLoading,
-  setIsLoading,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
