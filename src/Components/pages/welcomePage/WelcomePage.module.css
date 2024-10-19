@@ -1,0 +1,32 @@
+.type-writer-effect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-writer-effect p {
+  font-family: monospace;
+  margin-inline: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 1px solid;
+  animation:
+    typing 3s steps(22) forwards,
+    blink 1s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
