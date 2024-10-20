@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
-  Input,
   Button,
   useToast,
   Box,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { auth } from "../../firebase";
 interface SignUpPageProps {
   onClose: () => void;
@@ -98,11 +98,13 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
         return (
           <Box key={type}>
             <FormLabel>{`Enter ${type}`}</FormLabel>
-            <Input
+            <CustomInput
               type={`${type.toLowerCase()}`}
               placeholder={`Enter ${type}`}
               value={handleInputValue(type)}
-              onChange={(e) => handleInputChange(e, type)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleInputChange(e, type)
+              }
             />
           </Box>
         );

@@ -17,6 +17,7 @@ import {
 
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { addVideos } from "../../features/redux/dataSlice";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 
 export interface dataType {
   id: string;
@@ -202,11 +203,13 @@ const VideoUpload: React.FC = () => {
         <Stack>
           <FormControl>
             <FormLabel>Enter Title</FormLabel>
-            <Input
+            <CustomInput
               type="text"
               placeholder="Enter Title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setTitle(e.target.value)
+              }
             />
             <FormLabel>Enter Description</FormLabel>
             <Textarea

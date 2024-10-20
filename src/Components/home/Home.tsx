@@ -7,7 +7,6 @@ import {
   useDisclosure,
   Button,
   Collapse,
-  Input,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import CardComponent from "./Card";
@@ -16,6 +15,7 @@ import SurveyCard from "./SurveyCard";
 import NoDataComp from "./NoDataComp";
 import { CiFilter } from "react-icons/ci";
 import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 
 interface UserProps {
   user: any;
@@ -132,10 +132,10 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                 })}
               </Select>
               {dropdown === "name" && (
-                <Input
+                <CustomInput
                   placeholder="Enter Name of the study"
                   value={inputValue}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setInputValue(e.target.value);
                   }}
                 />

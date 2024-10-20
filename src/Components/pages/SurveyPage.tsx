@@ -6,7 +6,6 @@ import {
   Stack,
   FormControl,
   FormLabel,
-  Input,
   Textarea,
   Button,
   Flex,
@@ -19,6 +18,7 @@ import {
 import { addSurveys } from "../../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
 import { DeleteIcon } from "@chakra-ui/icons";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 
 interface Question {
   text: string;
@@ -150,11 +150,13 @@ const SurveyPage: React.FC = () => {
           <Flex direction="column" mt="15px" width="100%" mx="auto">
             <FormControl>
               <FormLabel>Survey Title</FormLabel>
-              <Input
+              <CustomInput
                 type="text"
                 placeholder="Enter Survey Title"
                 value={surveyTitle}
-                onChange={(e: any) => setSurveyTitle(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSurveyTitle(e.target.value)
+                }
               />
               <FormLabel mt={2}>Survey Description</FormLabel>
               <Textarea
@@ -166,11 +168,11 @@ const SurveyPage: React.FC = () => {
 
             <FormControl mt={4}>
               <FormLabel>Enter Question</FormLabel>
-              <Input
+              <CustomInput
                 type="text"
                 placeholder="Enter Question"
                 value={questionText}
-                onChange={(e: any) => setQuestionText(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestionText(e.target.value)}
               />
             </FormControl>
 
@@ -199,11 +201,11 @@ const SurveyPage: React.FC = () => {
             {questionType === "mcq" && (
               <FormControl mt={4}>
                 <FormLabel>Options for MCQ</FormLabel>
-                <Input
+                <CustomInput
                   type="text"
                   placeholder="Enter Option"
                   value={optionText}
-                  onChange={(e: any) => setOptionText(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOptionText(e.target.value)}
                 />
                 <Button mt={2} colorScheme="teal" onClick={addOption}>
                   Add Option

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
-  Input,
   Button,
   useToast,
   Box,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 
 interface SignPageProps {}
 
@@ -74,11 +74,13 @@ const SignPage: React.FC<SignPageProps> = () => {
         return (
           <Box key={type}>
             <FormLabel mb="8px">{`Enter ${type}`}</FormLabel>
-            <Input
+            <CustomInput
               type={`${type.toLowerCase()}`}
               placeholder={`Enter ${type}`}
               value={isEmail ? email : passowrd}
-              onChange={(e) => handleChangeInput(e, type)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChangeInput(e, type)
+              }
             />
           </Box>
         );
