@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Input } from "@chakra-ui/react";
-interface CustomInputProps {
+import { Input, InputProps } from "@chakra-ui/react";
+interface CustomInputProps extends InputProps {
   isDisabled?: boolean;
   isReadOnly?: boolean;
   isRequired?: boolean;

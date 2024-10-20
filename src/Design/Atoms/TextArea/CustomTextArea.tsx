@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Textarea } from "@chakra-ui/react";
-interface CustomInputProps {
+import { Textarea, TextareaProps } from "@chakra-ui/react";
+interface CustomInputProps extends TextareaProps {
   isDisabled?: boolean;
   isReadOnly?: boolean;
   isRequired?: boolean;
