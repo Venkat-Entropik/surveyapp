@@ -4,7 +4,6 @@ import {
   Text,
   Heading,
   AspectRatio,
-  Button,
   useToast,
 } from "@chakra-ui/react";
 import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
@@ -13,6 +12,7 @@ import { textDb } from "../../firebase";
 import Spinners from "../loaders/Spinners";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface DatabaseCard {
   selector: any;
@@ -89,9 +89,9 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
         <Text pt="5px">{selector?.description}</Text>
 
         {dataBase && (
-          <Button mt="5px" onClick={() => handleRemove(selector.id)}>
+          <CustomButton mt="5px" onClick={() => handleRemove(selector.id)}>
             Remove Task
-          </Button>
+          </CustomButton>
         )}
         {analyticsBtn && (
           <AnalyticsDrawer

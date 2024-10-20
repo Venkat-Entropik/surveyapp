@@ -5,7 +5,6 @@ import {
   SimpleGrid,
   Select,
   useDisclosure,
-  Button,
   Collapse,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
@@ -16,6 +15,7 @@ import NoDataComp from "./NoDataComp";
 import { CiFilter } from "react-icons/ci";
 import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface UserProps {
   user: any;
@@ -57,7 +57,6 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
         : item;
   });
 
-  console.log("allstudies", allStudies);
 
   const filterTypes = [
     {
@@ -103,9 +102,9 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           bg="gray.300"
           color="black"
         >
-          <Button onClick={onToggle} isDisabled={allStudies.length === 0}>
+          <CustomButton onClick={onToggle} isDisabled={allStudies.length === 0}>
             <CiFilter />
-          </Button>
+          </CustomButton>
         </CustomTooltip>
         <Collapse in={isOpen} animateOpacity>
           <Box
@@ -153,12 +152,12 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
               )}
             </Box>
             <Box mt="8px" float="right">
-              <Button mr="8px" bg="red.400" onClick={handleClearFilter}>
+              <CustomButton mr="8px" bg="red.400" onClick={handleClearFilter}>
                 Clear filter
-              </Button>
-              <Button bg="green.400" onClick={handleApplyFilter}>
+              </CustomButton>
+              <CustomButton bg="green.400" onClick={handleApplyFilter}>
                 Apply Filter
-              </Button>
+              </CustomButton>
             </Box>
           </Box>
         </Collapse>

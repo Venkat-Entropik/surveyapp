@@ -9,7 +9,6 @@ import {
   Text,
   FormControl,
   FormLabel,
-  Button,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -19,6 +18,7 @@ import { addVideos } from "../../features/redux/dataSlice";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { Static } from "../../utility/Static";
 import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 export interface dataType {
   id: string;
@@ -185,9 +185,9 @@ const VideoUpload: React.FC = () => {
                 >
                   <source src={videoPreviews[0]?.url} />
                 </video>
-                <Button bg="red.500" onClick={handleRemove}>
+                <CustomButton bg="red.500" onClick={handleRemove}>
                   Remove Video
-                </Button>
+                </CustomButton>
               </>
             )}
           </VStack>
@@ -214,9 +214,9 @@ const VideoUpload: React.FC = () => {
                 setDescription(e.target.value)
               }
             ></CustomTextArea>
-            <Button w="100%" mt="10px" onClick={handleSubmit}>
+            <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
               Submit
-            </Button>
+            </CustomButton>
           </FormControl>
         </Stack>
       </Flex>

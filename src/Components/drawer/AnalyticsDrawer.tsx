@@ -5,7 +5,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Button,
   Box,
   Text,
   Heading,
@@ -17,6 +16,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface dataBase {
   id: string;
@@ -76,9 +76,9 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen} mt="10px">
+      <CustomButton ref={btnRef} colorScheme="teal" onClick={onOpen} mt="10px">
         View This Block
-      </Button>
+      </CustomButton>
       <Drawer onClose={onClose} isOpen={isOpen} size="lg">
         <DrawerOverlay />
         <DrawerContent>
@@ -138,14 +138,14 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                   <Text>
                     Remaining Time: {Math.floor(remainingTime)} seconds
                   </Text>
-                  <Button
+                  <CustomButton
                     colorScheme="teal"
                     onClick={handleButtonClick}
                     mt="10px"
                     isDisabled={isPlaying}
                   >
                     {isPlaying ? "Playing ..." : "Play Video"}
-                  </Button>
+                  </CustomButton>
                 </VStack>
               )}
             </Flex>

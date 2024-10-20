@@ -9,7 +9,6 @@ import {
   Text,
   FormControl,
   FormLabel,
-  Button,
   useToast,
   Input,
 } from "@chakra-ui/react";
@@ -19,6 +18,7 @@ import { addImages } from "../../features/redux/dataSlice";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { Static } from "../../utility/Static";
 import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 export interface dataType {
   id: string;
@@ -199,9 +199,9 @@ const FileUpload: React.FC = () => {
           </Flex>
           {imagePreviews.length > 0 && (
             <>
-              <Button bg="red.500" onClick={handleRemove}>
+              <CustomButton bg="red.500" onClick={handleRemove}>
                 Remove Images
-              </Button>
+              </CustomButton>
             </>
           )}
           <Text fontSize="sm" color="gray.500">
@@ -227,9 +227,9 @@ const FileUpload: React.FC = () => {
                 setDescription(e.target.value)
               }
             ></CustomTextArea>
-            <Button w="100%" mt="10px" onClick={handleSubmit}>
+            <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
               Submit
-            </Button>
+            </CustomButton>
           </FormControl>
         </Stack>
       </Flex>
