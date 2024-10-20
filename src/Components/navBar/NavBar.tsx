@@ -17,6 +17,7 @@ import { FiTrendingUp } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import React, { useEffect } from "react";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 interface user {
   user: any;
 }
@@ -80,9 +81,9 @@ const NavBar: React.FC<user> = ({ user }) => {
                       </Center>
                       <br />
                       <MenuDivider />
-                      <Button w="100%" onClick={handlelogout}>
+                      <CustomButton w="100%" onClick={handlelogout}>
                         Logout
-                      </Button>
+                      </CustomButton>
                     </MenuList>
                   </Menu>
                 </Box>

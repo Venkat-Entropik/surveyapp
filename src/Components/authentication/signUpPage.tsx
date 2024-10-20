@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
-  Button,
   useToast,
   Box,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { auth } from "../../firebase";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 interface SignUpPageProps {
   onClose: () => void;
 }
@@ -73,7 +73,6 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
   };
 
   const handleInputChange = (e: any, type: string) => {
-    console.log(e.target.value, type);
     if (type === "Email") {
       setFormValues({ ...formValues, email: e.target.value });
     } else if (type === "Password") {
@@ -109,9 +108,9 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
           </Box>
         );
       })}
-      <Button w="100%" mt="10px" onClick={handleSubmit}>
+      <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
         Sign Up
-      </Button>
+      </CustomButton>
     </FormControl>
   );
 };

@@ -5,7 +5,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
   useDisclosure,
   Box,
   Text,
@@ -21,6 +20,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imageDb, textDb } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface id {
   id: string;
@@ -108,7 +108,7 @@ export const DrawerComponent: React.FC<id> = ({
 
   return (
     <>
-      <Button
+      <CustomButton
         ref={btnRef}
         w="100%"
         mt="10px"
@@ -116,7 +116,7 @@ export const DrawerComponent: React.FC<id> = ({
         onClick={onOpen}
       >
         View More
-      </Button>
+      </CustomButton>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -163,9 +163,9 @@ export const DrawerComponent: React.FC<id> = ({
               })}
             </SimpleGrid>
             <Flex mt="10px" justifyContent="space-between">
-              <Button bg="green.600" w="40%" onClick={handleAddToDataBase}>
+              <CustomButton bg="green.600" w="40%" onClick={handleAddToDataBase}>
                 Publish
-              </Button>
+              </CustomButton>
               <Link
                 to="Analytics"
                 style={{
@@ -175,7 +175,7 @@ export const DrawerComponent: React.FC<id> = ({
                   textAlign: "center",
                 }}
               >
-                <Button>Analytics</Button>
+                <CustomButton>Analytics</CustomButton>
               </Link>
             </Flex>
           </DrawerBody>

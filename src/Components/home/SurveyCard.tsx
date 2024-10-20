@@ -1,10 +1,11 @@
-import { Card, Image, Heading, Text, Button, useToast } from "@chakra-ui/react";
+import { Card, Image, Heading, Text, useToast } from "@chakra-ui/react";
 import React from "react";
 import img from "../assets/17.jpg";
 import { SurveyDrawer } from "../drawer/SurveyDrawer";
 import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
 import { deleteDoc, doc } from "firebase/firestore";
 import { textDb } from "../../firebase";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface survey {
   selector: any;
@@ -76,9 +77,9 @@ const SurveyCard: React.FC<survey> = ({
       )}
 
       {drawerHide && (
-        <Button mt="5px" onClick={() => handleRemove(selector.id)}>
+        <CustomButton mt="5px" onClick={() => handleRemove(selector.id)}>
           Remove Task
-        </Button>
+        </CustomButton>
       )}
 
       {analyticsDrawer && (

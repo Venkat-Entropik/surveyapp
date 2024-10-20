@@ -5,7 +5,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
   useDisclosure,
   Box,
   Text,
@@ -16,6 +15,7 @@ import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { textDb } from "../../firebase";
 import { Link } from "react-router-dom";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface survey {
   id: string;
@@ -73,7 +73,7 @@ export const SurveyDrawer: React.FC<survey> = ({
 
   return (
     <>
-      <Button
+      <CustomButton
         ref={btnRef}
         w="100%"
         mt="10px"
@@ -81,7 +81,7 @@ export const SurveyDrawer: React.FC<survey> = ({
         onClick={onOpen}
       >
         View More
-      </Button>
+      </CustomButton>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -97,9 +97,9 @@ export const SurveyDrawer: React.FC<survey> = ({
               <Text>Description : {filteredSurveys[0]?.description}</Text>
             </Box>
             <Flex mt="10px" justifyContent="space-between">
-              <Button bg="green.600" w="40%" onClick={handleUploadSurvey}>
+              <CustomButton bg="green.600" w="40%" onClick={handleUploadSurvey}>
                 Publish
-              </Button>
+              </CustomButton>
               <Link
                 to="Analytics"
                 style={{
@@ -109,7 +109,7 @@ export const SurveyDrawer: React.FC<survey> = ({
                   textAlign: "center",
                 }}
               >
-                <Button>Analytics</Button>
+                <CustomButton>Analytics</CustomButton>
               </Link>
             </Flex>
           </DrawerBody>
