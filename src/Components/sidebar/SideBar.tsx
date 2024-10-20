@@ -15,14 +15,10 @@ import {
   FlexProps,
 } from "@chakra-ui/react";
 import {
-  FiHome,
   FiMenu,
-  FiVideo,
-  FiCamera,
-  FiBarChart,
-  FiDatabase,
 } from "react-icons/fi";
-import { RiSurveyFill } from "react-icons/ri";
+import { Static } from "../../utility/Static";
+
 import {
   NavLink as ReactRouterLink,
   Outlet,
@@ -34,14 +30,7 @@ interface LinkItemProps {
   name: string;
   icon: IconType;
 }
-const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "Videos", icon: FiVideo },
-  { name: "Images", icon: FiCamera },
-  { name: "Survey", icon: RiSurveyFill },
-  { name: "Database", icon: FiDatabase },
-  { name: "Analytics", icon: FiBarChart },
-];
+const LinkItems: Array<LinkItemProps> = Static.SIDEBARLIST;
 
 export default function SimpleSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
