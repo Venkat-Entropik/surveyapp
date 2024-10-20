@@ -6,6 +6,7 @@ import {
   Select,
   useDisclosure,
   Collapse,
+  Button,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import CardComponent from "./Card";
@@ -102,9 +103,9 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           bg="gray.300"
           color="black"
         >
-          <CustomButton onClick={onToggle} isDisabled={allStudies.length === 0}>
+          <Button onClick={onToggle} isDisabled={allStudies.length === 0}>
             <CiFilter />
-          </CustomButton>
+          </Button>
         </CustomTooltip>
         <Collapse in={isOpen} animateOpacity>
           <Box

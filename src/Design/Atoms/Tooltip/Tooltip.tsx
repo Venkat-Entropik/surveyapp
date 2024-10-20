@@ -23,8 +23,9 @@ const CustomTooltip: FC<CustomTooltipProps> = ({
   closeOnEsc = true,
   closeOnPointerDown = true,
   defaultIsOpen = false,
-  hasArrow = false,
+  hasArrow = true,
   isDisabled = false,
+  placement = "right",
   ...props
 }) => {
   return (
@@ -37,7 +38,7 @@ const CustomTooltip: FC<CustomTooltipProps> = ({
       defaultIsOpen={defaultIsOpen}
       hasArrow={hasArrow}
       isDisabled={isDisabled}
-      placement={props.placement}
+      placement={placement}
       {...props}
     >
       {children}
