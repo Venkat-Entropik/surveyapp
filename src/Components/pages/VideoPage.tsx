@@ -17,6 +17,8 @@ import {
 
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { addVideos } from "../../features/redux/dataSlice";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import { Static } from "../../utility/Static";
 
 export interface dataType {
   id: string;
@@ -55,16 +57,10 @@ const VideoUpload: React.FC = () => {
         return;
       }
 
-      const allowedTypes = [
-        "video/mp4",
-        "video/x-m4v",
-        "video/webm",
-        "video/*",
-      ];
       const previews: { url: string; name: string }[] = [];
 
       for (let i = 0; i < files.length; i++) {
-        if (!allowedTypes.includes(files[i].type)) {
+        if (!Static.ALLOWEDTYPES.includes(files[i].type)) {
           toast({
             title: "Please select only video files (mp4, x-m4v etc..).",
             status: "warning",
@@ -163,7 +159,7 @@ const VideoUpload: React.FC = () => {
             id="fileInput"
             display="none"
             onChange={(e) => handleImages(e)}
-            accept="video/mp4,video/x-m4v,video/*"
+            accept={Static.VIDEO_ACCEPT_FILES}
             placeholder="Enter files"
           />
           <label htmlFor="fileInput">
@@ -202,11 +198,13 @@ const VideoUpload: React.FC = () => {
         <Stack>
           <FormControl>
             <FormLabel>Enter Title</FormLabel>
-            <Input
+            <CustomInput
               type="text"
               placeholder="Enter Title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setTitle(e.target.value)
+              }
             />
             <FormLabel>Enter Description</FormLabel>
             <Textarea

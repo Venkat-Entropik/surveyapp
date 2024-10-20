@@ -5,7 +5,6 @@ import {
   Box,
   Flex,
   Heading,
-  Input,
   Stack,
   Text,
   FormControl,
@@ -13,10 +12,13 @@ import {
   Textarea,
   Button,
   useToast,
+  Input,
 } from "@chakra-ui/react";
 
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { addImages } from "../../features/redux/dataSlice";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import { Static } from "../../utility/Static";
 
 export interface dataType {
   id: string;
@@ -159,9 +161,11 @@ const FileUpload: React.FC = () => {
             type="file"
             id="fileInput"
             display="none"
-            onChange={(e) => handleImages(e)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleImages(e)
+            }
             multiple
-            accept="image/jpeg, image/png, image/gif"
+            accept={Static.IMAGE_ACCEPT_FILES}
             placeholder="Enter files"
           />
           <label htmlFor="fileInput">
@@ -207,11 +211,13 @@ const FileUpload: React.FC = () => {
         <Stack>
           <FormControl>
             <FormLabel>Enter Title</FormLabel>
-            <Input
+            <CustomInput
               type="text"
               placeholder="Enter Title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setTitle(e.target.value)
+              }
             />
             <FormLabel mt="5px">Enter Description</FormLabel>
             <Textarea

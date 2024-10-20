@@ -7,8 +7,6 @@ import {
   useDisclosure,
   Button,
   Collapse,
-  Tooltip,
-  Input,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import CardComponent from "./Card";
@@ -16,6 +14,8 @@ import Spinners from "../loaders/Spinners";
 import SurveyCard from "./SurveyCard";
 import NoDataComp from "./NoDataComp";
 import { CiFilter } from "react-icons/ci";
+import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
+import CustomInput from "../../Design/Atoms/Input/CustomInput";
 
 interface UserProps {
   user: any;
@@ -69,7 +69,6 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
       value: "type",
     },
   ];
-  console.log("filterKey", filterValue);
 
   const handleApplyFilter = () => {
     if (dropdown === "name") {
@@ -97,7 +96,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
   return (
     <Box>
       <>
-        <Tooltip
+        <CustomTooltip
           hasArrow
           label="Filter Cards"
           placement="right"
@@ -107,7 +106,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           <Button onClick={onToggle} isDisabled={allStudies.length === 0}>
             <CiFilter />
           </Button>
-        </Tooltip>
+        </CustomTooltip>
         <Collapse in={isOpen} animateOpacity>
           <Box
             p="20px"
@@ -133,10 +132,10 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                 })}
               </Select>
               {dropdown === "name" && (
-                <Input
+                <CustomInput
                   placeholder="Enter Name of the study"
                   value={inputValue}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setInputValue(e.target.value);
                   }}
                 />
