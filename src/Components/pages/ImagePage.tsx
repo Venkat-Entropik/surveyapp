@@ -18,6 +18,7 @@ import {
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { addImages } from "../../features/redux/dataSlice";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import { Static } from "../../utility/Static";
 
 export interface dataType {
   id: string;
@@ -164,7 +165,7 @@ const FileUpload: React.FC = () => {
               handleImages(e)
             }
             multiple
-            accept="image/jpeg, image/png, image/gif"
+            accept={Static.IMAGE_ACCEPT_FILES}
             placeholder="Enter files"
           />
           <label htmlFor="fileInput">
