@@ -6,7 +6,6 @@ import {
   Stack,
   FormControl,
   FormLabel,
-  Textarea,
   Button,
   Flex,
   Radio,
@@ -19,6 +18,7 @@ import { addSurveys } from "../../features/redux/surveySlice";
 import { useDispatch } from "react-redux";
 import { DeleteIcon } from "@chakra-ui/icons";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
 
 interface Question {
   text: string;
@@ -159,10 +159,12 @@ const SurveyPage: React.FC = () => {
                 }
               />
               <FormLabel mt={2}>Survey Description</FormLabel>
-              <Textarea
+              <CustomTextArea
                 placeholder="Enter Survey Description"
                 value={surveyDescription}
-                onChange={(e) => setSurveyDescription(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setSurveyDescription(e.target.value)
+                }
               />
             </FormControl>
 
@@ -172,7 +174,9 @@ const SurveyPage: React.FC = () => {
                 type="text"
                 placeholder="Enter Question"
                 value={questionText}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestionText(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setQuestionText(e.target.value)
+                }
               />
             </FormControl>
 
@@ -205,7 +209,9 @@ const SurveyPage: React.FC = () => {
                   type="text"
                   placeholder="Enter Option"
                   value={optionText}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOptionText(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setOptionText(e.target.value)
+                  }
                 />
                 <Button mt={2} colorScheme="teal" onClick={addOption}>
                   Add Option

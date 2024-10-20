@@ -9,7 +9,6 @@ import {
   Text,
   FormControl,
   FormLabel,
-  Textarea,
   Button,
   useToast,
   VStack,
@@ -19,6 +18,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { addVideos } from "../../features/redux/dataSlice";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { Static } from "../../utility/Static";
+import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
 
 export interface dataType {
   id: string;
@@ -207,11 +207,13 @@ const VideoUpload: React.FC = () => {
               }
             />
             <FormLabel>Enter Description</FormLabel>
-            <Textarea
+            <CustomTextArea
               placeholder="Enter Description..."
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></Textarea>
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setDescription(e.target.value)
+              }
+            ></CustomTextArea>
             <Button w="100%" mt="10px" onClick={handleSubmit}>
               Submit
             </Button>
