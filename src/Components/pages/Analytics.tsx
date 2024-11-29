@@ -1,4 +1,4 @@
-import { Box, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Select, SimpleGrid } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { textDb } from "../../firebase";
@@ -6,6 +6,7 @@ import Spinners from "../loaders/Spinners";
 import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
+import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
 
 interface analatycsType {
   user: any;
@@ -98,7 +99,15 @@ const Analytics: React.FC<analatycsType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            <></>
+            <Flex justifyContent="center">
+              <LottieGif
+                width={["100%", "50%", "40%"]}
+                height="40%"
+                lottieGifType="empty-state"
+                showDescription={true}
+                description="No Data Available"
+              />
+            </Flex>
           )}
         </>
       ) : (
@@ -124,7 +133,15 @@ const Analytics: React.FC<analatycsType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            <></>
+            <Flex justifyContent="center">
+              <LottieGif
+                width={["100%", "50%", "40%"]}
+                height="40%"
+                lottieGifType="empty-state"
+                showDescription={true}
+                description="No Data Available"
+              />
+            </Flex>
           )}
         </>
       )}
