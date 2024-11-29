@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
-  Button,
   useToast,
   Box,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
+import CustomButton from "../../Design/Atoms/Button/CustomButton";
 
 interface SignPageProps {}
 
@@ -85,9 +85,9 @@ const SignPage: React.FC<SignPageProps> = () => {
           </Box>
         );
       })}
-      <Button w="100%" mt="10px" onClick={handleSubmit}>
+      <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
         Login
-      </Button>
+      </CustomButton>
     </FormControl>
   );
 };

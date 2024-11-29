@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, TooltipProps } from "@chakra-ui/react";
 
-interface TooltipProps {
+interface CustomTooltipProps extends TooltipProps {
   label: string;
   children: any;
   closeDelay?: number;
@@ -11,11 +11,11 @@ interface TooltipProps {
   defaultIsOpen?: boolean;
   hasArrow?: boolean;
   isDisabled?: boolean;
-  placement?:any;
-  bg?:any;
-  color?:any;
+  placement?: any;
+  bg?: any;
+  color?: any;
 }
-const CustomTooltip: FC<TooltipProps> = ({
+const CustomTooltip: FC<CustomTooltipProps> = ({
   label = "",
   children,
   closeDelay = 0,
@@ -23,8 +23,9 @@ const CustomTooltip: FC<TooltipProps> = ({
   closeOnEsc = true,
   closeOnPointerDown = true,
   defaultIsOpen = false,
-  hasArrow = false,
+  hasArrow = true,
   isDisabled = false,
+  placement = "right",
   ...props
 }) => {
   return (
@@ -37,7 +38,7 @@ const CustomTooltip: FC<TooltipProps> = ({
       defaultIsOpen={defaultIsOpen}
       hasArrow={hasArrow}
       isDisabled={isDisabled}
-      placement={props.placement}
+      placement={placement}
       {...props}
     >
       {children}
