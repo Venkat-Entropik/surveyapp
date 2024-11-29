@@ -1,4 +1,4 @@
-import { Box, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Select, SimpleGrid } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { textDb } from "../../firebase";
@@ -7,6 +7,7 @@ import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
 import NoDataComp from "../home/NoDataComp";
+import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
 
 interface DatabaseType {
   user: any;
@@ -106,7 +107,17 @@ const Database: React.FC<DatabaseType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            !isLoading && <NoDataComp dropdown="" home={false} />
+            !isLoading && (
+              <Flex justifyContent="center">
+                <LottieGif
+                  width={["100%", "50%", "40%"]}
+                  height="40%"
+                  lottieGifType="empty-state"
+                  showDescription={true}
+                  description="No Data Available"
+                />
+              </Flex>
+            )
           )}
         </>
       ) : (
@@ -133,7 +144,17 @@ const Database: React.FC<DatabaseType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            !isLoading && <NoDataComp dropdown="" home={false} />
+            !isLoading && (
+              <Flex justifyContent="center">
+                <LottieGif
+                  width={["100%", "50%", "40%"]}
+                  height="40%"
+                  lottieGifType="empty-state"
+                  showDescription={true}
+                  description="No Data Available"
+                />
+              </Flex>
+            )
           )}
         </>
       )}

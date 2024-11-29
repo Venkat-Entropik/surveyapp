@@ -17,6 +17,7 @@ import { CiFilter } from "react-icons/ci";
 import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
 
 interface UserProps {
   user: any;
@@ -57,7 +58,6 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
         ? item.type === filterValue.key
         : item;
   });
-
 
   const filterTypes = [
     {
@@ -191,8 +191,14 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           )}
         </SimpleGrid>
       ) : (
-        <Flex justifyContent="center" alignItems="center">
-          <NoDataComp dropdown={dropdown} home={true} />
+        <Flex justifyContent="center">
+          <LottieGif
+            width={['100%', '50%', '40%']}
+            height="40%"
+            lottieGifType="empty-state"
+            showDescription={true}
+            description="No Data Available"
+          />
         </Flex>
       )}
     </Box>
