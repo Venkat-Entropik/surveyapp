@@ -7,6 +7,7 @@ import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
 import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
+import CircularProgressComponent from "../loaders/CircularProgress/CircularProgress";
 
 interface analatycsType {
   user: any;
@@ -63,21 +64,7 @@ const Analytics: React.FC<analatycsType> = ({
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
-      {isLoading && (
-        <SimpleGrid
-          spacing={4}
-          mt="15px"
-          templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-          maxH="400px"
-          overflowY="auto"
-        >
-          {Array(40)
-            .fill(0)
-            .map((_, index: number) => {
-              return <SkeletonComp key={index} />;
-            })}
-        </SimpleGrid>
-      )}
+      {isLoading && <CircularProgressComponent />}
       {dropdown === "surveys" ? (
         <>
           {surveySelector.length > 0 ? (
