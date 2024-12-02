@@ -1,4 +1,4 @@
-import { Box, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Select, SimpleGrid } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { textDb } from "../../firebase";
@@ -7,6 +7,8 @@ import DataBaseCard from "../home/DataBaseCard";
 import SurveyCard from "../home/SurveyCard";
 import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
 import NoDataComp from "../home/NoDataComp";
+import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
+import CircularProgressComponent from "../loaders/CircularProgress/CircularProgress";
 
 interface DatabaseType {
   user: any;
@@ -31,8 +33,9 @@ const Database: React.FC<DatabaseType> = ({
       setDatabaseData(allData);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -64,25 +67,7 @@ const Database: React.FC<DatabaseType> = ({
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
-      {deleteCard ? (
-        <Spinners />
-      ) : (
-        isLoading && (
-          <SimpleGrid
-            spacing={4}
-            mt="15px"
-            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-            maxH="400px"
-            overflowY="auto"
-          >
-            {Array(40)
-              .fill(0)
-              .map((_, index: number) => {
-                return <SkeletonComp key={index} />;
-              })}
-          </SimpleGrid>
-        )
-      )}
+      {deleteCard ? <Spinners /> : isLoading && <CircularProgressComponent />}
       {dropdown === "surveys" ? (
         <>
           {surveySelector.length > 0 ? (
@@ -106,7 +91,17 @@ const Database: React.FC<DatabaseType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            !isLoading && <NoDataComp dropdown="" home={false} />
+            !isLoading && (
+              <Flex justifyContent="center">
+                <LottieGif
+                  width={["100%", "50%", "40%"]}
+                  height="40%"
+                  lottieGifType="empty-state"
+                  showDescription={true}
+                  description="No Data Available"
+                />
+              </Flex>
+            )
           )}
         </>
       ) : (
@@ -133,7 +128,17 @@ const Database: React.FC<DatabaseType> = ({
               ))}
             </SimpleGrid>
           ) : (
-            !isLoading && <NoDataComp dropdown="" home={false} />
+            !isLoading && (
+              <Flex justifyContent="center">
+                <LottieGif
+                  width={["100%", "50%", "40%"]}
+                  height="40%"
+                  lottieGifType="empty-state"
+                  showDescription={true}
+                  description="No Data Available"
+                />
+              </Flex>
+            )
           )}
         </>
       )}
