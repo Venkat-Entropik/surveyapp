@@ -14,13 +14,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imageDb, textDb } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import { showAlertDilog } from "../../features/redux/CommonDataSlice";
 
 interface id {
   id: string;
@@ -36,6 +37,7 @@ export const DrawerComponent: React.FC<id> = ({
   setIsLoading,
 }) => {
   const toast = useToast();
+  const dispatch = useDispatch()
 
   const imagesArrayRef = useRef<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -104,6 +106,8 @@ export const DrawerComponent: React.FC<id> = ({
       duration: 3000,
       isClosable: true,
     });
+
+    dispatch(showAlertDilog(true))
   };
 
   return (

@@ -11,11 +11,12 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { textDb } from "../../firebase";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import { showAlertDilog } from "../../features/redux/CommonDataSlice";
 
 interface survey {
   id: string;
@@ -33,6 +34,7 @@ export const SurveyDrawer: React.FC<survey> = ({
   const selector = useSelector((state: any) => {
     return state.survey.surveys;
   });
+  const disaptch = useDispatch();
   const toast = useToast();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,6 +71,7 @@ export const SurveyDrawer: React.FC<survey> = ({
       duration: 3000,
       isClosable: true,
     });
+    disaptch(showAlertDilog(true));
   };
 
   return (
