@@ -19,6 +19,7 @@ import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import { Static } from "../../utility/Static";
 import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 export interface dataType {
   id: string;
@@ -38,6 +39,7 @@ const VideoUpload: React.FC = () => {
   const [videoPreviews, setVideoPreviews] = useState<
     { url: string; name: string }[]
   >([]);
+  const navigate = useNavigate()
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -120,6 +122,7 @@ const VideoUpload: React.FC = () => {
     };
 
     dispatch(addVideos(data));
+    navigate("/")
 
     toast({
       title: "Video Uploaded Successfully",

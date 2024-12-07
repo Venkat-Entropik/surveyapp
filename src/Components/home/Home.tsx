@@ -7,6 +7,9 @@ import {
   useDisclosure,
   Collapse,
   Button,
+  HStack,
+  Text,
+  Image,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import CardComponent from "./Card";
@@ -18,6 +21,10 @@ import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
 import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
+import { Link } from "react-router-dom";
+import { FaCamera, FaVideo } from "react-icons/fa";
+import { RiSurveyFill } from "react-icons/ri";
+import CustomAlertDilog from "../../Design/Atoms/DilogAlert/CustomAlertDilog";
 
 interface UserProps {
   user: any;
@@ -42,6 +49,11 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
   const selector = useSelector((state: any) => {
     return state.data.images;
   });
+  const surveyTypes = [
+    { name: "Images", image: <FaCamera /> },
+    { name: "Videos", image: <FaVideo /> },
+    { name: "Survey", image: <RiSurveyFill /> },
+  ];
 
   const surveySelector = useSelector((state: any) => {
     return state.survey.surveys;
@@ -191,16 +203,37 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           )}
         </SimpleGrid>
       ) : (
-        <Flex justifyContent="center">
+        <Flex
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+        >
           <LottieGif
-            width={['100%', '50%', '40%']}
+            width={["100%", "50%", "40%"]}
             height="40%"
             lottieGifType="empty-state"
             showDescription={true}
             description="No Data Available"
           />
+          <Box>
+            <Text margin="0px 0px 8px 40px">Create from scratch</Text>
+            <HStack ml="70px">
+              {surveyTypes.map((key) => {
+                return (
+                  <Link key={key.name} to={key.name}>
+                    <CustomTooltip label={key.name} placement="bottom">
+                      <Box w="30px" height="30px" color="#9333ea">
+                        {key.image}
+                      </Box>
+                    </CustomTooltip>
+                  </Link>
+                );
+              })}
+            </HStack>
+          </Box>
         </Flex>
       )}
+      <CustomAlertDilog/>
     </Box>
   );
 };

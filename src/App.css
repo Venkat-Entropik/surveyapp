@@ -2,3 +2,7 @@
     width: 100vw;
     height: 100vh;
 }
+
+.lazy-load-image-background.blur.lazy-load-image-loaded img{
+    height: 100px !important;
+}
