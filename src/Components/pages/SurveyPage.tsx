@@ -19,6 +19,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import CustomInput from "../../Design/Atoms/Input/CustomInput";
 import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
 import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 interface Question {
   text: string;
@@ -39,6 +40,8 @@ const SurveyPage: React.FC = () => {
   const [surveyTitle, setSurveyTitle] = useState<string>("");
   const [surveyDescription, setSurveyDescription] = useState<string>("");
   const [hoveredQuestion, setHoveredQuestion] = useState<number | string>("");
+
+  const navigate = useNavigate();
   const addQuestion = () => {
     if (questionText.trim() === "") {
       toast({
@@ -113,6 +116,7 @@ const SurveyPage: React.FC = () => {
       questions: questions,
     };
     dispatch(addSurveys(surveyData));
+    navigate("/");
     toast({
       title: "Survey submitted successfully",
       description: "Please check in home page.",

@@ -65,7 +65,8 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
         {selector.type === "images" ? (
           <LazyLoadImage
             alt="chakra ui"
-            height="100px"
+            height= "100px"
+            width= "100%"
             src={selector?.images[0]}
             effect="blur"
             wrapperProps={{
