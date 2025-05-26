@@ -1,11 +1,11 @@
-import { Card, Image, Heading, Text, useToast } from "@chakra-ui/react";
-import React from "react";
-import img from "../assets/17.jpg";
-import { SurveyDrawer } from "../drawer/SurveyDrawer";
-import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
-import { deleteDoc, doc } from "firebase/firestore";
-import { textDb } from "../../firebase";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import { Card, Image, Heading, Text, useToast } from '@chakra-ui/react';
+import React from 'react';
+import img from '../assets/17.jpg';
+import { SurveyDrawer } from '../drawer/SurveyDrawer';
+import AnalyticsDrawer from '../drawer/AnalyticsDrawer';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { textDb } from '../../firebase';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
 
 interface survey {
   selector: any;
@@ -24,30 +24,30 @@ const SurveyCard: React.FC<survey> = ({
   setDatabaseData,
   setDeleteCard,
 }) => {
-  const drawerHide = selector.hasOwnProperty("database");
-  const analyticsDrawer = selector.hasOwnProperty("analytics");
+  const drawerHide = selector.hasOwnProperty('database');
+  const analyticsDrawer = selector.hasOwnProperty('analytics');
   const toast = useToast();
 
   const handleRemove = async (id: string) => {
     setDeleteCard(true);
     try {
-      await deleteDoc(doc(textDb, "textData", id));
+      await deleteDoc(doc(textDb, 'textData', id));
       setDatabaseData((prevData: any) =>
         prevData.filter((item: any) => item.id !== id),
       );
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Error",
-        status: "error",
+        title: 'Error',
+        description: 'Error',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
     }
     setDeleteCard(false);
     toast({
-      title: "Removed Task successfully",
-      status: "success",
+      title: 'Removed Task successfully',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });

@@ -1,5 +1,7 @@
-import React, { FC } from "react";
-import { Input, InputProps } from "@chakra-ui/react";
+import type { FC } from 'react';
+import { Input } from '@chakra-ui/react';
+import type { InputProps } from '@chakra-ui/react';
+
 interface CustomInputProps extends InputProps {
   isDisabled?: boolean;
   isReadOnly?: boolean;
@@ -20,11 +22,10 @@ const CustomInput: FC<CustomInputProps> = ({
   value,
   size,
   variant,
-  placeholder = "Enter ...",
-  type = "text",
+  placeholder = 'Enter ...',
+  type = 'text',
   ...props
-}) => {
-  return (
+}) => (
     <Input
       isDisabled={isDisabled}
       isReadOnly={isReadOnly}
@@ -38,6 +39,5 @@ const CustomInput: FC<CustomInputProps> = ({
       {...props}
     />
   );
-};
 
 export default CustomInput;

@@ -1,8 +1,7 @@
-import React from "react";
-import { CirclesWithBar } from "react-loader-spinner";
-import styles from "./Spinners.module.css";
-const Spinners = () => {
-  return (
+import React from 'react';
+import { CirclesWithBar } from 'react-loader-spinner';
+import styles from './Spinners.module.css';
+const Spinners = () => (
     <>
       <CirclesWithBar
         height="100"
@@ -18,6 +17,5 @@ const Spinners = () => {
       />
     </>
   );
-};
 
 export default Spinners;

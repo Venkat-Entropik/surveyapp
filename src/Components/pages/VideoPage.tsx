@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Box,
   Flex,
@@ -11,15 +11,15 @@ import {
   FormLabel,
   useToast,
   VStack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { addVideos } from "../../features/redux/dataSlice";
-import CustomInput from "../../Design/Atoms/Input/CustomInput";
-import { Static } from "../../utility/Static";
-import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import { useNavigate } from "react-router-dom";
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { addVideos } from '../../features/redux/dataSlice';
+import CustomInput from '../../Design/Atoms/Input/CustomInput';
+import { Static } from '../../utility/Static';
+import CustomTextArea from '../../Design/Atoms/TextArea/CustomTextArea';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 export interface dataType {
   id: string;
@@ -32,14 +32,14 @@ const VideoUpload: React.FC = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [videoUploaded, setvideoUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [videoPreviews, setVideoPreviews] = useState<
     { url: string; name: string }[]
   >([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -48,12 +48,12 @@ const VideoUpload: React.FC = () => {
     if (files && files.length > 0) {
       if (files.length > 1) {
         toast({
-          title: "You can only select up to 1 Video.",
-          status: "warning",
+          title: 'You can only select up to 1 Video.',
+          status: 'warning',
           duration: 3000,
           isClosable: true,
         });
-        e.target.value = "";
+        e.target.value = '';
         setvideoUploaded(false);
         setVideoPreviews([]);
         return;
@@ -64,12 +64,12 @@ const VideoUpload: React.FC = () => {
       for (let i = 0; i < files.length; i++) {
         if (!Static.ALLOWEDTYPES.includes(files[i].type)) {
           toast({
-            title: "Please select only video files (mp4, x-m4v etc..).",
-            status: "warning",
+            title: 'Please select only video files (mp4, x-m4v etc..).',
+            status: 'warning',
             duration: 3000,
             isClosable: true,
           });
-          e.target.value = "";
+          e.target.value = '';
           setvideoUploaded(false);
           setVideoPreviews([]);
           return;
@@ -82,21 +82,21 @@ const VideoUpload: React.FC = () => {
     }
   };
   const handleSubmit = () => {
-    if (title.trim() === "") {
+    if (title.trim() === '') {
       toast({
-        title: "Title should not be empty",
-        description: "Enter Title",
-        status: "warning",
+        title: 'Title should not be empty',
+        description: 'Enter Title',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    if (description.trim() === "") {
+    if (description.trim() === '') {
       toast({
-        title: "Description should not be empty",
-        description: "Enter Description",
-        status: "warning",
+        title: 'Description should not be empty',
+        description: 'Enter Description',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -105,9 +105,9 @@ const VideoUpload: React.FC = () => {
 
     if (!videoUploaded) {
       toast({
-        title: "Upload Video",
-        description: "Video Not Uploaded",
-        status: "warning",
+        title: 'Upload Video',
+        description: 'Video Not Uploaded',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -122,20 +122,20 @@ const VideoUpload: React.FC = () => {
     };
 
     dispatch(addVideos(data));
-    navigate("/")
+    navigate('/');
 
     toast({
-      title: "Video Uploaded Successfully",
-      description: "Please check in home page",
-      status: "success",
+      title: 'Video Uploaded Successfully',
+      description: 'Please check in home page',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
 
     setVideoPreviews([]);
     setSelectedFiles(null);
-    setTitle("");
-    setDescription("");
+    setTitle('');
+    setDescription('');
     setvideoUploaded(false);
   };
 
@@ -147,7 +147,7 @@ const VideoUpload: React.FC = () => {
 
   return (
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
-      <Flex flexDirection={["column", "column", "row"]} justify="space-around">
+      <Flex flexDirection={['column', 'column', 'row']} justify="space-around">
         <Stack spacing={4} align="center">
           <FaCloudUploadAlt
             data-testid="uploadlogo"
@@ -173,7 +173,7 @@ const VideoUpload: React.FC = () => {
               borderRadius="md"
               p={2}
               borderColor="blue.500"
-              _hover={{ color: "black", bg: "white", fontWeight: "600" }}
+              _hover={{ color: 'black', bg: 'white', fontWeight: '600' }}
             >
               Choose a file
             </Box>
@@ -184,7 +184,7 @@ const VideoUpload: React.FC = () => {
                 <video
                   width="100px"
                   height="70px"
-                  style={{ borderRadius: "10px" }}
+                  style={{ borderRadius: '10px' }}
                 >
                   <source src={videoPreviews[0]?.url} />
                 </video>
@@ -216,7 +216,7 @@ const VideoUpload: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setDescription(e.target.value)
               }
-            ></CustomTextArea>
+             />
             <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
               Submit
             </CustomButton>

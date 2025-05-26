@@ -1,12 +1,8 @@
-import React from 'react'
-import { Toast } from '@chakra-ui/react'
+import React from 'react';
+import { Toast } from '@chakra-ui/react';
 
-const ShowToast = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const ShowToast = () => (
+    <div />
+  );
 
-export default ShowToast
+export default ShowToast;

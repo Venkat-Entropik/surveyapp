@@ -12,11 +12,11 @@ import {
   Image,
   Flex,
   VStack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import React, { useRef, useState } from "react";
-import ReactPlayer from "react-player";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
+import React, { useRef, useState } from 'react';
+import ReactPlayer from 'react-player';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
 
 interface dataBase {
   id: string;
@@ -88,18 +88,18 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
               <Heading as="h3" size="lg">
                 <Box as="span" color="red">
                   Title
-                </Box>{" "}
+                </Box>{' '}
                 : {selector.title}
               </Heading>
               <Text mt="10px">
                 <Box as="span" color="red" fontWeight="bold">
                   Description
-                </Box>{" "}
+                </Box>{' '}
                 : {selector.description}
               </Text>
             </Box>
             <Flex justifyContent="center" w="100%">
-              {selector.type.includes("image") && (
+              {selector.type.includes('image') && (
                 <SimpleGrid columns={2} spacing={4} mt="25px">
                   {selector?.images?.map((img: string, index: number) => (
                     <Image
@@ -114,7 +114,7 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                   ))}
                 </SimpleGrid>
               )}
-              {selector.type.includes("video") && (
+              {selector.type.includes('video') && (
                 <VStack justifyContent="center" w="100%">
                   {selector?.images?.map((img: string, index: number) => (
                     <ReactPlayer
@@ -123,7 +123,7 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                       url={img}
                       width="auto"
                       height="auto"
-                      style={{ marginTop: "10px", borderRadius: "10px" }}
+                      style={{ marginTop: '10px', borderRadius: '10px' }}
                       onStart={() =>
                         handlePlay(selector.id, selector.startTime)
                       }
@@ -132,7 +132,7 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                   ))}
 
                   <Text>
-                    Video Starts from {selector.startTime} seconds and ends at{" "}
+                    Video Starts from {selector.startTime} seconds and ends at{' '}
                     {selector.endTime} seconds
                   </Text>
                   <Text>
@@ -144,20 +144,19 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                     mt="10px"
                     isDisabled={isPlaying}
                   >
-                    {isPlaying ? "Playing ..." : "Play Video"}
+                    {isPlaying ? 'Playing ...' : 'Play Video'}
                   </CustomButton>
                 </VStack>
               )}
             </Flex>
-            {selector.type.includes("survey") && (
+            {selector.type.includes('survey') && (
               <>
-                {selector.questions.map((que: any, index: string) => {
-                  return (
+                {selector.questions.map((que: any, index: string) => (
                     <Box key={index} mt="10px" overflowY="auto">
                       <Heading as="h4" size="md" color="blue.600">
-                        {index + 1}.{" "}
-                        {que.text.charAt(0).toUpperCase() + que.text.slice(1)}{" "}
-                        {"?"}
+                        {index + 1}.{' '}
+                        {que.text.charAt(0).toUpperCase() + que.text.slice(1)}{' '}
+                        ?
                       </Heading>
                       <Box
                         border="1px"
@@ -168,13 +167,12 @@ const AnalyticsDrawer: React.FC<dataBase> = ({
                         p="5px"
                       >
                         <Text fontWeight="bolder">
-                          {" "}
+                          {' '}
                           Ans : {selector.answers[index]}
                         </Text>
                       </Box>
                     </Box>
-                  );
-                })}
+                  ))}
               </>
             )}
           </DrawerBody>

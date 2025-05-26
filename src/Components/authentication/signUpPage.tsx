@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   FormControl,
   FormLabel,
   useToast,
   Box,
-} from "@chakra-ui/react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import CustomInput from "../../Design/Atoms/Input/CustomInput";
-import { auth } from "../../firebase";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
+} from '@chakra-ui/react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import CustomInput from '../../Design/Atoms/Input/CustomInput';
+import { auth } from '../../firebase';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
 interface SignUpPageProps {
   onClose: () => void;
 }
@@ -22,18 +22,18 @@ interface formValuesProps {
 const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
   const toast = useToast();
   const [formValues, setFormValues] = useState<formValuesProps>({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
-  const FormTypes = ["Email", "Password", "Confirm Password"];
+  const FormTypes = ['Email', 'Password', 'Confirm Password'];
 
   const handleSubmit = async () => {
     if (formValues.password !== formValues.confirmPassword) {
       toast({
-        title: "Password not mached",
-        description: "Enter same password",
-        status: "warning",
+        title: 'Password not mached',
+        description: 'Enter same password',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -46,26 +46,26 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
         formValues.password,
       );
       toast({
-        title: "Sign Up Successfull",
+        title: 'Sign Up Successfull',
         description: `welcome ${result.user.email}`,
-        status: "success",
+        status: 'success',
         duration: 3000,
         isClosable: true,
       });
       onClose();
     } catch (error) {
-      let errorMessage = "An unexpected error occurred";
+      let errorMessage = 'An unexpected error occurred';
 
       if (error instanceof Error) {
         errorMessage = error.message;
-      } else if (typeof error === "string") {
+      } else if (typeof error === 'string') {
         errorMessage = error;
       }
 
       toast({
-        title: "Error",
+        title: 'Error',
         description: errorMessage,
-        status: "error",
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
@@ -73,19 +73,19 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
   };
 
   const handleInputChange = (e: any, type: string) => {
-    if (type === "Email") {
+    if (type === 'Email') {
       setFormValues({ ...formValues, email: e.target.value });
-    } else if (type === "Password") {
+    } else if (type === 'Password') {
       setFormValues({ ...formValues, password: e.target.value });
-    } else if (type === "Confirm Password") {
+    } else if (type === 'Confirm Password') {
       setFormValues({ ...formValues, confirmPassword: e.target.value });
     }
   };
 
   const handleInputValue = (type: string) => {
-    if (type === "Email") {
+    if (type === 'Email') {
       return formValues.email;
-    } else if (type === "Password") {
+    } else if (type === 'Password') {
       return formValues.password;
     }
     return formValues.confirmPassword;
@@ -93,8 +93,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
 
   return (
     <FormControl isRequired>
-      {FormTypes.map((type: string) => {
-        return (
+      {FormTypes.map((type: string) => (
           <Box key={type}>
             <FormLabel>{`Enter ${type}`}</FormLabel>
             <CustomInput
@@ -106,8 +105,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onClose }) => {
               }
             />
           </Box>
-        );
-      })}
+        ))}
       <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
         Sign Up
       </CustomButton>

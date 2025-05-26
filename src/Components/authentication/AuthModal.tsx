@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -7,7 +7,6 @@ import {
   ModalCloseButton,
   Box,
   useDisclosure,
-  UseDisclosureReturn,
   useToast,
   Tabs,
   Text,
@@ -16,13 +15,13 @@ import {
   Tab,
   TabPanel,
   ModalFooter,
-} from "@chakra-ui/react";
-import SignPage from "./SignPage";
-import SignUpPage from "./signUpPage";
-import GoogleButton from "react-google-button";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../firebase";
-import styles from "./AuthModal.module.css";
+} from '@chakra-ui/react';
+import SignPage from './SignPage';
+import SignUpPage from './signUpPage';
+import GoogleButton from 'react-google-button';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../firebase';
+import styles from './AuthModal.module.css';
 
 export const AuthModal: FC = () => {
   const { isOpen, onOpen, onClose }: UseDisclosureReturn = useDisclosure();
@@ -34,27 +33,27 @@ export const AuthModal: FC = () => {
     try {
       const response = await signInWithPopup(auth, googleProvider);
       toast({
-        title: "Sign Up Successfull",
+        title: 'Sign Up Successfull',
         description: `welcome ${response.user.email}`,
-        status: "success",
+        status: 'success',
         duration: 3000,
         isClosable: true,
       });
       onClose();
       return response;
     } catch (error) {
-      let errorMessage = "An unexpected error occurred";
+      let errorMessage = 'An unexpected error occurred';
 
       if (error instanceof Error) {
         errorMessage = error.message;
-      } else if (typeof error === "string") {
+      } else if (typeof error === 'string') {
         errorMessage = error;
       }
 
       toast({
-        title: "Error",
+        title: 'Error',
         description: errorMessage,
-        status: "error",
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
@@ -67,7 +66,7 @@ export const AuthModal: FC = () => {
         as="span"
         p="1"
         onClick={onOpen}
-        className={styles["authmodal__container"]}
+        className={styles['authmodal__container']}
       >
         Login
       </Box>
@@ -92,15 +91,15 @@ export const AuthModal: FC = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <Box className={styles["authmodal__divider-wrapper"]}>
-            <Box className={styles["authmodal__divider-left"]} />
-            <Text className={styles["authmodal__divider"]}>OR</Text>
-            <Box className={styles["authmodal__divider-right"]} />
+          <Box className={styles['authmodal__divider-wrapper']}>
+            <Box className={styles['authmodal__divider-left']} />
+            <Text className={styles['authmodal__divider']}>OR</Text>
+            <Box className={styles['authmodal__divider-right']} />
           </Box>
 
           <ModalFooter>
             <GoogleButton
-              className={styles["authmodal__google-btn"]}
+              className={styles['authmodal__google-btn']}
               onClick={signInWithGoogle}
             />
           </ModalFooter>

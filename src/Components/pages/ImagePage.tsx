@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   Box,
@@ -11,15 +11,15 @@ import {
   FormLabel,
   useToast,
   Input,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { addImages } from "../../features/redux/dataSlice";
-import CustomInput from "../../Design/Atoms/Input/CustomInput";
-import { Static } from "../../utility/Static";
-import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import { useNavigate } from "react-router-dom";
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { addImages } from '../../features/redux/dataSlice';
+import CustomInput from '../../Design/Atoms/Input/CustomInput';
+import { Static } from '../../utility/Static';
+import CustomTextArea from '../../Design/Atoms/TextArea/CustomTextArea';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 export interface dataType {
   id: string;
@@ -32,15 +32,15 @@ const FileUpload: React.FC = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [imagePreviews, setImagePreviews] = useState<
     { url: string; name: string }[]
   >([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -49,29 +49,29 @@ const FileUpload: React.FC = () => {
     if (files && files.length > 0) {
       if (files.length > 4) {
         toast({
-          title: "You can only select up to 4 images.",
-          status: "warning",
+          title: 'You can only select up to 4 images.',
+          status: 'warning',
           duration: 3000,
           isClosable: true,
         });
-        e.target.value = "";
+        e.target.value = '';
         setImageUploaded(false);
         setImagePreviews([]);
         return;
       }
 
-      const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
       const previews: { url: string; name: string }[] = [];
 
       for (let i = 0; i < files.length; i++) {
         if (!allowedTypes.includes(files[i].type)) {
           toast({
-            title: "Please select only image files (JPEG, PNG, GIF).",
-            status: "warning",
+            title: 'Please select only image files (JPEG, PNG, GIF).',
+            status: 'warning',
             duration: 3000,
             isClosable: true,
           });
-          e.target.value = "";
+          e.target.value = '';
           setImageUploaded(false);
           setImagePreviews([]);
           return;
@@ -87,21 +87,21 @@ const FileUpload: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (title.trim() === "") {
+    if (title.trim() === '') {
       toast({
-        title: "Title should not be empty",
-        description: "Enter Title",
-        status: "warning",
+        title: 'Title should not be empty',
+        description: 'Enter Title',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    if (description.trim() === "") {
+    if (description.trim() === '') {
       toast({
-        title: "Description should not be empty",
-        description: "Enter Description",
-        status: "warning",
+        title: 'Description should not be empty',
+        description: 'Enter Description',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -110,9 +110,9 @@ const FileUpload: React.FC = () => {
 
     if (!imageUploaded) {
       toast({
-        title: "Upload Image",
-        description: "Images Not Uploaded",
-        status: "warning",
+        title: 'Upload Image',
+        description: 'Images Not Uploaded',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -128,19 +128,19 @@ const FileUpload: React.FC = () => {
 
     dispatch(addImages(data));
 
-    navigate("/")
+    navigate('/');
 
     toast({
-      title: "Images Uploaded Successfully",
-      description: "Please check in the home page",
-      status: "success",
+      title: 'Images Uploaded Successfully',
+      description: 'Please check in the home page',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
     setImagePreviews([]);
     setSelectedFiles(null);
-    setTitle("");
-    setDescription("");
+    setTitle('');
+    setDescription('');
     setImageUploaded(false);
   };
 
@@ -152,7 +152,7 @@ const FileUpload: React.FC = () => {
 
   return (
     <Box p={6} borderWidth={3} borderRadius="md" borderColor="blue.500">
-      <Flex flexDirection={["column", "column", "row"]} justify="space-around">
+      <Flex flexDirection={['column', 'column', 'row']} justify="space-around">
         <Stack spacing={4} align="center">
           <FaCloudUploadAlt
             fontSize="2em"
@@ -181,7 +181,7 @@ const FileUpload: React.FC = () => {
               borderRadius="md"
               p={2}
               borderColor="blue.500"
-              _hover={{ color: "black", bg: "white", fontWeight: "600" }}
+              _hover={{ color: 'black', bg: 'white', fontWeight: '600' }}
             >
               Choose a file
             </Box>
@@ -193,11 +193,11 @@ const FileUpload: React.FC = () => {
                 src={preview.url}
                 alt={preview.name}
                 style={{
-                  width: "50px",
-                  height: "50px",
-                  objectFit: "cover",
-                  margin: "0 5px",
-                  borderRadius: "10px",
+                  width: '50px',
+                  height: '50px',
+                  objectFit: 'cover',
+                  margin: '0 5px',
+                  borderRadius: '10px',
                 }}
               />
             ))}
@@ -231,7 +231,7 @@ const FileUpload: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setDescription(e.target.value)
               }
-            ></CustomTextArea>
+             />
             <CustomButton w="100%" mt="10px" onClick={handleSubmit}>
               Submit
             </CustomButton>

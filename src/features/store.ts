@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import surveySlice from "./redux/surveySlice";
-import dataSlice from "./redux/dataSlice";
-import CommonDataSlice from "./redux/CommonDataSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import surveySlice from './redux/surveySlice';
+import dataSlice from './redux/dataSlice';
+import CommonDataSlice from './redux/CommonDataSlice';
 
 export const store = configureStore({
   reducer: {
@@ -9,5 +9,5 @@ export const store = configureStore({
     survey: surveySlice,
     common: CommonDataSlice,
   },
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production',
 });

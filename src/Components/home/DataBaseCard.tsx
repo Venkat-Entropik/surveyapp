@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   Text,
   Heading,
   AspectRatio,
   useToast,
-} from "@chakra-ui/react";
-import AnalyticsDrawer from "../drawer/AnalyticsDrawer";
-import { deleteDoc, doc } from "firebase/firestore";
-import { textDb } from "../../firebase";
-import Spinners from "../loaders/Spinners";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
+} from '@chakra-ui/react';
+import AnalyticsDrawer from '../drawer/AnalyticsDrawer';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { textDb } from '../../firebase';
+import Spinners from '../loaders/Spinners';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
 
 interface DatabaseCard {
   selector: any;
@@ -32,27 +32,27 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
   databaseData,
   setDeleteCard,
 }) => {
-  const analyticsBtn = selector.hasOwnProperty("analytics");
-  const dataBase = selector.hasOwnProperty("database");
+  const analyticsBtn = selector.hasOwnProperty('analytics');
+  const dataBase = selector.hasOwnProperty('database');
   const toast = useToast();
   const handleRemove = async (id: string) => {
     setDeleteCard(true);
     try {
-      await deleteDoc(doc(textDb, "textData", id));
+      await deleteDoc(doc(textDb, 'textData', id));
       setDatabaseData((prevData) => prevData.filter((item) => item.id !== id));
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Error",
-        status: "error",
+        title: 'Error',
+        description: 'Error',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
     } finally {
       setDeleteCard(false);
       toast({
-        title: "Removed Task successfully",
-        status: "success",
+        title: 'Removed Task successfully',
+        status: 'success',
         duration: 3000,
         isClosable: true,
       });
@@ -62,7 +62,7 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
     <>
       {isLoading && Spinners}
       <Card p="10px">
-        {selector.type === "images" ? (
+        {selector.type === 'images' ? (
           <LazyLoadImage
             alt="chakra ui"
             height= "100px"
@@ -71,7 +71,7 @@ const DataBaseCard: React.FC<DatabaseCard> = ({
             effect="blur"
             wrapperProps={{
               style: {
-                transitionDelay: "1s",
+                transitionDelay: '1s',
               },
             }}
           />

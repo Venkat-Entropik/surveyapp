@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, Text, Heading, Image, AspectRatio } from "@chakra-ui/react";
-import { DrawerComponent } from "../drawer/Drawer";
+import React from 'react';
+import { Card, Text, Heading, Image, AspectRatio } from '@chakra-ui/react';
+import { DrawerComponent } from '../drawer/Drawer';
 
 interface user {
   selector: any;
@@ -15,12 +15,12 @@ const CardComponent: React.FC<user> = ({
   setIsLoading,
 }) => {
   const imageName = selector?.images?.[0];
-  const image = imageName ? URL.createObjectURL(imageName) : "";
+  const image = imageName ? URL.createObjectURL(imageName) : '';
 
   return (
     <>
       <Card p="10px">
-        {selector.type === "images" ? (
+        {selector.type === 'images' ? (
           <Image
             objectFit="cover"
             src={image}

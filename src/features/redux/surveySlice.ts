@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 interface questions {
   text: string;
-  type: "descriptive" | "mcq";
+  type: 'descriptive' | 'mcq';
   options?: string[];
 }
 
@@ -21,12 +21,12 @@ const initialState: intialstate = {
 };
 
 const surveySlice = createSlice({
-  name: "survey",
+  name: 'survey',
   initialState,
 
   reducers: {
     addSurveys: (state, { payload }) => {
-      state.surveys.push({ ...payload, type: "survey" });
+      state.surveys.push({ ...payload, type: 'survey' });
     },
   },
 });

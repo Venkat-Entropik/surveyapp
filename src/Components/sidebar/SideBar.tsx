@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   IconButton,
@@ -11,20 +11,18 @@ import {
   Drawer,
   DrawerContent,
   useDisclosure,
-  BoxProps,
-  FlexProps,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   FiMenu,
-} from "react-icons/fi";
-import { Static } from "../../utility/Static";
+} from 'react-icons/fi';
+import { Static } from '../../utility/Static';
 
 import {
   NavLink as ReactRouterLink,
   Outlet,
   useLocation,
-} from "react-router-dom";
-import { IconType } from "react-icons";
+} from 'react-router-dom';
+import type { IconType } from 'react-icons';
 
 interface LinkItemProps {
   name: string;
@@ -36,10 +34,10 @@ export default function SimpleSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="90%" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box minH="90%" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
+        display={{ base: 'none', md: 'block' }}
       />
       <Drawer
         isOpen={isOpen}
@@ -54,7 +52,7 @@ export default function SimpleSidebar() {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
+      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         <Outlet />
       </Box>
@@ -66,19 +64,18 @@ interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  return (
+const SidebarContent = ({ onClose, ...rest }: SidebarProps) => (
     <Box
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
+      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
       {...rest}
     >
       <Flex h="10" alignItems="center" mx="8" justifyContent="space-between">
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
         <NavItem key={link.name} icon={link.icon} onClose={onClose}>
@@ -87,7 +84,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       ))}
     </Box>
   );
-};
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
@@ -99,8 +95,8 @@ const NavItem = ({ icon, children, onClose, ...rest }: NavItemProps) => {
   return (
     <>
       <ReactRouterLink
-        to={`${children === "Home" ? "" : children}`}
-        style={{ textDecoration: "none" }}
+        to={`${children === 'Home' ? '' : children}`}
+        style={{ textDecoration: 'none' }}
       >
         <Flex
           align="center"
@@ -111,16 +107,16 @@ const NavItem = ({ icon, children, onClose, ...rest }: NavItemProps) => {
           role="group"
           cursor="pointer"
           _hover={{
-            bg: "cyan.400",
-            color: "white",
+            bg: 'cyan.400',
+            color: 'white',
           }}
           {...rest}
           onClick={onClose}
           sx={{
             backgroundColor:
               children.toLowerCase() === pathname?.slice(1).toLowerCase() &&
-              "cyan.400",
-            color: "white",
+              'cyan.400',
+            color: 'white',
           }}
         >
           {icon && (
@@ -129,7 +125,7 @@ const NavItem = ({ icon, children, onClose, ...rest }: NavItemProps) => {
               fontSize="16"
               data-testid="icon"
               _groupHover={{
-                color: "white",
+                color: 'white',
               }}
               as={icon}
             />
@@ -145,16 +141,15 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  return (
+const MobileNav = ({ onOpen, ...rest }: MobileProps) => (
     <Flex
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 24 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent="flex-start"
       {...rest}
     >
@@ -170,7 +165,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         ml="8"
         fontFamily="monospace"
         fontWeight="bold"
-      ></Text>
+       />
     </Flex>
   );
-};

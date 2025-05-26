@@ -1,5 +1,7 @@
-import React, { FC } from "react";
-import { Textarea, TextareaProps } from "@chakra-ui/react";
+import type { FC } from 'react';
+import { Textarea } from '@chakra-ui/react';
+import type { TextareaProps } from '@chakra-ui/react';
+
 interface CustomInputProps extends TextareaProps {
   isDisabled?: boolean;
   isReadOnly?: boolean;
@@ -19,10 +21,9 @@ const CustomTextArea: FC<CustomInputProps> = ({
   value,
   size,
   variant,
-  placeholder = "Enter ...",
+  placeholder = 'Enter ...',
   ...props
-}) => {
-  return (
+}) => (
     <Textarea
       isDisabled={isDisabled}
       isReadOnly={isReadOnly}
@@ -35,6 +36,5 @@ const CustomTextArea: FC<CustomInputProps> = ({
       {...props}
     />
   );
-};
 
 export default CustomTextArea;

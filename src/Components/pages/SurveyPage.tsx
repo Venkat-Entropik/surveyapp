@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./SurveyPage.module.css";
+import React, { useState } from 'react';
+import styles from './SurveyPage.module.css';
 import {
   Box,
   Text,
@@ -12,18 +12,18 @@ import {
   VStack,
   useToast,
   SimpleGrid,
-} from "@chakra-ui/react";
-import { addSurveys } from "../../features/redux/surveySlice";
-import { useDispatch } from "react-redux";
-import { DeleteIcon } from "@chakra-ui/icons";
-import CustomInput from "../../Design/Atoms/Input/CustomInput";
-import CustomTextArea from "../../Design/Atoms/TextArea/CustomTextArea";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { addSurveys } from '../../features/redux/surveySlice';
+import { useDispatch } from 'react-redux';
+import { DeleteIcon } from '@chakra-ui/icons';
+import CustomInput from '../../Design/Atoms/Input/CustomInput';
+import CustomTextArea from '../../Design/Atoms/TextArea/CustomTextArea';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 interface Question {
   text: string;
-  type: "descriptive" | "mcq";
+  type: 'descriptive' | 'mcq';
   options?: string[];
 }
 
@@ -31,22 +31,22 @@ const SurveyPage: React.FC = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [questionText, setQuestionText] = useState<string>("");
-  const [questionType, setQuestionType] = useState<"descriptive" | "mcq">(
-    "descriptive",
+  const [questionText, setQuestionText] = useState<string>('');
+  const [questionType, setQuestionType] = useState<'descriptive' | 'mcq'>(
+    'descriptive',
   );
   const [options, setOptions] = useState<string[]>([]);
-  const [optionText, setOptionText] = useState<string>("");
-  const [surveyTitle, setSurveyTitle] = useState<string>("");
-  const [surveyDescription, setSurveyDescription] = useState<string>("");
-  const [hoveredQuestion, setHoveredQuestion] = useState<number | string>("");
+  const [optionText, setOptionText] = useState<string>('');
+  const [surveyTitle, setSurveyTitle] = useState<string>('');
+  const [surveyDescription, setSurveyDescription] = useState<string>('');
+  const [hoveredQuestion, setHoveredQuestion] = useState<number | string>('');
 
   const navigate = useNavigate();
   const addQuestion = () => {
-    if (questionText.trim() === "") {
+    if (questionText.trim() === '') {
       toast({
-        title: "please Enter Question",
-        status: "warning",
+        title: 'please Enter Question',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -58,21 +58,21 @@ const SurveyPage: React.FC = () => {
       {
         text: questionText,
         type: questionType,
-        ...(questionType === "mcq" && { options }),
+        ...(questionType === 'mcq' && { options }),
       },
     ]);
 
-    setQuestionText("");
-    setQuestionType("descriptive");
+    setQuestionText('');
+    setQuestionType('descriptive');
     setOptions([]);
-    setOptionText("");
+    setOptionText('');
   };
 
   const addOption = () => {
-    if (optionText.trim() === "") {
+    if (optionText.trim() === '') {
       toast({
-        title: "Please enter an option",
-        status: "warning",
+        title: 'Please enter an option',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -81,7 +81,7 @@ const SurveyPage: React.FC = () => {
 
     setOptions((prevOptions) => [...prevOptions, optionText]);
 
-    setOptionText("");
+    setOptionText('');
   };
 
   const handleDeleteQuestion = (deletedIndex: any) => {
@@ -89,20 +89,20 @@ const SurveyPage: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    if (surveyTitle.trim() === "") {
+    if (surveyTitle.trim() === '') {
       toast({
-        title: "Please enter title",
-        status: "warning",
+        title: 'Please enter title',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
 
-    if (surveyDescription.trim() === "") {
+    if (surveyDescription.trim() === '') {
       toast({
-        title: "Enter Description",
-        status: "warning",
+        title: 'Enter Description',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -116,16 +116,16 @@ const SurveyPage: React.FC = () => {
       questions: questions,
     };
     dispatch(addSurveys(surveyData));
-    navigate("/");
+    navigate('/');
     toast({
-      title: "Survey submitted successfully",
-      description: "Please check in home page.",
-      status: "success",
+      title: 'Survey submitted successfully',
+      description: 'Please check in home page.',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
-    setSurveyTitle("");
-    setSurveyDescription("");
+    setSurveyTitle('');
+    setSurveyDescription('');
     setQuestions([]);
   };
 
@@ -139,14 +139,14 @@ const SurveyPage: React.FC = () => {
       overflowY="auto"
     >
       <Flex
-        flexDirection={["column", "row", "row"]}
+        flexDirection={['column', 'row', 'row']}
         justifyContent="space-around"
       >
-        <Box width={["100%", "45%", "35%"]}>
+        <Box width={['100%', '45%', '35%']}>
           <Text
             textAlign="center"
             fontWeight="bolder"
-            fontSize={["md", "xl", "2xl"]}
+            fontSize={['md', 'xl', '2xl']}
           >
             Survey Form Creation
           </Text>
@@ -189,24 +189,24 @@ const SurveyPage: React.FC = () => {
               <RadioGroup
                 defaultValue="descriptive"
                 onChange={(value: any) =>
-                  setQuestionType(value as "descriptive" | "mcq")
+                  setQuestionType(value as 'descriptive' | 'mcq')
                 }
               >
                 <Stack direction="row">
                   <Radio
                     value="descriptive"
-                    isChecked={questionType === "descriptive"}
+                    isChecked={questionType === 'descriptive'}
                   >
                     Descriptive
                   </Radio>
-                  <Radio value="mcq" isChecked={questionType === "mcq"}>
+                  <Radio value="mcq" isChecked={questionType === 'mcq'}>
                     MCQ
                   </Radio>
                 </Stack>
               </RadioGroup>
             </FormControl>
 
-            {questionType === "mcq" && (
+            {questionType === 'mcq' && (
               <FormControl mt={4}>
                 <FormLabel>Options for MCQ</FormLabel>
                 <CustomInput
@@ -244,9 +244,9 @@ const SurveyPage: React.FC = () => {
             )}
           </Flex>
         </Box>
-        <VStack spacing={4} mt={4} align="start" width={["100%", "45%", "35%"]}>
+        <VStack spacing={4} mt={4} align="start" width={['100%', '45%', '35%']}>
           <Text textAlign="center" color="green">
-            Add at least 5 questions{" "}
+            Add at least 5 questions{' '}
           </Text>
           {questions.map((q, index) => (
             <Flex
@@ -269,7 +269,7 @@ const SurveyPage: React.FC = () => {
                 data-testid="questions"
                 position="relative"
                 onMouseEnter={() => setHoveredQuestion(index)}
-                onMouseLeave={() => setHoveredQuestion("")}
+                onMouseLeave={() => setHoveredQuestion('')}
               >
                 <Box
                   display="flex"
@@ -280,13 +280,13 @@ const SurveyPage: React.FC = () => {
                   borderRadius="50%"
                   bg="white"
                   color="green"
-                  sx={{ fontWeight: "bolder" }}
+                  sx={{ fontWeight: 'bolder' }}
                   textAlign="center"
                 >
-                  {index + 1}{" "}
+                  {index + 1}{' '}
                 </Box>
-                <Box className={styles["survey__question"]}>
-                  {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} {"?"}
+                <Box className={styles['survey__question']}>
+                  {q.text?.charAt(0)?.toUpperCase() + q.text?.slice(1)} ?
                 </Box>
                 {hoveredQuestion === index && (
                   <DeleteIcon
@@ -298,7 +298,7 @@ const SurveyPage: React.FC = () => {
                   />
                 )}
               </Box>
-              {q.type === "mcq" && (
+              {q.type === 'mcq' && (
                 <SimpleGrid columns={2} spacing={4} mt={2} width="100%">
                   {q.options?.map((option, optionIndex) => (
                     <Box
@@ -325,7 +325,7 @@ const SurveyPage: React.FC = () => {
                         borderRadius="50%"
                         bg="black"
                         color="white"
-                        sx={{ fontWeight: "bolder" }}
+                        sx={{ fontWeight: 'bolder' }}
                         textAlign="center"
                       >
                         {String.fromCharCode(97 + optionIndex).toUpperCase()}

@@ -1,11 +1,10 @@
-import { Flex, Heading, VStack, Text } from "@chakra-ui/react";
-import React from "react";
-import { AuthModal } from "../../authentication/AuthModal";
-import { PiHandWavingFill } from "react-icons/pi";
-import styles from "./WelcomePage.module.css";
+import { Flex, Heading, VStack, Text } from '@chakra-ui/react';
+import React from 'react';
+import { AuthModal } from '../../authentication/AuthModal';
+import { PiHandWavingFill } from 'react-icons/pi';
+import styles from './WelcomePage.module.css';
 
-const WelcomePage = () => {
-  return (
+const WelcomePage = () => (
     <Flex
       justifyContent="center"
       alignItems="center"
@@ -15,10 +14,10 @@ const WelcomePage = () => {
     >
       <VStack gap="18px">
         <Heading
-          fontSize={["2xl", "2xl", "5xl"]}
-          className={styles["type-writer-effect"]}
+          fontSize={['2xl', '2xl', '5xl']}
+          className={styles['type-writer-effect']}
         >
-          <p style={{display:"flex", alignItems:"center", gap:"10px"}}>
+          <p style={{ display:'flex', alignItems:'center', gap:'10px' }}>
             <PiHandWavingFill data-testid="handicon" />
             Welcome to our website
           </p>
@@ -29,6 +28,5 @@ const WelcomePage = () => {
       </VStack>
     </Flex>
   );
-};
 
 export default WelcomePage;

@@ -1,18 +1,18 @@
-import React, { useState, useEffect, Suspense } from "react";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import NavBar from "./Components/navBar/NavBar";
-import SimpleSidebar from "./Components/sidebar/SideBar";
-import { auth } from "./firebase";
-import WelcomePage from "./Components/pages/welcomePage/WelcomePage";
+import React, { useState, useEffect, Suspense } from 'react';
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import NavBar from './Components/navBar/NavBar';
+import SimpleSidebar from './Components/sidebar/SideBar';
+import { auth } from './firebase';
+import WelcomePage from './Components/pages/welcomePage/WelcomePage';
 
-const Home = React.lazy(() => import("./Components/home/Home"));
-const FileUpload = React.lazy(() => import("./Components/pages/ImagePage"));
-const VideoUpload = React.lazy(() => import("./Components/pages/VideoPage"));
-const SurveyPage = React.lazy(() => import("./Components/pages/SurveyPage"));
-const Database = React.lazy(() => import("./Components/pages/Database"));
-const Analytics = React.lazy(() => import("./Components/pages/Analytics"));
+const Home = React.lazy(() => import('./Components/home/Home'));
+const FileUpload = React.lazy(() => import('./Components/pages/ImagePage'));
+const VideoUpload = React.lazy(() => import('./Components/pages/VideoPage'));
+const SurveyPage = React.lazy(() => import('./Components/pages/SurveyPage'));
+const Database = React.lazy(() => import('./Components/pages/Database'));
+const Analytics = React.lazy(() => import('./Components/pages/Analytics'));
 
 function App() {
   const [user, setUser] = useState(null as any);
