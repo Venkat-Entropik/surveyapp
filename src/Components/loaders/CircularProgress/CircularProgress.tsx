@@ -1,8 +1,7 @@
-import React from "react";
-import { Box, CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import React from 'react';
+import { Box, CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
 
-const CircularProgressComponent = () => {
-  return (
+const CircularProgressComponent = () => (
     <Box
       width="100%"
       height="90vh"
@@ -10,9 +9,8 @@ const CircularProgressComponent = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <CircularProgress isIndeterminate color="gray"></CircularProgress>
+      <CircularProgress isIndeterminate color="gray" />
     </Box>
   );
-};
 
 export default CircularProgressComponent;

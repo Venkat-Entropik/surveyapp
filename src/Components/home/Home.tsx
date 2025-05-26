@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -10,21 +10,21 @@ import {
   HStack,
   Text,
   Image,
-} from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import CardComponent from "./Card";
-import Spinners from "../loaders/Spinners";
-import SurveyCard from "./SurveyCard";
-import NoDataComp from "./NoDataComp";
-import { CiFilter } from "react-icons/ci";
-import CustomTooltip from "../../Design/Atoms/Tooltip/Tooltip";
-import CustomInput from "../../Design/Atoms/Input/CustomInput";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
-import { Link } from "react-router-dom";
-import { FaCamera, FaVideo } from "react-icons/fa";
-import { RiSurveyFill } from "react-icons/ri";
-import CustomAlertDilog from "../../Design/Atoms/DilogAlert/CustomAlertDilog";
+} from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import CardComponent from './Card';
+import Spinners from '../loaders/Spinners';
+import SurveyCard from './SurveyCard';
+import NoDataComp from './NoDataComp';
+import { CiFilter } from 'react-icons/ci';
+import CustomTooltip from '../../Design/Atoms/Tooltip/Tooltip';
+import CustomInput from '../../Design/Atoms/Input/CustomInput';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import LottieGif from '../../Design/Molecules/LottieGif/LottieGif';
+import { Link } from 'react-router-dom';
+import { FaCamera, FaVideo } from 'react-icons/fa';
+import { RiSurveyFill } from 'react-icons/ri';
+import CustomAlertDilog from '../../Design/Atoms/DilogAlert/CustomAlertDilog';
 
 interface UserProps {
   user: any;
@@ -39,58 +39,50 @@ interface filterProps {
 
 const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const [dropdown, setDropDown] = useState<string>("name");
+  const [dropdown, setDropDown] = useState<string>('name');
   const [filterValue, setFilterValue] = useState<filterProps>({
-    type: "",
-    key: "",
+    type: '',
+    key: '',
   });
-  const [inputValue, setInputValue] = useState<string>("");
-  const [filterDropDown, setFilterDropDown] = useState("");
-  const selector = useSelector((state: any) => {
-    return state.data.images;
-  });
+  const [inputValue, setInputValue] = useState<string>('');
+  const [filterDropDown, setFilterDropDown] = useState('');
+  const selector = useSelector((state: any) => state.data.images);
   const surveyTypes = [
-    { name: "Images", image: <FaCamera /> },
-    { name: "Videos", image: <FaVideo /> },
-    { name: "Survey", image: <RiSurveyFill /> },
+    { name: 'Images', image: <FaCamera /> },
+    { name: 'Videos', image: <FaVideo /> },
+    { name: 'Survey', image: <RiSurveyFill /> },
   ];
 
-  const surveySelector = useSelector((state: any) => {
-    return state.survey.surveys;
-  });
+  const surveySelector = useSelector((state: any) => state.survey.surveys);
 
-  const filterTasks = selector.filter((task: any) => {
-    return task.type.toLowerCase() === dropdown.toLowerCase();
-  });
+  const filterTasks = selector.filter((task: any) => task.type.toLowerCase() === dropdown.toLowerCase());
 
-  const allStudies = [...selector, ...surveySelector].filter((item, index) => {
-    return filterValue.type === "name"
+  const allStudies = [...selector, ...surveySelector].filter((item, index) => filterValue.type === 'name'
       ? item.title.toLowerCase().includes(filterValue.key.toLowerCase())
-      : filterValue.type === "type"
+      : filterValue.type === 'type'
         ? item.type === filterValue.key
-        : item;
-  });
+        : item);
 
   const filterTypes = [
     {
-      label: "Name",
-      value: "name",
+      label: 'Name',
+      value: 'name',
     },
     {
-      label: "Study Type",
-      value: "type",
+      label: 'Study Type',
+      value: 'type',
     },
   ];
 
   const handleApplyFilter = () => {
-    if (dropdown === "name") {
+    if (dropdown === 'name') {
       setFilterValue({
-        type: "name",
+        type: 'name',
         key: inputValue,
       });
     } else {
       setFilterValue({
-        type: "type",
+        type: 'type',
         key: filterDropDown,
       });
     }
@@ -98,11 +90,11 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
 
   const handleClearFilter = () => {
     setFilterValue({
-      type: "",
-      key: "",
+      type: '',
+      key: '',
     });
-    setInputValue("");
-    setFilterDropDown("images");
+    setInputValue('');
+    setFilterDropDown('images');
   };
 
   return (
@@ -127,23 +119,21 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
             bg="teal.500"
             rounded="md"
             shadow="md"
-            w={["100%", "70%", "70%"]}
+            w={['100%', '70%', '70%']}
             height="120px"
           >
             <Box display="flex" gap="10px">
               <Select
                 w="150px"
-                onChange={(e) => setDropDown(e.target.value || "name")}
+                onChange={(e) => setDropDown(e.target.value || 'name')}
               >
-                {filterTypes.map((item, index) => {
-                  return (
+                {filterTypes.map((item, index) => (
                     <option key={item.value} value={item.value}>
                       {item.label}
                     </option>
-                  );
-                })}
+                  ))}
               </Select>
-              {dropdown === "name" && (
+              {dropdown === 'name' && (
                 <CustomInput
                   placeholder="Enter Name of the study"
                   value={inputValue}
@@ -152,10 +142,10 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                   }}
                 />
               )}
-              {dropdown === "type" && (
+              {dropdown === 'type' && (
                 <Select
                   onChange={(e) =>
-                    setFilterDropDown(e.target.value || "images")
+                    setFilterDropDown(e.target.value || 'images')
                   }
                 >
                   <option value="images">Images</option>
@@ -183,7 +173,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         >
           {allStudies.map((survey: any) =>
-            survey.type === "survey" ? (
+            survey.type === 'survey' ? (
               <SurveyCard
                 key={survey.id}
                 user={user}
@@ -209,7 +199,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           alignItems="center"
         >
           <LottieGif
-            width={["100%", "50%", "40%"]}
+            width={['100%', '50%', '40%']}
             height="40%"
             lottieGifType="empty-state"
             showDescription={true}
@@ -218,8 +208,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
           <Box>
             <Text margin="0px 0px 8px 40px">Create from scratch</Text>
             <HStack ml="70px">
-              {surveyTypes.map((key) => {
-                return (
+              {surveyTypes.map((key) => (
                   <Link key={key.name} to={key.name}>
                     <CustomTooltip label={key.name} placement="bottom">
                       <Box w="30px" height="30px" color="#9333ea">
@@ -227,8 +216,7 @@ const Home: React.FC<UserProps> = ({ user, isLoading, setIsLoading }) => {
                       </Box>
                     </CustomTooltip>
                   </Link>
-                );
-              })}
+                ))}
             </HStack>
           </Box>
         </Flex>

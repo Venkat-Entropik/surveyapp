@@ -1,12 +1,11 @@
-import React, { FC } from "react";
-import styles from "./SkeletonComp.module.css";
-import { Card, Skeleton, SkeletonText } from "@chakra-ui/react";
+import type { FC } from 'react';
+import styles from './SkeletonComp.module.css';
+import { Card, Skeleton, SkeletonText } from '@chakra-ui/react';
 
 interface SkeletonCompProps {}
 
-const SkeletonComp: FC<SkeletonCompProps> = () => {
-  return (
-    <Card className={styles["skeleton__card"]}>
+const SkeletonComp: FC<SkeletonCompProps> = () => (
+    <Card className={styles['skeleton__card']}>
       <Skeleton isLoaded={false} w="100%" h="100px" />
       <SkeletonText
         mt="10px"
@@ -18,6 +17,5 @@ const SkeletonComp: FC<SkeletonCompProps> = () => {
       <Skeleton mt="10px" w="100%" h="40px" />
     </Card>
   );
-};
 
 export default SkeletonComp;

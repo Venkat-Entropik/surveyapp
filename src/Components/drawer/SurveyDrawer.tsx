@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -10,13 +10,13 @@ import {
   Text,
   Flex,
   useToast,
-} from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { addDoc, collection } from "firebase/firestore";
-import { textDb } from "../../firebase";
-import { Link } from "react-router-dom";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import { showAlertDilog } from "../../features/redux/CommonDataSlice";
+} from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addDoc, collection } from 'firebase/firestore';
+import { textDb } from '../../firebase';
+import { Link } from 'react-router-dom';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import { showAlertDilog } from '../../features/redux/CommonDataSlice';
 
 interface survey {
   id: string;
@@ -31,43 +31,39 @@ export const SurveyDrawer: React.FC<survey> = ({
   isLoading,
   setIsLoading,
 }) => {
-  const selector = useSelector((state: any) => {
-    return state.survey.surveys;
-  });
+  const selector = useSelector((state: any) => state.survey.surveys);
   const disaptch = useDispatch();
   const toast = useToast();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const filteredSurveys = selector.filter((survey: any) => {
-    return survey.id === id;
-  });
+  const filteredSurveys = selector.filter((survey: any) => survey.id === id);
 
   const handleUploadSurvey = async () => {
     try {
       setIsLoading(true);
-      const valRef = collection(textDb, "textData");
+      const valRef = collection(textDb, 'textData');
       const dataToStore = {
         id: filteredSurveys[0].id,
         title: filteredSurveys[0].title,
         description: filteredSurveys[0].description,
         questions: filteredSurveys[0].questions,
-        type: "surveys",
+        type: 'surveys',
         database: true,
       };
       await addDoc(valRef, dataToStore);
     } catch (error) {
       toast({
         title: `${error}`,
-        status: "warning",
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
     }
     setIsLoading(false);
     toast({
-      title: `successfully uploaded files`,
-      status: "success",
+      title: 'successfully uploaded files',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
@@ -106,10 +102,10 @@ export const SurveyDrawer: React.FC<survey> = ({
               <Link
                 to="Analytics"
                 style={{
-                  background: "skyblue",
-                  width: "40%",
-                  borderRadius: "5px",
-                  textAlign: "center",
+                  background: 'skyblue',
+                  width: '40%',
+                  borderRadius: '5px',
+                  textAlign: 'center',
                 }}
               >
                 <CustomButton>Analytics</CustomButton>

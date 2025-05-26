@@ -1,29 +1,30 @@
-import React, { FC, JSXElementConstructor, ReactElement } from "react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import type { FC, JSXElementConstructor, ReactElement } from 'react';
+import { Button } from '@chakra-ui/react';
+import type { ButtonProps } from '@chakra-ui/react';
 
 interface CustomButtonProps extends ButtonProps {
   isActive?: boolean;
   isDisabled?: boolean;
   isLoading?: boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: 'lg' | 'md' | 'sm' | 'xs';
   leftIcon?: ReactElement<any, string | JSXElementConstructor<any>>;
   loadingText?: string | number | boolean;
   rightIcon?: ReactElement<any, string | JSXElementConstructor<any>>;
-  spinnerPlacement?: "start" | "end";
+  spinnerPlacement?: 'start' | 'end';
   variant?:
-    | "primary"
-    | "link-green"
-    | "secondary"
-    | "secondary-gray"
-    | "tertiary"
-    | "tertiary-gray"
-    | "link"
-    | "link-gray"
-    | "error"
-    | "danger-primary"
-    | "danger-secondary"
-    | "danger-tertiary"
-    | "danger-link";
+    | 'primary'
+    | 'link-green'
+    | 'secondary'
+    | 'secondary-gray'
+    | 'tertiary'
+    | 'tertiary-gray'
+    | 'link'
+    | 'link-gray'
+    | 'error'
+    | 'danger-primary'
+    | 'danger-secondary'
+    | 'danger-tertiary'
+    | 'danger-link';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   ref?: any;
 }
@@ -31,7 +32,7 @@ const CustomButton: FC<CustomButtonProps> = ({
   isActive = false,
   isDisabled = false,
   isLoading = false,
-  size = "md",
+  size = 'md',
   leftIcon,
   loadingText,
   rightIcon,
@@ -40,8 +41,7 @@ const CustomButton: FC<CustomButtonProps> = ({
   onClick,
   ref,
   ...props
-}) => {
-  return (
+}) => (
     <Button
       isActive={isActive}
       isDisabled={isDisabled}
@@ -58,6 +58,5 @@ const CustomButton: FC<CustomButtonProps> = ({
       {rightIcon && rightIcon}
     </Button>
   );
-};
 
 export default CustomButton;

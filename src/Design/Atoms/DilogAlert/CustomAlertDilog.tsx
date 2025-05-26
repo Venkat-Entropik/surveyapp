@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -9,23 +9,21 @@ import {
   AlertDialogCloseButton,
   Button,
   useDisclosure,
-} from "@chakra-ui/react";
-import styles from "./CustomAlertDilog.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { showAlertDilog } from "../../../features/redux/CommonDataSlice";
+} from '@chakra-ui/react';
+import styles from './CustomAlertDilog.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { showAlertDilog } from '../../../features/redux/CommonDataSlice';
 
 const CustomAlertDilog = () => {
-  const selector = useSelector((state: any) => {
-    return state.common.showDilog;
-  });
+  const selector = useSelector((state: any) => state.common.showDilog);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
   const [isCoppied, setisCoppied] = useState(false);
   const dispatch = useDispatch();
 
-  console.log("selector", selector);
+  console.log('selector', selector);
   const handleCopyLink = () => {
-    navigator.clipboard.writeText("https://testerview.vercel.app/");
+    navigator.clipboard.writeText('https://testerview.vercel.app/');
     setisCoppied(true);
     setTimeout(() => {
       setisCoppied(false);
@@ -48,7 +46,7 @@ const CustomAlertDilog = () => {
           <AlertDialogCloseButton
             onClick={() => dispatch(showAlertDilog(false))}
           />
-          <AlertDialogBody className={styles["copy_text"]}>
+          <AlertDialogBody className={styles['copy_text']}>
             https://testerview.vercel.app/
           </AlertDialogBody>
           <AlertDialogFooter>
@@ -59,7 +57,7 @@ const CustomAlertDilog = () => {
               Close
             </Button>
             <Button colorScheme="red" ml={3} onClick={handleCopyLink}>
-              {isCoppied ? "Coppied" : "Copy"}
+              {isCoppied ? 'Coppied' : 'Copy'}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

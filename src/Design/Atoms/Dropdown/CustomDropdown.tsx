@@ -1,12 +1,8 @@
-import React from 'react'
-import {} from "@chakra-ui/react"
+import React from 'react';
+import {} from '@chakra-ui/react';
 
-const CustomDropdown = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const CustomDropdown = () => (
+    <div />
+  );
 
-export default CustomDropdown
+export default CustomDropdown;

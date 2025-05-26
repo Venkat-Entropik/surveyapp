@@ -1,19 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { screen, render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import SignPage from "../SignPage";
-import { BrowserRouter } from "react-router-dom";
+import { screen, render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import SignPage from '../SignPage';
+import { BrowserRouter } from 'react-router-dom';
 import {
   ChakraProvider,
   useDisclosure,
   useToast as baseUseToast,
-} from "@chakra-ui/react";
-import { Provider } from "react-redux";
-import { store } from "../../../features/store";
+} from '@chakra-ui/react';
+import { Provider } from 'react-redux';
+import { store } from '../../../features/store';
 
-const SingInPageWrapper = () => {
-  return (
+const SingInPageWrapper = () => (
     <BrowserRouter>
       <ChakraProvider>
         <Provider store={store}>
@@ -22,16 +21,15 @@ const SingInPageWrapper = () => {
       </ChakraProvider>
     </BrowserRouter>
   );
-};
 
-jest.mock("@chakra-ui/react", () => ({
-  ...jest.requireActual("@chakra-ui/react"),
+jest.mock('@chakra-ui/react', () => ({
+  ...jest.requireActual('@chakra-ui/react'),
   useDisclosure: jest.fn(),
   useToast: jest.fn(),
 }));
 const useToast = baseUseToast as jest.Mock;
-describe("testing sign in page", () => {
-  test("should all the inputs and buttons available", () => {
+describe('testing sign in page', () => {
+  test('should all the inputs and buttons available', () => {
     const mockToast = jest.fn();
     useToast.mockReturnValue(mockToast);
     const mockUseDisclosure = useDisclosure as jest.MockedFunction<any>;
@@ -44,12 +42,12 @@ describe("testing sign in page", () => {
     render(<SingInPageWrapper />);
     const emailInput = screen.getByPlaceholderText(/enter email/i);
     const passwordInput = screen.getByPlaceholderText(/enter password/i);
-    const submitBtn = screen.getByRole("button", { name: /Login/i });
+    const submitBtn = screen.getByRole('button', { name: /Login/i });
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(submitBtn).toBeInTheDocument();
   });
-  test("should empty value showing error", () => {
+  test('should empty value showing error', () => {
     const mockToast = jest.fn();
     useToast.mockReturnValue(mockToast);
     const mockUseDisclosure = useDisclosure as jest.MockedFunction<any>;
@@ -62,19 +60,19 @@ describe("testing sign in page", () => {
     render(<SingInPageWrapper />);
     const emailInput = screen.getByPlaceholderText(/enter email/i);
     const passwordInput = screen.getByPlaceholderText(/enter password/i);
-    const submitBtn = screen.getByRole("button", { name: /Login/i });
-    fireEvent.change(emailInput, { target: { value: "email.@gmail.com" } });
-    fireEvent.change(passwordInput, { target: { value: "" } });
+    const submitBtn = screen.getByRole('button', { name: /Login/i });
+    fireEvent.change(emailInput, { target: { value: 'email.@gmail.com' } });
+    fireEvent.change(passwordInput, { target: { value: '' } });
     fireEvent.click(submitBtn);
     expect(mockToast).toHaveBeenCalledWith({
-      title: "Email and password does not match",
-      description: "Enter valid email and password",
-      status: "warning",
+      title: 'Email and password does not match',
+      description: 'Enter valid email and password',
+      status: 'warning',
       duration: 3000,
       isClosable: true,
     });
   });
-  test("should email input and passowrd input are working", () => {
+  test('should email input and passowrd input are working', () => {
     const mockToast = jest.fn();
     useToast.mockReturnValue(mockToast);
     const mockUseDisclosure = useDisclosure as jest.MockedFunction<any>;
@@ -88,10 +86,10 @@ describe("testing sign in page", () => {
     const emailInput = screen.getByPlaceholderText(/enter email/i);
     const passwordInput = screen.getByPlaceholderText(/enter password/i);
 
-    fireEvent.change(emailInput, { target: { value: "email.@gmail.com" } });
-    fireEvent.change(passwordInput, { target: { value: "password" } });
+    fireEvent.change(emailInput, { target: { value: 'email.@gmail.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
 
-    expect(emailInput).toHaveValue("email.@gmail.com");
-    expect(passwordInput).toHaveValue("password");
+    expect(emailInput).toHaveValue('email.@gmail.com');
+    expect(passwordInput).toHaveValue('password');
   });
 });

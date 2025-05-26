@@ -1,13 +1,13 @@
-import { Box, Flex, Select, SimpleGrid } from "@chakra-ui/react";
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { textDb } from "../../firebase";
-import Spinners from "../loaders/Spinners";
-import DataBaseCard from "../home/DataBaseCard";
-import SurveyCard from "../home/SurveyCard";
-import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
-import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
-import CircularProgressComponent from "../loaders/CircularProgress/CircularProgress";
+import { Box, Flex, Select, SimpleGrid } from '@chakra-ui/react';
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { textDb } from '../../firebase';
+import Spinners from '../loaders/Spinners';
+import DataBaseCard from '../home/DataBaseCard';
+import SurveyCard from '../home/SurveyCard';
+import SkeletonComp from '../../Common/Skeleton/SkeletonComp';
+import LottieGif from '../../Design/Molecules/LottieGif/LottieGif';
+import CircularProgressComponent from '../loaders/CircularProgress/CircularProgress';
 
 interface analatycsType {
   user: any;
@@ -21,12 +21,12 @@ const Analytics: React.FC<analatycsType> = ({
   setIsLoading,
 }) => {
   const [databaseData, setDatabaseData] = useState<any[]>([]);
-  const [dropdown, setDropDown] = useState<string>("images");
+  const [dropdown, setDropDown] = useState<string>('images');
 
   const getDataFromDatabase = async () => {
     setIsLoading(true);
     try {
-      const valRef = collection(textDb, "analyticsData");
+      const valRef = collection(textDb, 'analyticsData');
       const dataDB = await getDocs(valRef);
       const allData = dataDB.docs.map((val) => ({ ...val.data(), id: val.id }));
       setDatabaseData(allData);
@@ -39,33 +39,29 @@ const Analytics: React.FC<analatycsType> = ({
     getDataFromDatabase();
   }, []);
 
-  const filterTasks = databaseData.filter((task) => {
-    return (
+  const filterTasks = databaseData.filter((task) => (
       dropdown.toLowerCase() === task.type.toLowerCase() &&
-      dropdown.toLowerCase() !== "surveys"
-    );
-  });
+      dropdown.toLowerCase() !== 'surveys'
+    ));
 
-  const surveySelector = databaseData.filter((survey) => {
-    return (
+  const surveySelector = databaseData.filter((survey) => (
       dropdown.toLowerCase() === survey.type.toLowerCase() &&
-      dropdown.toLowerCase() === "surveys"
-    );
-  });
+      dropdown.toLowerCase() === 'surveys'
+    ));
 
   return (
     <Box>
       <Select
         placeholder="Select option"
-        w={["50%", "40%", "30%"]}
-        onChange={(e) => setDropDown(e.target.value || "images")}
+        w={['50%', '40%', '30%']}
+        onChange={(e) => setDropDown(e.target.value || 'images')}
       >
         <option value="images">Images</option>
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
       {isLoading && <CircularProgressComponent />}
-      {dropdown === "surveys" ? (
+      {dropdown === 'surveys' ? (
         <>
           {surveySelector.length > 0 ? (
             <SimpleGrid
@@ -88,7 +84,7 @@ const Analytics: React.FC<analatycsType> = ({
           ) : (
             <Flex justifyContent="center">
               <LottieGif
-                width={["100%", "50%", "40%"]}
+                width={['100%', '50%', '40%']}
                 height="40%"
                 lottieGifType="empty-state"
                 showDescription={true}
@@ -122,7 +118,7 @@ const Analytics: React.FC<analatycsType> = ({
           ) : (
             <Flex justifyContent="center">
               <LottieGif
-                width={["100%", "50%", "40%"]}
+                width={['100%', '50%', '40%']}
                 height="40%"
                 lottieGifType="empty-state"
                 showDescription={true}

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { dataType } from "../../Components/pages/ImagePage";
+import { createSlice } from '@reduxjs/toolkit';
+import type { dataType } from '../../Components/pages/ImagePage';
 
 interface intialStateType {
   images: dataType[];
@@ -10,15 +10,15 @@ const initialState: intialStateType = {
 };
 
 const dataSlice = createSlice({
-  name: "data",
+  name: 'data',
   initialState,
 
   reducers: {
     addImages: (state, { payload }) => {
-      state.images.push({ ...payload, type: "images" });
+      state.images.push({ ...payload, type: 'images' });
     },
     addVideos: (state, { payload }) => {
-      state.images.push({ ...payload, type: "videos" });
+      state.images.push({ ...payload, type: 'videos' });
     },
   },
 });

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -12,16 +12,16 @@ import {
   Image,
   Flex,
   useToast,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { useDispatch, useSelector } from "react-redux";
-import { v4 } from "uuid";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { imageDb, textDb } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { Link } from "react-router-dom";
-import CustomButton from "../../Design/Atoms/Button/CustomButton";
-import { showAlertDilog } from "../../features/redux/CommonDataSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 } from 'uuid';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { imageDb, textDb } from '../../firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import CustomButton from '../../Design/Atoms/Button/CustomButton';
+import { showAlertDilog } from '../../features/redux/CommonDataSlice';
 
 interface id {
   id: string;
@@ -37,25 +37,21 @@ export const DrawerComponent: React.FC<id> = ({
   setIsLoading,
 }) => {
   const toast = useToast();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const imagesArrayRef = useRef<string[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  const selector = useSelector((state: any) => {
-    return state.data.images;
-  });
+  const selector = useSelector((state: any) => state.data.images);
 
-  const singleCardData = selector.filter((prod: any) => {
-    return prod.id === id;
-  });
+  const singleCardData = selector.filter((prod: any) => prod.id === id);
 
   const imagesContainer = Array.from(singleCardData[0].images);
 
   const handleAddToDataBase = async () => {
     setIsLoading(true);
-    const storageRef = ref(imageDb, "storage");
+    const storageRef = ref(imageDb, 'storage');
 
     try {
       const uploadPromises = imagesContainer.map(async (file: any) => {
@@ -70,7 +66,7 @@ export const DrawerComponent: React.FC<id> = ({
         } catch (error) {
           toast({
             title: `${error}`,
-            status: "warning",
+            status: 'warning',
             duration: 3000,
             isClosable: true,
           });
@@ -79,7 +75,7 @@ export const DrawerComponent: React.FC<id> = ({
 
       await Promise.all(uploadPromises);
 
-      const valRef = collection(textDb, "textData");
+      const valRef = collection(textDb, 'textData');
 
       const dataToStore = {
         id: singleCardData[0].id,
@@ -94,20 +90,20 @@ export const DrawerComponent: React.FC<id> = ({
     } catch (error) {
       toast({
         title: `${error}`,
-        status: "warning",
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
     }
     setIsLoading(false);
     toast({
-      title: `successfully uploaded files`,
-      status: "success",
+      title: 'successfully uploaded files',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
 
-    dispatch(showAlertDilog(true))
+    dispatch(showAlertDilog(true));
   };
 
   return (
@@ -139,11 +135,12 @@ export const DrawerComponent: React.FC<id> = ({
               spacing={4}
               templateColumns="repeat(auto-fill, minmax(100px, 1fr)"
             >
-              {imagesContainer?.map((item: unknown) => {
+              {imagesContainer?.map((item: unknown, index: number) => {
                 if (item instanceof File) {
-                  if (item.type.includes("image")) {
+                  if (item.type.includes('image')) {
                     return (
                       <Image
+                        key={index}
                         src={URL.createObjectURL(item)}
                         h="100px"
                         w="100%"
@@ -154,10 +151,11 @@ export const DrawerComponent: React.FC<id> = ({
                   } else {
                     return (
                       <video
+                        key={index}
                         controls
                         width="100%"
                         height="200px"
-                        style={{ borderRadius: "10px" }}
+                        style={{ borderRadius: '10px' }}
                       >
                         <source src={URL.createObjectURL(item)} />
                       </video>
@@ -173,10 +171,10 @@ export const DrawerComponent: React.FC<id> = ({
               <Link
                 to="Analytics"
                 style={{
-                  background: "skyblue",
-                  width: "40%",
-                  borderRadius: "5px",
-                  textAlign: "center",
+                  background: 'skyblue',
+                  width: '40%',
+                  borderRadius: '5px',
+                  textAlign: 'center',
                 }}
               >
                 <CustomButton>Analytics</CustomButton>

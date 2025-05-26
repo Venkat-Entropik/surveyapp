@@ -1,13 +1,12 @@
-import { VStack, Text, Img } from "@chakra-ui/react";
-import React from "react";
+import { VStack, Text, Img } from '@chakra-ui/react';
+import React from 'react';
 
 type dropdown = {
   dropdown: string;
   home?: boolean;
 };
 
-const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => {
-  return (
+const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => (
     <VStack>
       <Img
         w="300px"
@@ -18,6 +17,5 @@ const NoDataComp: React.FC<dropdown> = ({ dropdown, home }) => {
       <Text fontWeight="bold">No Data Available</Text>
     </VStack>
   );
-};
 
 export default NoDataComp;

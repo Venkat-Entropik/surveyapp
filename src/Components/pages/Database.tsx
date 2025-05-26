@@ -1,14 +1,14 @@
-import { Box, Flex, Select, SimpleGrid } from "@chakra-ui/react";
-import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { textDb } from "../../firebase";
-import Spinners from "../loaders/Spinners";
-import DataBaseCard from "../home/DataBaseCard";
-import SurveyCard from "../home/SurveyCard";
-import SkeletonComp from "../../Common/Skeleton/SkeletonComp";
-import NoDataComp from "../home/NoDataComp";
-import LottieGif from "../../Design/Molecules/LottieGif/LottieGif";
-import CircularProgressComponent from "../loaders/CircularProgress/CircularProgress";
+import { Box, Flex, Select, SimpleGrid } from '@chakra-ui/react';
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { textDb } from '../../firebase';
+import Spinners from '../loaders/Spinners';
+import DataBaseCard from '../home/DataBaseCard';
+import SurveyCard from '../home/SurveyCard';
+import SkeletonComp from '../../Common/Skeleton/SkeletonComp';
+import NoDataComp from '../home/NoDataComp';
+import LottieGif from '../../Design/Molecules/LottieGif/LottieGif';
+import CircularProgressComponent from '../loaders/CircularProgress/CircularProgress';
 
 interface DatabaseType {
   user: any;
@@ -21,13 +21,13 @@ const Database: React.FC<DatabaseType> = ({
   isLoading,
   setIsLoading,
 }) => {
-  const [dropdown, setDropDown] = useState<string>("images");
+  const [dropdown, setDropDown] = useState<string>('images');
   const [databaseData, setDatabaseData] = useState<any[]>([]);
   const [deleteCard, setDeleteCard] = useState(false as boolean);
   const getDataFromDatabase = async () => {
     setIsLoading(true);
     try {
-      const valRef = collection(textDb, "textData");
+      const valRef = collection(textDb, 'textData');
       const dataDB = await getDocs(valRef);
       const allData = dataDB.docs.map((val) => ({ ...val.data(), id: val.id }));
       setDatabaseData(allData);
@@ -43,32 +43,28 @@ const Database: React.FC<DatabaseType> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filterTasks = databaseData.filter((task) => {
-    return (
+  const filterTasks = databaseData.filter((task) => (
       dropdown.toLowerCase() === task.type.toLowerCase() &&
-      dropdown.toLowerCase() !== "surveys"
-    );
-  });
+      dropdown.toLowerCase() !== 'surveys'
+    ));
 
-  const surveySelector = databaseData.filter((survey) => {
-    return (
+  const surveySelector = databaseData.filter((survey) => (
       dropdown.toLowerCase() === survey.type.toLowerCase() &&
-      dropdown.toLowerCase() === "surveys"
-    );
-  });
+      dropdown.toLowerCase() === 'surveys'
+    ));
   return (
     <Box>
       <Select
         placeholder="Select option"
-        w={["50%", "40%", "30%"]}
-        onChange={(e) => setDropDown(e.target.value || "images")}
+        w={['50%', '40%', '30%']}
+        onChange={(e) => setDropDown(e.target.value || 'images')}
       >
         <option value="images">Images</option>
         <option value="videos">Videos</option>
         <option value="surveys">Survey</option>
       </Select>
       {deleteCard ? <Spinners /> : isLoading && <CircularProgressComponent />}
-      {dropdown === "surveys" ? (
+      {dropdown === 'surveys' ? (
         <>
           {surveySelector.length > 0 ? (
             <SimpleGrid
@@ -94,7 +90,7 @@ const Database: React.FC<DatabaseType> = ({
             !isLoading && (
               <Flex justifyContent="center">
                 <LottieGif
-                  width={["100%", "50%", "40%"]}
+                  width={['100%', '50%', '40%']}
                   height="40%"
                   lottieGifType="empty-state"
                   showDescription={true}
@@ -131,7 +127,7 @@ const Database: React.FC<DatabaseType> = ({
             !isLoading && (
               <Flex justifyContent="center">
                 <LottieGif
-                  width={["100%", "50%", "40%"]}
+                  width={['100%', '50%', '40%']}
                   height="40%"
                   lottieGifType="empty-state"
                   showDescription={true}

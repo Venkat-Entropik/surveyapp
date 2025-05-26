@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 
 import {
   render,
   screen,
-} from "@testing-library/react";
-import "@testing-library/jest-dom";
-import NavBar from "./NavBar";
+} from '@testing-library/react';
+import '@testing-library/jest-dom';
+import NavBar from './NavBar';
 
-jest.mock("firebase/auth", () => ({
+jest.mock('firebase/auth', () => ({
   getAuth: jest.fn(),
   signOut: jest.fn(),
 }));
 
-jest.mock("@chakra-ui/react", () => ({
-  ...jest.requireActual("@chakra-ui/react"),
+jest.mock('@chakra-ui/react', () => ({
+  ...jest.requireActual('@chakra-ui/react'),
   useToast: jest.fn(),
 }));
 
-describe("testing navbar component", () => {
-  test("should logo exist", () => {
+describe('testing navbar component', () => {
+  test('should logo exist', () => {
     render(<NavBar user={null} />);
     const title1 = screen.getByText(/Data/i);
     const title2 = screen.getByText(/analytics/i);
@@ -28,11 +28,11 @@ describe("testing navbar component", () => {
     expect(logo).toBeInTheDocument();
   });
 
-  test("should user data render or not", () => {
+  test('should user data render or not', () => {
     const user = {
-      email: "test@gmil.com",
-      photoURL: "test.png",
-      displayName: "user",
+      email: 'test@gmil.com',
+      photoURL: 'test.png',
+      displayName: 'user',
     };
     render(<NavBar user={user} />);
 
@@ -41,43 +41,43 @@ describe("testing navbar component", () => {
     expect(userMenu).toBeInTheDocument();
   });
 
-  test("should user name showing", () => {
+  test('should user name showing', () => {
     const user = {
-      email: "test@gmil.com",
-      photoURL: "test.png",
-      displayName: "user",
+      email: 'test@gmil.com',
+      photoURL: 'test.png',
+      displayName: 'user',
     };
     render(<NavBar user={user} />);
     const username = screen.getByTestId(/paragraph/i);
-    expect(username.textContent).toBe("user");
+    expect(username.textContent).toBe('user');
   });
 
-  test("should user email showing", () => {
+  test('should user email showing', () => {
     const user = {
-      email: "test@gmil.com",
-      photoURL: "test.png",
+      email: 'test@gmil.com',
+      photoURL: 'test.png',
     };
     render(<NavBar user={user} />);
     const username = screen.getByTestId(/paragraph/i);
-    expect(username.textContent).toBe("test@gmil.com");
+    expect(username.textContent).toBe('test@gmil.com');
   });
-  test("should image is showing or not", () => {
+  test('should image is showing or not', () => {
     const user = {
-      email: "test@gmil.com",
-      photoURL: "test.png",
+      email: 'test@gmil.com',
+      photoURL: 'test.png',
     };
     render(<NavBar user={user} />);
-    const userImage = screen.getAllByRole("img");
+    const userImage = screen.getAllByRole('img');
     expect(userImage.length).toBe(1);
   });
 
-  test("should sign out button exist", () => {
+  test('should sign out button exist', () => {
     const user = {
-      email: "test@gmil.com",
-      photoURL: "test.png",
+      email: 'test@gmil.com',
+      photoURL: 'test.png',
     };
     render(<NavBar user={user} />);
-    const logoutbtn = screen.getByRole("button");
+    const logoutbtn = screen.getByRole('button');
     expect(logoutbtn).toBeInTheDocument();
   });
 });

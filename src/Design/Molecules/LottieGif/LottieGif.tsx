@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import { Box, Text } from "@chakra-ui/react";
-import Lottie from "lottie-react";
-import * as defaultState from "../../../Components/assets/Json/empty-state.json";
-import * as emptyState from "../../../Components/assets/Json/empty-state-new.json";
+import type { FC } from 'react';
+import { Box, Text } from '@chakra-ui/react';
+import Lottie from 'lottie-react';
+import * as defaultState from '../../../Components/assets/Json/empty-state.json';
+import * as emptyState from '../../../Components/assets/Json/empty-state-new.json';
 
 interface LottieGifProps {
   lottieGifType: string;
@@ -14,14 +14,14 @@ interface LottieGifProps {
 
 const LottieGif: FC<LottieGifProps> = ({
   lottieGifType,
-  width = "100%",
-  height = "100%",
+  width = '100%',
+  height = '100%',
   showDescription = true,
   description,
 }) => {
   const getAnimateData = (type: string) => {
     switch (type) {
-      case "empty-state":
+      case 'empty-state':
         return emptyState;
       default:
         return defaultState;

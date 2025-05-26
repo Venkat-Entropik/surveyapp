@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   showDilog: false,
 };
 
 const commonDataSlice = createSlice({
-  name: "common",
+  name: 'common',
   initialState: initialState,
   reducers: {
     showAlertDilog: (state, action) => {
